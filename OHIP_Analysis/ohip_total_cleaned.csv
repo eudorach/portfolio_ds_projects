@@ -1,145 +1,145 @@
-participant_id,raw_id,timepoint,dob,race,race_label,age,gender,surgery,surgery_simple,ohip1,ohip2,ohip3,ohip4,ohip5,ohip6,ohip7,ohip8,ohip9,ohip10,ohip11,ohip12,ohip13,ohip14,total,ohip_score_interpretation
-CARSH_00069,00069,pom_3,4/26/1983,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,Little to none
-CARSH_00069,00069,pom_6,4/26/1983,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,,,,,,,,,,,,,,,,
-CARSH_00069,00069,poy_1,4/26/1983,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,,,,,,,,,,,,,,,,
-CARSH_00069,00069,poy_1,4/26/1983,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00092,00092,pom_3,5/18/1998,6,,19.9,1,"LeFort I (maxillary advancement, anterior lengthening), bilateral sagittal split osteotomy with asymmetric correction",maxilla,2,0,2,3,3,3,1,2,2,2,3,1,3,0,27,Moderate
-CARSH_00092,00092,pom_6,5/18/1998,6,,19.9,1,"LeFort I (maxillary advancement, anterior lengthening), bilateral sagittal split osteotomy with asymmetric correction",maxilla,,,,,,,,,,,,,,,,
-CARSH_00092,00092,pom_6,5/18/1998,6,,19.9,1,"LeFort I (maxillary advancement, anterior lengthening), bilateral sagittal split osteotomy with asymmetric correction",maxilla,1,0,1,2,3,3,1,0,1,3,2,0,3,1,21,Moderate
-CARSH_00101,00101,pom_3,3/16/2001,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,1,2,1,2,1,1,2,1,0,0,1,0,0,0,12,Mild
-CARSH_00101,00101,pom_6,3/16/2001,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,,,,,,,,,,,,,,,,
-CARSH_00101,00101,poy_1,3/16/2001,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,,,,,,,,,,,,,,,,
-CARSH_00101,00101,poy_1,3/16/2001,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,1,0,0,1,1,1,1,0,1,0,2,0,0,0,8,Mild
-CARSH_00113,00113,pom_3,3/1/1999,1,,19.6,1,"Lefort I (advancement, posterior impaction and correction of the cant of the maxilla), genioplasty (advancement and shortening)",maxilla,,,,,,,,,,,,,,,,0
-CARSH_00113,00113,pom_6,3/1/1999,1,,19.6,1,"Lefort I (advancement, posterior impaction and correction of the cant of the maxilla), genioplasty (advancement and shortening)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00113,00113,poy_1,3/1/1999,1,,19.6,1,"Lefort I (advancement, posterior impaction and correction of the cant of the maxilla), genioplasty (advancement and shortening)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00117,00117,pom_3,5/5/2004,0,,14.5,2,LeFort I (advancement of 5 mm with anterior lengthening of 2 mm),maxilla,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,Little to none
-CARSH_00117,00117,pom_6,5/5/2004,0,,14.5,2,LeFort I (advancement of 5 mm with anterior lengthening of 2 mm),maxilla,,,,,,,,,,,,,,,,
-CARSH_00117,00117,poy_1,5/5/2004,0,,14.5,2,LeFort I (advancement of 5 mm with anterior lengthening of 2 mm),maxilla,,,,,,,,,,,,,,,,
-CARSH_00121,00121,pom_3,9/19/2004,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,,,,,,,,,,,,,,,,0
-CARSH_00121,00121,pom_6,9/19/2004,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00121,00121,poy_1,9/19/2004,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00121,00121,pom_6,9/19/2004,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,Little to none
-CARSH_00121,00121,poy_1,9/19/2004,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,Little to none
-CARSH_00124,00124,pom_3,11/5/2000,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00124,00124,pom_6,11/5/2000,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,,,,,,,,,,,,,,,,
-CARSH_00124,00124,poy_1,11/5/2000,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,,,,,,,,,,,,,,,,
-CARSH_00124,00124,pom_6,11/5/2000,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00127,00127,pom_3,7/31/1990,1,,28.4,2,Lefort I (7 mm advancement and 3mm lengthening),maxilla,,,,,,,,,,,,,,,,0
-CARSH_00127,00127,pom_6,7/31/1990,1,,28.4,2,Lefort I (7 mm advancement and 3mm lengthening),maxilla,,,,,,,,,,,,,,,,
-CARSH_00127,00127,poy_1,7/31/1990,1,,28.4,2,Lefort I (7 mm advancement and 3mm lengthening),maxilla,,,,,,,,,,,,,,,,
-CARSH_00131,00131,pom_6,4/30/1987,6,,31.9,1,"LeFort I (advancement 3 mm, rotation to right 6 mm, vertical lengthening 5-6mm), bilateral posterior maxillary exostoses removal/reduction",maxilla,,,,,,,,,,,,,,,,
-CARSH_00131,00131,poy_1,4/30/1987,6,,31.9,1,"LeFort I (advancement 3 mm, rotation to right 6 mm, vertical lengthening 5-6mm), bilateral posterior maxillary exostoses removal/reduction",maxilla,,,,,,,,,,,,,,,,
-CARSH_00157,00157,pom_3,6/30/1993,0,,26.4,2,"Lefort I- 2pce (advancement 5mm, widening in posterior region 7 mm)",maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00157,00157,poy_1,6/30/1993,0,,26.4,2,"Lefort I- 2pce (advancement 5mm, widening in posterior region 7 mm)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00162,00162,pom_6,2/27/2003,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00162,00162,poy_1,2/27/2003,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00162,00162,pom_6,2/27/2003,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,0,0,0,1,2,0,0,0,0,1,0,0,0,0,4,
-CARSH_00162,00162,poy_1,2/27/2003,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,1,0,1,1,0,0,0,0,0,0,0,0,0,0,3,
-CARSH_00163,00163,pom_3,2/22/2001,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,,,,,,,,,,,,,,,,0
-CARSH_00163,00163,pom_6,2/22/2001,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,,,,,,,,,,,,,,,,
-CARSH_00163,00163,poy_1,2/22/2001,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,,,,,,,,,,,,,,,,
-CARSH_00163,00163,pom_6,2/22/2001,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,Little to none
-CARSH_00163,00163,poy_1,2/22/2001,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00169,00169,pom_3,11/10/1997,0,,22.2,1,"LeFort I (6 mm advancement and lengthening 5 mm on the left with correction of cant), BSSO",bimaxillary,,,,,,,,,,,,,,,,0
-CARSH_00169,00169,poy_1,11/10/1997,0,,22.2,1,"LeFort I (6 mm advancement and lengthening 5 mm on the left with correction of cant), BSSO",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00169,00169,poy_1,11/10/1997,0,,22.2,1,"LeFort I (6 mm advancement and lengthening 5 mm on the left with correction of cant), BSSO",bimaxillary,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Little to none
-CARSH_00172,00172,pom_3,2/28/1985,0,,34.9,1,"Lefort 1 (advancement of 6 mm), BSSO (rotation of the mandible to the right by 5 mm)",bimaxillary,0,0,0,0,3,1,0,0,1,3,0,0,1,0,9,Mild
-CARSH_00172,00172,pom_6,2/28/1985,0,,34.9,1,"Lefort 1 (advancement of 6 mm), BSSO (rotation of the mandible to the right by 5 mm)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00172,00172,poy_1,2/28/1985,0,,34.9,1,"Lefort 1 (advancement of 6 mm), BSSO (rotation of the mandible to the right by 5 mm)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00174,00174,pom_3,4/24/1980,1,,39.8,2,"LeFort I (2mm advancement, 1.5mm to the right, cant correction and 5mm impaction), BSSO (3mm to the left), Bilateral turbinectomy",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00174,00174,poy_1,4/24/1980,1,,39.8,2,"LeFort I (2mm advancement, 1.5mm to the right, cant correction and 5mm impaction), BSSO (3mm to the left), Bilateral turbinectomy",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00177,00177,pom_3,4/16/1999,2,,20.9,2,"Lefort I (advancement - 6 mm, anterior lengthening - 2 mm), BSSO (setback - 5 mm with rotation to left)",bimaxillary,2,0,0,1,2,2,0,1,1,0,0,0,0,0,9,Mild
-CARSH_00177,00177,pom_6,4/16/1999,2,,20.9,2,"Lefort I (advancement - 6 mm, anterior lengthening - 2 mm), BSSO (setback - 5 mm with rotation to left)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00177,00177,poy_1,4/16/1999,2,,20.9,2,"Lefort I (advancement - 6 mm, anterior lengthening - 2 mm), BSSO (setback - 5 mm with rotation to left)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00183,00183,pom_6,7/3/2004,0,,16.2,2,BSSO (advancement 9.5 mm),mandible,,,,,,,,,,,,,,,,
-CARSH_00183,00183,poy_1,7/3/2004,0,,16.2,2,BSSO (advancement 9.5 mm),mandible,,,,,,,,,,,,,,,,
-CARSH_00189,00189,pom_3,7/7/2004,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,,,,,,,,,,,,,,,,0
-CARSH_00189,00189,pom_6,7/7/2004,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00189,00189,poy_1,7/7/2004,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00189,00189,poy_1,7/7/2004,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00197,00197,pom_6,10/17/1996,0,,24.1,1,"Lefort I (advancement 6 mm, correction of cant 2-3 mm down on right), BSSO setback 3 mm, with rotation to left 5 mm",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00197,00197,poy_1,10/17/1996,0,,24.1,1,"Lefort I (advancement 6 mm, correction of cant 2-3 mm down on right), BSSO setback 3 mm, with rotation to left 5 mm",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00201,00201,pom_3,10/5/1988,1,,32.5,2,"LeFort I (5 mm advancement, 2 mm impaction), BSSO (4 mm setback)",bimaxillary,,,,,,,,,,,,,,,,0
-CARSH_00201,00201,pom_6,10/5/1988,1,,32.5,2,"LeFort I (5 mm advancement, 2 mm impaction), BSSO (4 mm setback)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00201,00201,pom_6,10/5/1988,1,,32.5,2,"LeFort I (5 mm advancement, 2 mm impaction), BSSO (4 mm setback)",bimaxillary,2,0,2,0,3,0,0,0,3,2,4,1,0,0,17,Moderate
-CARSH_00208,00208,pom_3,5/6/1997,2,,24.1,2,BSSO with 5 mm advancement,mandible,,,,,,,,,,,,,,,,
-CARSH_00208,00208,pom_6,5/6/1997,2,,24.1,2,BSSO with 5 mm advancement,mandible,,,,,,,,,,,,,,,,
-CARSH_00208,00208,poy_1,5/6/1997,2,,24.1,2,BSSO with 5 mm advancement,mandible,,,,,,,,,,,,,,,,
-CARSH_00208,00208,poy_1,5/6/1997,2,,24.1,2,BSSO with 5 mm advancement,mandible,1,0,0,1,1,1,0,0,0,1,0,0,0,0,5,
-CARSH_00211,00211,pom_3,11/16/1976,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00211,00211,pom_6,11/16/1976,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00211,00211,poy_1,11/16/1976,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00211,00211,pom_6,11/16/1976,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,1,0,1,0,1,1,1,1,1,1,1,1,1,0,11,
-CARSH_00211,00211,poy_1,11/16/1976,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-CARSH_00221,00221,pom_3,9/29/2000,0,,21.2,1,"LeFort I (5-mm advancement, anterior lengthening of 3 mm, and posterior impaction)",maxilla,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
-CARSH_00221,00221,pom_6,9/29/2000,0,,21.2,1,"LeFort I (5-mm advancement, anterior lengthening of 3 mm, and posterior impaction)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00221,00221,pom_6,9/29/2000,0,,21.2,1,"LeFort I (5-mm advancement, anterior lengthening of 3 mm, and posterior impaction)",maxilla,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
-CARSH_00227,00227,pom_6,3/22/1982,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,,,,,,,,,,,,,,,,
-CARSH_00227,00227,poy_1,3/22/1982,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,,,,,,,,,,,,,,,,
-CARSH_00227,00227,pom_6,3/22/1982,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,0,0,0,2,4,2,0,0,0,3,2,0,2,0,15,0
-CARSH_00227,00227,poy_1,3/22/1982,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,0,0,0,1,4,3,0,0,2,4,0,0,2,0,16,Moderate
-CARSH_00229,00229,pom_3,3/28/1999,0,,22.9,1,"Lefort I 2-piece (advance 5 mm, anterior lengthen 3 mm, widen 5 mm at the first molars)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00229,00229,pom_6,3/28/1999,0,,22.9,1,"Lefort I 2-piece (advance 5 mm, anterior lengthen 3 mm, widen 5 mm at the first molars)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00229,00229,pom_6,3/28/1999,0,,22.9,1,"Lefort I 2-piece (advance 5 mm, anterior lengthen 3 mm, widen 5 mm at the first molars)",maxilla,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,
-CARSH_00232,00232,pom_3,3/31/1993,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
+participant_id,raw_id,timepoint,race,race_label,age,gender,surgery,surgery_simple,ohip1,ohip2,ohip3,ohip4,ohip5,ohip6,ohip7,ohip8,ohip9,ohip10,ohip11,ohip12,ohip13,ohip14,total,ohip_score_interpretation
+CARSH_00069,69,pom_3,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,Little to none
+CARSH_00069,69,pom_6,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,,,,,,,,,,,,,,,,
+CARSH_00069,69,poy_1,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,,,,,,,,,,,,,,,,
+CARSH_00069,69,poy_1,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
+CARSH_00092,92,pom_3,6,,19.9,1,"LeFort I (maxillary advancement, anterior lengthening), bilateral sagittal split osteotomy with asymmetric correction",maxilla,2,0,2,3,3,3,1,2,2,2,3,1,3,0,27,Moderate
+CARSH_00092,92,pom_6,6,,19.9,1,"LeFort I (maxillary advancement, anterior lengthening), bilateral sagittal split osteotomy with asymmetric correction",maxilla,,,,,,,,,,,,,,,,
+CARSH_00092,92,pom_6,6,,19.9,1,"LeFort I (maxillary advancement, anterior lengthening), bilateral sagittal split osteotomy with asymmetric correction",maxilla,1,0,1,2,3,3,1,0,1,3,2,0,3,1,21,Moderate
+CARSH_00101,101,pom_3,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,1,2,1,2,1,1,2,1,0,0,1,0,0,0,12,Mild
+CARSH_00101,101,pom_6,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,,,,,,,,,,,,,,,,
+CARSH_00101,101,poy_1,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,,,,,,,,,,,,,,,,
+CARSH_00101,101,poy_1,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,1,0,0,1,1,1,1,0,1,0,2,0,0,0,8,Mild
+CARSH_00113,113,pom_3,1,,19.6,1,"Lefort I (advancement, posterior impaction and correction of the cant of the maxilla), genioplasty (advancement and shortening)",maxilla,,,,,,,,,,,,,,,,0
+CARSH_00113,113,pom_6,1,,19.6,1,"Lefort I (advancement, posterior impaction and correction of the cant of the maxilla), genioplasty (advancement and shortening)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00113,113,poy_1,1,,19.6,1,"Lefort I (advancement, posterior impaction and correction of the cant of the maxilla), genioplasty (advancement and shortening)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00117,117,pom_3,0,,14.5,2,LeFort I (advancement of 5 mm with anterior lengthening of 2 mm),maxilla,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,Little to none
+CARSH_00117,117,pom_6,0,,14.5,2,LeFort I (advancement of 5 mm with anterior lengthening of 2 mm),maxilla,,,,,,,,,,,,,,,,
+CARSH_00117,117,poy_1,0,,14.5,2,LeFort I (advancement of 5 mm with anterior lengthening of 2 mm),maxilla,,,,,,,,,,,,,,,,
+CARSH_00121,121,pom_3,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,,,,,,,,,,,,,,,,0
+CARSH_00121,121,pom_6,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00121,121,poy_1,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00121,121,pom_6,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,Little to none
+CARSH_00121,121,poy_1,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,Little to none
+CARSH_00124,124,pom_3,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
+CARSH_00124,124,pom_6,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,,,,,,,,,,,,,,,,
+CARSH_00124,124,poy_1,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,,,,,,,,,,,,,,,,
+CARSH_00124,124,pom_6,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
+CARSH_00127,127,pom_3,1,,28.4,2,Lefort I (7 mm advancement and 3mm lengthening),maxilla,,,,,,,,,,,,,,,,0
+CARSH_00127,127,pom_6,1,,28.4,2,Lefort I (7 mm advancement and 3mm lengthening),maxilla,,,,,,,,,,,,,,,,
+CARSH_00127,127,poy_1,1,,28.4,2,Lefort I (7 mm advancement and 3mm lengthening),maxilla,,,,,,,,,,,,,,,,
+CARSH_00131,131,pom_6,6,,31.9,1,"LeFort I (advancement 3 mm, rotation to right 6 mm, vertical lengthening 5-6mm), bilateral posterior maxillary exostoses removal/reduction",maxilla,,,,,,,,,,,,,,,,
+CARSH_00131,131,poy_1,6,,31.9,1,"LeFort I (advancement 3 mm, rotation to right 6 mm, vertical lengthening 5-6mm), bilateral posterior maxillary exostoses removal/reduction",maxilla,,,,,,,,,,,,,,,,
+CARSH_00157,157,pom_3,0,,26.4,2,"Lefort I- 2pce (advancement 5mm, widening in posterior region 7 mm)",maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
+CARSH_00157,157,poy_1,0,,26.4,2,"Lefort I- 2pce (advancement 5mm, widening in posterior region 7 mm)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00162,162,pom_6,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00162,162,poy_1,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00162,162,pom_6,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,0,0,0,1,2,0,0,0,0,1,0,0,0,0,4,
+CARSH_00162,162,poy_1,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,1,0,1,1,0,0,0,0,0,0,0,0,0,0,3,
+CARSH_00163,163,pom_3,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,,,,,,,,,,,,,,,,0
+CARSH_00163,163,pom_6,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,,,,,,,,,,,,,,,,
+CARSH_00163,163,poy_1,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,,,,,,,,,,,,,,,,
+CARSH_00163,163,pom_6,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,Little to none
+CARSH_00163,163,poy_1,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
+CARSH_00169,169,pom_3,0,,22.2,1,"LeFort I (6 mm advancement and lengthening 5 mm on the left with correction of cant), BSSO",bimaxillary,,,,,,,,,,,,,,,,0
+CARSH_00169,169,poy_1,0,,22.2,1,"LeFort I (6 mm advancement and lengthening 5 mm on the left with correction of cant), BSSO",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00169,169,poy_1,0,,22.2,1,"LeFort I (6 mm advancement and lengthening 5 mm on the left with correction of cant), BSSO",bimaxillary,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Little to none
+CARSH_00172,172,pom_3,0,,34.9,1,"Lefort 1 (advancement of 6 mm), BSSO (rotation of the mandible to the right by 5 mm)",bimaxillary,0,0,0,0,3,1,0,0,1,3,0,0,1,0,9,Mild
+CARSH_00172,172,pom_6,0,,34.9,1,"Lefort 1 (advancement of 6 mm), BSSO (rotation of the mandible to the right by 5 mm)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00172,172,poy_1,0,,34.9,1,"Lefort 1 (advancement of 6 mm), BSSO (rotation of the mandible to the right by 5 mm)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00174,174,pom_3,1,,39.8,2,"LeFort I (2mm advancement, 1.5mm to the right, cant correction and 5mm impaction), BSSO (3mm to the left), Bilateral turbinectomy",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00174,174,poy_1,1,,39.8,2,"LeFort I (2mm advancement, 1.5mm to the right, cant correction and 5mm impaction), BSSO (3mm to the left), Bilateral turbinectomy",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00177,177,pom_3,2,,20.9,2,"Lefort I (advancement - 6 mm, anterior lengthening - 2 mm), BSSO (setback - 5 mm with rotation to left)",bimaxillary,2,0,0,1,2,2,0,1,1,0,0,0,0,0,9,Mild
+CARSH_00177,177,pom_6,2,,20.9,2,"Lefort I (advancement - 6 mm, anterior lengthening - 2 mm), BSSO (setback - 5 mm with rotation to left)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00177,177,poy_1,2,,20.9,2,"Lefort I (advancement - 6 mm, anterior lengthening - 2 mm), BSSO (setback - 5 mm with rotation to left)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00183,183,pom_6,0,,16.2,2,BSSO (advancement 9.5 mm),mandible,,,,,,,,,,,,,,,,
+CARSH_00183,183,poy_1,0,,16.2,2,BSSO (advancement 9.5 mm),mandible,,,,,,,,,,,,,,,,
+CARSH_00189,189,pom_3,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,,,,,,,,,,,,,,,,0
+CARSH_00189,189,pom_6,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00189,189,poy_1,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00189,189,poy_1,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
+CARSH_00197,197,pom_6,0,,24.1,1,"Lefort I (advancement 6 mm, correction of cant 2-3 mm down on right), BSSO setback 3 mm, with rotation to left 5 mm",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00197,197,poy_1,0,,24.1,1,"Lefort I (advancement 6 mm, correction of cant 2-3 mm down on right), BSSO setback 3 mm, with rotation to left 5 mm",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00201,201,pom_3,1,,32.5,2,"LeFort I (5 mm advancement, 2 mm impaction), BSSO (4 mm setback)",bimaxillary,,,,,,,,,,,,,,,,0
+CARSH_00201,201,pom_6,1,,32.5,2,"LeFort I (5 mm advancement, 2 mm impaction), BSSO (4 mm setback)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00201,201,pom_6,1,,32.5,2,"LeFort I (5 mm advancement, 2 mm impaction), BSSO (4 mm setback)",bimaxillary,2,0,2,0,3,0,0,0,3,2,4,1,0,0,17,Moderate
+CARSH_00208,208,pom_3,2,,24.1,2,BSSO with 5 mm advancement,mandible,,,,,,,,,,,,,,,,
+CARSH_00208,208,pom_6,2,,24.1,2,BSSO with 5 mm advancement,mandible,,,,,,,,,,,,,,,,
+CARSH_00208,208,poy_1,2,,24.1,2,BSSO with 5 mm advancement,mandible,,,,,,,,,,,,,,,,
+CARSH_00208,208,poy_1,2,,24.1,2,BSSO with 5 mm advancement,mandible,1,0,0,1,1,1,0,0,0,1,0,0,0,0,5,
+CARSH_00211,211,pom_3,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00211,211,pom_6,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00211,211,poy_1,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00211,211,pom_6,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,1,0,1,0,1,1,1,1,1,1,1,1,1,0,11,
+CARSH_00211,211,poy_1,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+CARSH_00221,221,pom_3,0,,21.2,1,"LeFort I (5-mm advancement, anterior lengthening of 3 mm, and posterior impaction)",maxilla,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+CARSH_00221,221,pom_6,0,,21.2,1,"LeFort I (5-mm advancement, anterior lengthening of 3 mm, and posterior impaction)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00221,221,pom_6,0,,21.2,1,"LeFort I (5-mm advancement, anterior lengthening of 3 mm, and posterior impaction)",maxilla,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+CARSH_00227,227,pom_6,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,,,,,,,,,,,,,,,,
+CARSH_00227,227,poy_1,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,,,,,,,,,,,,,,,,
+CARSH_00227,227,pom_6,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,0,0,0,2,4,2,0,0,0,3,2,0,2,0,15,0
+CARSH_00227,227,poy_1,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,0,0,0,1,4,3,0,0,2,4,0,0,2,0,16,Moderate
+CARSH_00229,229,pom_3,0,,22.9,1,"Lefort I 2-piece (advance 5 mm, anterior lengthen 3 mm, widen 5 mm at the first molars)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00229,229,pom_6,0,,22.9,1,"Lefort I 2-piece (advance 5 mm, anterior lengthen 3 mm, widen 5 mm at the first molars)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00229,229,pom_6,0,,22.9,1,"Lefort I 2-piece (advance 5 mm, anterior lengthen 3 mm, widen 5 mm at the first molars)",maxilla,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,
+CARSH_00232,232,pom_3,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
 ",bimaxillary,,,,,,,,,,,,,,,,0
-CARSH_00232,00232,pom_6,3/31/1993,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
+CARSH_00232,232,pom_6,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
 ",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00232,00232,poy_1,3/31/1993,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
+CARSH_00232,232,poy_1,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
 ",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00232,00232,pom_6,3/31/1993,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
+CARSH_00232,232,pom_6,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
 ",bimaxillary,2,0,0,0,1,1,0,1,1,1,1,0,0,0,8,Mild
-CARSH_00232,00232,poy_1,3/31/1993,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
+CARSH_00232,232,poy_1,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
 ",bimaxillary,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00237,00237,pom_3,10/15/2003,1,,18.4,1,"LeFort I (7 mm advancement, 5 mm lengthening) and BSSO (5 mm setback, 3 mm right rotation)
+CARSH_00237,237,pom_3,1,,18.4,1,"LeFort I (7 mm advancement, 5 mm lengthening) and BSSO (5 mm setback, 3 mm right rotation)
 ",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00245,00245,pom_3,1/31/1981,0,,41.3,2,"LeFort I (advancement of 3 mm and rotation to the right by 2 mm, and anterior lengthening of 3 mm)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00245,00245,poy_1,1/31/1981,0,,41.3,2,"LeFort I (advancement of 3 mm and rotation to the right by 2 mm, and anterior lengthening of 3 mm)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00245,00245,poy_1,1/31/1981,0,,41.3,2,"LeFort I (advancement of 3 mm and rotation to the right by 2 mm, and anterior lengthening of 3 mm)",maxilla,0,0,0,1,1,0,0,0,0,0,1,0,0,0,3,
-CARSH_00246,00246,pom_3,10/1/2003,0,,18.7,2,"Lefort I (6 mm advancement), BSSO (2 mm setback)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00246,00246,poy_1,10/1/2003,0,,18.7,2,"Lefort I (6 mm advancement), BSSO (2 mm setback)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00246,00246,poy_1,10/1/2003,0,,18.7,2,"Lefort I (6 mm advancement), BSSO (2 mm setback)",bimaxillary,0,0,1,0,0,1,0,0,0,0,0,0,0,0,2,
-CARSH_00248,00248,pom_3,8/27/2004,1,,17.8,1,"LeFort I 5 mm maxillary advancement, 4 mm anterior lengthening) and BSSO (5 mm mandibular setback and 3.5 mm left rotation)",bimaxillary,1,0,0,2,1,2,1,0,1,1,0,0,0,1,10,Mild
-CARSH_00254,00254,pom_3,6/20/1993,1,,29.1,2,"2-piece LeFort I (2 mm advancement, 4 mm impaction, 7 mm expansion)",maxilla,,,,,,,,,,,,,,,,0
-CARSH_00254,00254,pom_6,6/20/1993,1,,29.1,2,"2-piece LeFort I (2 mm advancement, 4 mm impaction, 7 mm expansion)",maxilla,,,,,,,,,,,,,,,,
-CARSH_00254,00254,pom_6,6/20/1993,1,,29.1,2,"2-piece LeFort I (2 mm advancement, 4 mm impaction, 7 mm expansion)",maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00256,00256,pom_3,8/15/2002,6,,20.1,2,"LeFort I (6 mm advacement, 2 mm lengthening), BSSO (7 mm setback, 2 mm right rotation)",bimaxillary,,,,,,,,,,,,,,,,0
-CARSH_00256,00256,pom_6,8/15/2002,6,,20.1,2,"LeFort I (6 mm advacement, 2 mm lengthening), BSSO (7 mm setback, 2 mm right rotation)",bimaxillary,,,,,,,,,,,,,,,,
-CARSH_00256,00256,pom_6,8/15/2002,6,,20.1,2,"LeFort I (6 mm advacement, 2 mm lengthening), BSSO (7 mm setback, 2 mm right rotation)",bimaxillary,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,Little to none
-CARSH_00258,00258,pom_3,2/18/1999,0,,23.6,1,"2-piece LeFort I (5 mm advancement, 8 mm expansion)",maxilla,0,0,0,2,0,0,0,1,1,0,0,0,0,0,4,Little to none
-CARSH_00069,00069,baseline,4/26/1983,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,1,0,0,4,4,1,2,4,1,3,1,0,2,0,23,Moderate
-CARSH_00092,00092,baseline,5/18/1998,6,,19.9,1,"LeFort I (maxillary advancement, anterior lengthening), bilateral sagittal split osteotomy with asymmetric correction",maxilla,2,0,0,1,2,1,2,0,1,1,1,0,0,0,11,Mild
-CARSH_00101,00101,baseline,3/16/2001,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,3,0,1,2,2,2,1,0,2,2,1,0,0,0,16,Moderate
-CARSH_00113,00113,baseline,3/1/1999,1,,19.6,1,"Lefort I (advancement, posterior impaction and correction of the cant of the maxilla), genioplasty (advancement and shortening)",maxilla,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,Little to none
-CARSH_00117,00117,baseline,5/5/2004,0,,14.5,2,LeFort I (advancement of 5 mm with anterior lengthening of 2 mm),maxilla,2,0,0,2,1,0,0,0,0,0,1,0,0,0,6,Little to none
-CARSH_00121,00121,baseline,9/19/2004,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,2,0,1,1,1,1,0,0,0,2,2,0,1,0,11,Mild
-CARSH_00124,00124,baseline,11/5/2000,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2,Little to none
-CARSH_00127,00127,baseline,7/31/1990,1,,28.4,2,Lefort I (7 mm advancement and 3mm lengthening),maxilla,3,0,0,2,4,4,2,1,2,4,3,1,2,0,28,Moderate
-CARSH_00131,00131,baseline,4/30/1987,6,,31.9,1,"LeFort I (advancement 3 mm, rotation to right 6 mm, vertical lengthening 5-6mm), bilateral posterior maxillary exostoses removal/reduction",maxilla,0,0,2,2,2,1,1,0,1,2,1,0,1,0,13,0
-CARSH_00157,00157,baseline,6/30/1993,0,,26.4,2,"Lefort I- 2pce (advancement 5mm, widening in posterior region 7 mm)",maxilla,1,0,0,2,0,0,0,0,0,0,0,0,0,0,3,Little to none
-CARSH_00162,00162,baseline,2/27/2003,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,2,0,1,2,2,3,0,0,3,3,2,0,0,0,18,0
-CARSH_00163,00163,baseline,2/22/2001,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
-CARSH_00169,00169,baseline,11/10/1997,0,,22.2,1,"LeFort I (6 mm advancement and lengthening 5 mm on the left with correction of cant), BSSO",bimaxillary,2,0,0,3,2,0,1,1,1,2,1,0,0,0,13,Mild
-CARSH_00172,00172,baseline,2/28/1985,0,,34.9,1,"Lefort 1 (advancement of 6 mm), BSSO (rotation of the mandible to the right by 5 mm)",bimaxillary,1,0,0,0,4,0,0,0,0,4,3,0,2,0,14,Mild
-CARSH_00174,00174,baseline,4/24/1980,1,,39.8,2,"LeFort I (2mm advancement, 1.5mm to the right, cant correction and 5mm impaction), BSSO (3mm to the left), Bilateral turbinectomy",bimaxillary,1,0,0,1,3,2,1,1,0,3,0,0,1,0,13,0
-CARSH_00177,00177,baseline,4/16/1999,2,,20.9,2,"Lefort I (advancement - 6 mm, anterior lengthening - 2 mm), BSSO (setback - 5 mm with rotation to left)",bimaxillary,2,0,2,4,4,4,1,2,3,3,2,1,0,0,28,Moderate
-CARSH_00183,00183,baseline,7/3/2004,0,,16.2,2,BSSO (advancement 9.5 mm),mandible,0,0,3,0,0,0,0,0,0,0,1,0,0,0,4,0
-CARSH_00189,00189,baseline,7/7/2004,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,2,0,1,1,0,0,0,0,0,0,0,0,0,0,4,Little to none
-CARSH_00197,00197,baseline,10/17/1996,0,,24.1,1,"Lefort I (advancement 6 mm, correction of cant 2-3 mm down on right), BSSO setback 3 mm, with rotation to left 5 mm",bimaxillary,2,0,2,3,0,1,0,1,2,4,0,1,1,1,0,0
-CARSH_00201,00201,baseline,10/5/1988,1,,32.5,2,"LeFort I (5 mm advancement, 2 mm impaction), BSSO (4 mm setback)",bimaxillary,2,0,2,2,4,2,1,2,2,3,2,1,0,0,23,Moderate
-CARSH_00208,00208,baseline,5/6/1997,2,,24.1,2,BSSO with 5 mm advancement,mandible,2,0,3,3,4,4,2,1,3,4,3,1,1,0,31,0
-CARSH_00211,00211,baseline,11/16/1976,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,1,0,0,0,3,2,1,1,1,3,1,1,1,0,15,0
-CARSH_00221,00221,baseline,9/29/2000,0,,21.2,1,"LeFort I (5-mm advancement, anterior lengthening of 3 mm, and posterior impaction)",maxilla,2,0,0,4,2,0,2,1,0,0,0,0,0,0,11,0
-CARSH_00227,00227,baseline,3/22/1982,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,0,0,0,0,4,3,0,0,2,4,0,0,4,0,17,Moderate
-CARSH_00229,00229,baseline,3/28/1999,0,,22.9,1,"Lefort I 2-piece (advance 5 mm, anterior lengthen 3 mm, widen 5 mm at the first molars)",maxilla,1,0,0,2,2,1,0,0,1,1,0,0,0,0,8,0
-CARSH_00232,00232,baseline,3/31/1993,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
+CARSH_00245,245,pom_3,0,,41.3,2,"LeFort I (advancement of 3 mm and rotation to the right by 2 mm, and anterior lengthening of 3 mm)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00245,245,poy_1,0,,41.3,2,"LeFort I (advancement of 3 mm and rotation to the right by 2 mm, and anterior lengthening of 3 mm)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00245,245,poy_1,0,,41.3,2,"LeFort I (advancement of 3 mm and rotation to the right by 2 mm, and anterior lengthening of 3 mm)",maxilla,0,0,0,1,1,0,0,0,0,0,1,0,0,0,3,
+CARSH_00246,246,pom_3,0,,18.7,2,"Lefort I (6 mm advancement), BSSO (2 mm setback)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00246,246,poy_1,0,,18.7,2,"Lefort I (6 mm advancement), BSSO (2 mm setback)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00246,246,poy_1,0,,18.7,2,"Lefort I (6 mm advancement), BSSO (2 mm setback)",bimaxillary,0,0,1,0,0,1,0,0,0,0,0,0,0,0,2,
+CARSH_00248,248,pom_3,1,,17.8,1,"LeFort I 5 mm maxillary advancement, 4 mm anterior lengthening) and BSSO (5 mm mandibular setback and 3.5 mm left rotation)",bimaxillary,1,0,0,2,1,2,1,0,1,1,0,0,0,1,10,Mild
+CARSH_00254,254,pom_3,1,,29.1,2,"2-piece LeFort I (2 mm advancement, 4 mm impaction, 7 mm expansion)",maxilla,,,,,,,,,,,,,,,,0
+CARSH_00254,254,pom_6,1,,29.1,2,"2-piece LeFort I (2 mm advancement, 4 mm impaction, 7 mm expansion)",maxilla,,,,,,,,,,,,,,,,
+CARSH_00254,254,pom_6,1,,29.1,2,"2-piece LeFort I (2 mm advancement, 4 mm impaction, 7 mm expansion)",maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
+CARSH_00256,256,pom_3,6,,20.1,2,"LeFort I (6 mm advacement, 2 mm lengthening), BSSO (7 mm setback, 2 mm right rotation)",bimaxillary,,,,,,,,,,,,,,,,0
+CARSH_00256,256,pom_6,6,,20.1,2,"LeFort I (6 mm advacement, 2 mm lengthening), BSSO (7 mm setback, 2 mm right rotation)",bimaxillary,,,,,,,,,,,,,,,,
+CARSH_00256,256,pom_6,6,,20.1,2,"LeFort I (6 mm advacement, 2 mm lengthening), BSSO (7 mm setback, 2 mm right rotation)",bimaxillary,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,Little to none
+CARSH_00258,258,pom_3,0,,23.6,1,"2-piece LeFort I (5 mm advancement, 8 mm expansion)",maxilla,0,0,0,2,0,0,0,1,1,0,0,0,0,0,4,Little to none
+CARSH_00069,69,baseline,1,,34.4,1,LeFort 1 osteotomy with maxillary advancement and anterior lengthening.,maxilla,1,0,0,4,4,1,2,4,1,3,1,0,2,0,23,Moderate
+CARSH_00092,92,baseline,6,,19.9,1,"LeFort I (maxillary advancement, anterior lengthening), bilateral sagittal split osteotomy with asymmetric correction",maxilla,2,0,0,1,2,1,2,0,1,1,1,0,0,0,11,Mild
+CARSH_00101,101,baseline,1,,17.2,2,"LeFort I maxillary advancement with anterior lengthening, bilateral sagittal split osteotomy for the mandible with setback ",maxilla,3,0,1,2,2,2,1,0,2,2,1,0,0,0,16,Moderate
+CARSH_00113,113,baseline,1,,19.6,1,"Lefort I (advancement, posterior impaction and correction of the cant of the maxilla), genioplasty (advancement and shortening)",maxilla,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,Little to none
+CARSH_00117,117,baseline,0,,14.5,2,LeFort I (advancement of 5 mm with anterior lengthening of 2 mm),maxilla,2,0,0,2,1,0,0,0,0,0,1,0,0,0,6,Little to none
+CARSH_00121,121,baseline,0,,14.2,2,"LeFort I (4mm advancement, 2mm to the left), BSSO (1mm setback, 2mm to the right and 4.5mm closure of open bite), extraction of teeth 16, 17 and 32",bimaxillary,2,0,1,1,1,1,0,0,0,2,2,0,1,0,11,Mild
+CARSH_00124,124,baseline,0,,18.1,2,Lefort I (advancement 5 mm; anterior lengthening 2 mm),maxilla,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2,Little to none
+CARSH_00127,127,baseline,1,,28.4,2,Lefort I (7 mm advancement and 3mm lengthening),maxilla,3,0,0,2,4,4,2,1,2,4,3,1,2,0,28,Moderate
+CARSH_00131,131,baseline,6,,31.9,1,"LeFort I (advancement 3 mm, rotation to right 6 mm, vertical lengthening 5-6mm), bilateral posterior maxillary exostoses removal/reduction",maxilla,0,0,2,2,2,1,1,0,1,2,1,0,1,0,13,0
+CARSH_00157,157,baseline,0,,26.4,2,"Lefort I- 2pce (advancement 5mm, widening in posterior region 7 mm)",maxilla,1,0,0,2,0,0,0,0,0,0,0,0,0,0,3,Little to none
+CARSH_00162,162,baseline,0,,16.8,2,"LeFort I (advancement of approximately 3 mm, cant correction with lengthening on the left),  BSSO (movement of the mandible to the left and 3-mm setback)",bimaxillary,2,0,1,2,2,3,0,0,3,3,2,0,0,0,18,0
+CARSH_00163,163,baseline,0,,18.9,1,LeFort I (advancement 5 mm with rotation to left 2.5 mm),maxilla,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Little to none
+CARSH_00169,169,baseline,0,,22.2,1,"LeFort I (6 mm advancement and lengthening 5 mm on the left with correction of cant), BSSO",bimaxillary,2,0,0,3,2,0,1,1,1,2,1,0,0,0,13,Mild
+CARSH_00172,172,baseline,0,,34.9,1,"Lefort 1 (advancement of 6 mm), BSSO (rotation of the mandible to the right by 5 mm)",bimaxillary,1,0,0,0,4,0,0,0,0,4,3,0,2,0,14,Mild
+CARSH_00174,174,baseline,1,,39.8,2,"LeFort I (2mm advancement, 1.5mm to the right, cant correction and 5mm impaction), BSSO (3mm to the left), Bilateral turbinectomy",bimaxillary,1,0,0,1,3,2,1,1,0,3,0,0,1,0,13,0
+CARSH_00177,177,baseline,2,,20.9,2,"Lefort I (advancement - 6 mm, anterior lengthening - 2 mm), BSSO (setback - 5 mm with rotation to left)",bimaxillary,2,0,2,4,4,4,1,2,3,3,2,1,0,0,28,Moderate
+CARSH_00183,183,baseline,0,,16.2,2,BSSO (advancement 9.5 mm),mandible,0,0,3,0,0,0,0,0,0,0,1,0,0,0,4,0
+CARSH_00189,189,baseline,0,,16.3,2,"Lefort I (advancement 4.5 mm, up on left 1 mm), BSSO (left rotation 5 mm), wisdom teeth extraction",bimaxillary,2,0,1,1,0,0,0,0,0,0,0,0,0,0,4,Little to none
+CARSH_00197,197,baseline,0,,24.1,1,"Lefort I (advancement 6 mm, correction of cant 2-3 mm down on right), BSSO setback 3 mm, with rotation to left 5 mm",bimaxillary,2,0,2,3,0,1,0,1,2,4,0,1,1,1,0,0
+CARSH_00201,201,baseline,1,,32.5,2,"LeFort I (5 mm advancement, 2 mm impaction), BSSO (4 mm setback)",bimaxillary,2,0,2,2,4,2,1,2,2,3,2,1,0,0,23,Moderate
+CARSH_00208,208,baseline,2,,24.1,2,BSSO with 5 mm advancement,mandible,2,0,3,3,4,4,2,1,3,4,3,1,1,0,31,0
+CARSH_00211,211,baseline,2,,44.6,1,"LeFort I (3 mm advancement, 7 mm lengthening)",maxilla,1,0,0,0,3,2,1,1,1,3,1,1,1,0,15,0
+CARSH_00221,221,baseline,0,,21.2,1,"LeFort I (5-mm advancement, anterior lengthening of 3 mm, and posterior impaction)",maxilla,2,0,0,4,2,0,2,1,0,0,0,0,0,0,11,0
+CARSH_00227,227,baseline,0,,39.8,2,"BSSO (5 mmadvancement), genioplasty (4 mm advancement)",mandible,0,0,0,0,4,3,0,0,2,4,0,0,4,0,17,Moderate
+CARSH_00229,229,baseline,0,,22.9,1,"Lefort I 2-piece (advance 5 mm, anterior lengthen 3 mm, widen 5 mm at the first molars)",maxilla,1,0,0,2,2,1,0,0,1,1,0,0,0,0,8,0
+CARSH_00232,232,baseline,2,,28.9,2,"Lefort I (advancement - 5 mm, 2 mm impaction), BSSO (setback - 4 mm)
 ",bimaxillary,4,1,2,4,2,1,2,4,2,4,2,1,2,1,32,Severe
-CARSH_00237,00237,baseline,10/15/2003,1,,18.4,1,"LeFort I (7 mm advancement, 5 mm lengthening) and BSSO (5 mm setback, 3 mm right rotation)
+CARSH_00237,237,baseline,1,,18.4,1,"LeFort I (7 mm advancement, 5 mm lengthening) and BSSO (5 mm setback, 3 mm right rotation)
 ",bimaxillary,2,0,3,3,3,2,0,0,2,2,2,2,2,0,23,0
-CARSH_00245,00245,baseline,1/31/1981,0,,41.3,2,"LeFort I (advancement of 3 mm and rotation to the right by 2 mm, and anterior lengthening of 3 mm)",maxilla,0,0,0,1,3,1,0,0,1,2,1,0,0,0,9,0
-CARSH_00246,00246,baseline,10/1/2003,0,,18.7,2,"Lefort I (6 mm advancement), BSSO (2 mm setback)",bimaxillary,2,0,2,1,3,3,0,0,3,2,1,0,0,0,17,0
-CARSH_00248,00248,baseline,8/27/2004,1,,17.8,1,"LeFort I 5 mm maxillary advancement, 4 mm anterior lengthening) and BSSO (5 mm mandibular setback and 3.5 mm left rotation)",bimaxillary,1,0,1,1,4,4,2,1,1,4,2,0,3,1,25,Moderate
-CARSH_00254,00254,baseline,6/20/1993,1,,29.1,2,"2-piece LeFort I (2 mm advancement, 4 mm impaction, 7 mm expansion)",maxilla,0,0,0,0,2,0,0,0,0,1,0,0,0,0,3,Little to none
-CARSH_00256,00256,baseline,8/15/2002,6,,20.1,2,"LeFort I (6 mm advacement, 2 mm lengthening), BSSO (7 mm setback, 2 mm right rotation)",bimaxillary,2,0,2,2,4,1,2,1,2,4,3,2,2,2,29,Severe
-CARSH_00258,00258,baseline,2/18/1999,0,,23.6,1,"2-piece LeFort I (5 mm advancement, 8 mm expansion)",maxilla,1,0,2,2,1,1,0,1,1,1,1,1,0,0,12,Mild
+CARSH_00245,245,baseline,0,,41.3,2,"LeFort I (advancement of 3 mm and rotation to the right by 2 mm, and anterior lengthening of 3 mm)",maxilla,0,0,0,1,3,1,0,0,1,2,1,0,0,0,9,0
+CARSH_00246,246,baseline,0,,18.7,2,"Lefort I (6 mm advancement), BSSO (2 mm setback)",bimaxillary,2,0,2,1,3,3,0,0,3,2,1,0,0,0,17,0
+CARSH_00248,248,baseline,1,,17.8,1,"LeFort I 5 mm maxillary advancement, 4 mm anterior lengthening) and BSSO (5 mm mandibular setback and 3.5 mm left rotation)",bimaxillary,1,0,1,1,4,4,2,1,1,4,2,0,3,1,25,Moderate
+CARSH_00254,254,baseline,1,,29.1,2,"2-piece LeFort I (2 mm advancement, 4 mm impaction, 7 mm expansion)",maxilla,0,0,0,0,2,0,0,0,0,1,0,0,0,0,3,Little to none
+CARSH_00256,256,baseline,6,,20.1,2,"LeFort I (6 mm advacement, 2 mm lengthening), BSSO (7 mm setback, 2 mm right rotation)",bimaxillary,2,0,2,2,4,1,2,1,2,4,3,2,2,2,29,Severe
+CARSH_00258,258,baseline,0,,23.6,1,"2-piece LeFort I (5 mm advancement, 8 mm expansion)",maxilla,1,0,2,2,1,1,0,1,1,1,1,1,0,0,12,Mild
