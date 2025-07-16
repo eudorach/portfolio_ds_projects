@@ -232,7 +232,21 @@ Add more rows as additional urine datasets are cleaned.
 | 7.P_COT.xpt | `LBDCOTLC`        | `serum_cotinine_comment`    | Comment code for serum cotinine |
 | 7.P_COT.xpt | `LBXHCOT`         | `serum_hydroxycotinine_ng_ml` | Serum hydroxycotinine level (ng/mL) |
 | 7.P_COT.xpt | `LBDHCOLC`        | `serum_hydroxycotinine_comment` | Comment code for serum hydroxycotinine |
-
+| 8.P_CMV.xpt     | `LBXIGG`   | `cmv_igg`         | Cytomegalovirus (CMV) IgG antibody |
+| 8.P_CMV.xpt     | `LBXIGM`   | `cmv_igm`         | Cytomegalovirus (CMV) IgM antibody |
+| 8.P_CMV.xpt     | `LBXIGGA`  | `cmv_igg_avidity` | Cytomegalovirus (CMV) IgG avidity |
+| 9.P_ETHOX.xpt   | `LBXEOA`     | `eto_pmol_g_hb` | Ethylene oxide hemoglobin adduct level (pmol/g Hb) |
+| 9.P_ETHOX.xpt   | `LBDEOALC`   | `eto_comment`   | Comment code for ethylene oxide measurement         |
+| 10.P_FERTIN.xpt | `LBXFER`     | `ferritin_ng_ml` | Ferritin concentration (ng/mL)         |
+| 10.P_FERTIN.xpt | `LBDFERSI`   | `ferritin_ug_l`   | Ferritin concentration (µg/L - SI units) |
+| 11.P_FETIB.xpt | `LBXIRN`    | `iron_frozen_ug_dl`        | Iron concentration in frozen serum (µg/dL)       |
+| 11.P_FETIB.xpt | `LBDIRNSI`  | `iron_frozen_umol_l`       | Iron concentration in frozen serum (µmol/L)      |
+| 11.P_FETIB.xpt | `LBXUIB`    | `uibc_ug_dl`               | Unsaturated Iron Binding Capacity (µg/dL)        |
+| 11.P_FETIB.xpt | `LBDUIBLC`  | `uibc_comment`             | Comment code for UIBC                            |
+| 11.P_FETIB.xpt | `LBDUIBSI`  | `uibc_umol_l`              | Unsaturated Iron Binding Capacity (µmol/L)       |
+| 11.P_FETIB.xpt | `LBDTIB`    | `tibc_ug_dl`               | Total Iron Binding Capacity (µg/dL)              |
+| 11.P_FETIB.xpt | `LBDTIBSI`  | `tibc_umol_l`              | Total Iron Binding Capacity (µmol/L)             |
+| 11.P_FETIB.xpt | `LBDPCT`    | `transferrin_saturation`   | Transferrin saturation percentage (%)            |
 
 ---
 
