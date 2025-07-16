@@ -91,49 +91,93 @@ The body measures were done on both males and females and ages 0 - 150 years unl
 | 7.P_UIO.XPT      | `URDUIOLC` | `urine_iodine_comment` | Urine iodine comment |
 | 8.P_UHG.XPT      | `URXUHG`   | `urine_mercury` | Urine mercury level (µg/L) |
 | 8.P_UHG.XPT      | `URDUHGLC` | `urine_mercury_comment` | Urine mercury comment |
-| 9.P_UM           | `URXUBA`   | `urine_barium` | Urine barium level ((µg/L) |
-| 9.P_UM           | `URDUBALC`  | `barium_comment` | Comment code for urine barium |
-| 9.P_UM           | `URXUCD`    | `urine_cadmium` | Urine cadmium level (µg/L) |
-| 9.P_UM           | `URDUCDLC`  | `cadmium_comment` | Comment code for cadmiumn |
-| 9.P_UM           | `URXUCO`    | `urine_cobalt` | Urine cobalt (µg/L) | 
-| 9.P_UM           | `URDUCOLC` | `cobalt_comment` | Comment code for urine cobalt |
-| 9.P_UM           | `URXUCS` | `urine_cesium` | Urine cesium level (µg/L) |
-| 9.P_UM           | `URDUCSLC` | `cesium_comment` | Comment code for urine cesium |
-| 9.P_UM           | `URXUMO` | `urine_molybdenum` | Urine molybdenum level (µg/L) |
-| 9.P_UM           | `URDUMOLC` | `molybdenum_comment` | Comment code for urine molybdenum |
-| 9.P_UM           | `URXUMN` | `urine_manganese` | Urine manganese level (µg/L) |
-| 9.P_UM           | `URDUMNLC` | `manganese_comment` | Comment code for urine manganese |
-| 9.P_UM           | `URXUPB` | `urine_lead` | Urine lead level (µg/L) |
-| 9.P_UM           | `URDUPBLC` | `lead_comment` | Comment code for urine lead |
-| 9.P_UM           | `URXUSB` | `urine_antimony` | Urine antimony level (µg/L) |
-| 9.P_UM           | `URDUSBLC` | `antimony_comment` | Comment code for urine antimony |
-| 9.P_UM           | `URXUSN` | `urine_tin` | Urine tin level (µg/L) |
-| 9.P_UM           | `URDUSNLC` | `tin_comment` | Comment code for urine tin |
-| 9.P_UM           | `URXUTL` | `urine_thallium` | Urine thallium level (µg/L) |
-| 9.P_UM           | `URDUTLLC` | `thallium_comment` | Comment code for urine thallium |
-| 9.P_UM           | `URXUTU` | `urine_tungsten` | Urine tungsten level (µg/L) |
-| 9.P_UM           | `URDUTULC` | `tungsten_comment` | Comment code for urine tungsten |
-| 10.P_UNI         | `URXUNI`         | `urine_nickel`            | Urine nickel level (µg/L)                 |
-| 10.P_UNI         | `URDUNILC`       | `urine_nickel_comment`    | Comment code for urine nickel             |
-| 11.P_OPD      | `URXOP1`         | `dimethylphosphate_ng_mL`         | Urine dimethylphosphate level (ng/mL)           |
-| 11.P_OPD      | `URDOP1LC`       | `dimethylphosphate_comment`       | Comment code for dimethylphosphate              |
-| 11.P_OPD      | `URXOP2`         | `diethylphosphate_ng_mL`          | Urine diethylphosphate level (ng/mL)            |
-| 11.P_OPD      | `URDOP2LC`       | `diethylphosphate_comment`        | Comment code for diethylphosphate               |
-| 11.P_OPD      | `URXOP3`         | `dimethylthiophosphate_ng_mL`     | Urine dimethylthiophosphate level (ng/mL)       |
-| 11.P_OPD      | `URDOP3LC`       | `dimethylthiophosphate_comment`   | Comment code for dimethylthiophosphate          |
-| 11.P_OPD      | `URXOP4`         | `diethylthiophosphate_ng_mL`      | Urine diethylthiophosphate level (ng/mL)        |
-| 11.P_OPD      | `URDOP4LC`       | `diethylthiophosphate_comment`    | Comment code for diethylthiophosphate           |
-| 11.P_OPD      | `URXOP5`         | `dimethyldithiophosphate_ng_mL`   | Urine dimethyldithiophosphate level (ng/mL)     |
-| 11.P_OPD      | `URDOP5LC`       | `dimethyldithiophosphate_comment` | Comment code for dimethyldithiophosphate        |
-| 11.P_OPD      | `URXOP6`         | `diethyldithiophosphate_ng_mL`    | Urine diethyldithiophosphate level (ng/mL)      |
-| 11.P_OPD      | `URDOP6LC`       | `diethyldithiophosphate_comment`  | Comment code for diethyldithiophosphate         |
-| 12.P_PERNT  | `URXUP8`         | `perchlorate_urine_ng_mL`    | Urine perchlorate level (ng/mL)             |
-| 12.P_PERNT  | `URDUP8LC`       | `perchlorate_comment`        | Comment code for urine perchlorate          |
-| 12.P_PERNT  | `URXNO3`         | `nitrate_urine_ng_mL`        | Urine nitrate level (ng/mL)                 |
-| 12.P_PERNT  | `URDNO3LC`       | `nitrate_comment`            | Comment code for urine nitrate              |
-| 12.P_PERNT  | `URXSCN`         | `thiocyanate_urine_ng_mL`    | Urine thiocyanate level (ng/mL)             |
-| 12.P_PERNT  | `URDSCNLC`       | `thiocyanate_comment`        | Comment code for urine thiocyanate          |
-| 12.P_UCPREG  | `URXPREG`        | `pregnancy_test_result`    | Urine pregnancy test result (See Encoded Values)     |
+| 9.P_UM.XPT          | `URXUBA`   | `urine_barium` | Urine barium level ((µg/L) |
+| 9.P_UM.XPT           | `URDUBALC`  | `barium_comment` | Comment code for urine barium |
+| 9.P_UM.XPT           | `URXUCD`    | `urine_cadmium` | Urine cadmium level (µg/L) |
+| 9.P_UM.XPT           | `URDUCDLC`  | `cadmium_comment` | Comment code for cadmiumn |
+| 9.P_UM.XPT           | `URXUCO`    | `urine_cobalt` | Urine cobalt (µg/L) | 
+| 9.P_UM.XPT           | `URDUCOLC` | `cobalt_comment` | Comment code for urine cobalt |
+| 9.P_UM.XPT           | `URXUCS` | `urine_cesium` | Urine cesium level (µg/L) |
+| 9.P_UM.XPT           | `URDUCSLC` | `cesium_comment` | Comment code for urine cesium |
+| 9.P_UM.XPT           | `URXUMO` | `urine_molybdenum` | Urine molybdenum level (µg/L) |
+| 9.P_UM.XPT           | `URDUMOLC` | `molybdenum_comment` | Comment code for urine molybdenum |
+| 9.P_UM.XPT           | `URXUMN` | `urine_manganese` | Urine manganese level (µg/L) |
+| 9.P_UM.XPT           | `URDUMNLC` | `manganese_comment` | Comment code for urine manganese |
+| 9.P_UM.XPT           | `URXUPB` | `urine_lead` | Urine lead level (µg/L) |
+| 9.P_UM.XPT           | `URDUPBLC` | `lead_comment` | Comment code for urine lead |
+| 9.P_UM.XPT          | `URXUSB` | `urine_antimony` | Urine antimony level (µg/L) |
+| 9.P_UM.XPT           | `URDUSBLC` | `antimony_comment` | Comment code for urine antimony |
+| 9.P_UM.XPT           | `URXUSN` | `urine_tin` | Urine tin level (µg/L) |
+| 9.P_UM.XPT           | `URDUSNLC` | `tin_comment` | Comment code for urine tin |
+| 9.P_UM.XPT           | `URXUTL` | `urine_thallium` | Urine thallium level (µg/L) |
+| 9.P_UM.XPT           | `URDUTLLC` | `thallium_comment` | Comment code for urine thallium |
+| 9.P_UM.XPT           | `URXUTU` | `urine_tungsten` | Urine tungsten level (µg/L) |
+| 9.P_UM.XPT           | `URDUTULC` | `tungsten_comment` | Comment code for urine tungsten |
+| 10.P_UNI.XPT         | `URXUNI`         | `urine_nickel`            | Urine nickel level (µg/L)                 |
+| 10.P_UNI.XPT         | `URDUNILC`       | `urine_nickel_comment`    | Comment code for urine nickel             |
+| 11.P_OPD.XPT      | `URXOP1`         | `dimethylphosphate_ng_mL`         | Urine dimethylphosphate level (ng/mL)           |
+| 11.P_OPD.XPT      | `URDOP1LC`       | `dimethylphosphate_comment`       | Comment code for dimethylphosphate              |
+| 11.P_OPD.XPT      | `URXOP2`         | `diethylphosphate_ng_mL`          | Urine diethylphosphate level (ng/mL)            |
+| 11.P_OPD.XPT      | `URDOP2LC`       | `diethylphosphate_comment`        | Comment code for diethylphosphate               |
+| 11.P_OPD.XPT      | `URXOP3`         | `dimethylthiophosphate_ng_mL`     | Urine dimethylthiophosphate level (ng/mL)       |
+| 11.P_OPD.XPT      | `URDOP3LC`       | `dimethylthiophosphate_comment`   | Comment code for dimethylthiophosphate          |
+| 11.P_OPD.XPT      | `URXOP4`         | `diethylthiophosphate_ng_mL`      | Urine diethylthiophosphate level (ng/mL)        |
+| 11.P_OPD.XPT      | `URDOP4LC`       | `diethylthiophosphate_comment`    | Comment code for diethylthiophosphate           |
+| 11.P_OPD.XPT      | `URXOP5`         | `dimethyldithiophosphate_ng_mL`   | Urine dimethyldithiophosphate level (ng/mL)     |
+| 11.P_OPD.XPT      | `URDOP5LC`       | `dimethyldithiophosphate_comment` | Comment code for dimethyldithiophosphate        |
+| 11.P_OPD.XPT      | `URXOP6`         | `diethyldithiophosphate_ng_mL`    | Urine diethyldithiophosphate level (ng/mL)      |
+| 11.P_OPD.XPT      | `URDOP6LC`       | `diethyldithiophosphate_comment`  | Comment code for diethyldithiophosphate         |
+| 12.P_PERNT.XPT  | `URXUP8`         | `perchlorate_urine_ng_mL`    | Urine perchlorate level (ng/mL)             |
+| 12.P_PERNT.XPT  | `URDUP8LC`       | `perchlorate_comment`        | Comment code for urine perchlorate          |
+| 12.P_PERNT.XPT  | `URXNO3`         | `nitrate_urine_ng_mL`        | Urine nitrate level (ng/mL)                 |
+| 12.P_PERNT.XPT  | `URDNO3LC`       | `nitrate_comment`            | Comment code for urine nitrate              |
+| 12.P_PERNT.XPT  | `URXSCN`         | `thiocyanate_urine_ng_mL`    | Urine thiocyanate level (ng/mL)             |
+| 12.P_PERNT.XPT  | `URDSCNLC`       | `thiocyanate_comment`        | Comment code for urine thiocyanate          |
+| 13.P_UCPREG.XPT  | `URXPREG`        | `pregnancy_test_result`    | Urine pregnancy test result (See Encoded Values)     |
+| 14.P_UVOC.XPT | `URX2MH`    | `2_methylhippuric_acid_ng_ml`                     | 2-Methylhippuric acid (ng/mL) |
+| 14.P_UVOC.XPT | `URD2MHLC`  | `2_methylhippuric_acid_comment`                   | Comment code for 2-Methylhippuric acid |
+| 14.P_UVOC.XPT | `URX34M`    | `3__and_4_methylhippuric_acid_ng_ml`              | 3- and 4-Methylhippuric acid (ng/mL) |
+| 14.P_UVOC.XPT | `URD34MLC`  | `3__and_4_methylhippuric_acid_comment`            | Comment code for 3- and 4-Methylhippuric acid |
+| 14.P_UVOC.XPT | `URXAAM`    | `n_acetyl_s_2_carbamoylethyl_l_cysteine_ng_ml`    | N-Acetyl-S-(2-carbamoylethyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDAAMLC`  | `n_acetyl_s_2_carbamoylethyl_l_cysteine_comment`  | Comment code for N-Acetyl-S-(2-carbamoylethyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXAMC`    | `n_acetyl_s_n_methylcarbamoyl_l_cysteine_ng_ml`   | N-Acetyl-S-(N-methylcarbamoyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDAMCLC`  | `n_acetyl_s_n_methylcarbamoyl_l_cysteine_comment` | Comment code for N-Acetyl-S-(N-methylcarbamoyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXATC`    | `2_aminothiazoline_4_carboxylic_acid_ng_ml`       | 2-Aminothiazoline-4-carboxylic acid (ng/mL) |
+| 14.P_UVOC.XPT | `URDATCLC`  | `2_aminothiazoline_4_carboxylic_acid_comment`     | Comment code for 2-Aminothiazoline-4-carboxylic acid |
+| 14.P_UVOC.XPT | `URXBMA`    | `n_acetyl_s_benzyl_l_cysteine_ng_ml`              | N-Acetyl-S-benzyl-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDBMALC`  | `n_acetyl_s_benzyl_l_cysteine_comment`            | Comment code for N-Acetyl-S-benzyl-L-cysteine |
+| 14.P_UVOC.XPT | `URXBPM`    | `n_acetyl_s_n_propyl_l_cysteine_ng_ml`            | N-Acetyl-S-n-propyl-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDBPMLC`  | `n_acetyl_s_n_propyl_l_cysteine_comment`          | Comment code for N-Acetyl-S-n-propyl-L-cysteine |
+| 14.P_UVOC.XPT | `URXCEM`    | `n_acetyl_s_2_carboxyethyl_l_cysteine_ng_ml`      | N-Acetyl-S-(2-carboxyethyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDCEMLC`  | `n_acetyl_s_2_carboxyethyl_l_cysteine_comment`    | Comment code for N-Acetyl-S-(2-carboxyethyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXCYHA`   | `n_acetyl_s_1_cyano_2_hydroxyethyl_l_cysteine_ng_ml` | N-Acetyl-S-(1-cyano-2-hydroxyethyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDCYALC`  | `n_acetyl_s_1_cyano_2_hydroxyethyl_l_cysteine_comment` | Comment code for N-Acetyl-S-(1-cyano-2-hydroxyethyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXCYM`    | `n_acetyl_s_2_cyanoethyl_l_cysteine_ng_ml`        | N-Acetyl-S-(2-cyanoethyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDCYMLC`  | `n_acetyl_s_2_cyanoethyl_l_cysteine_comment`      | Comment code for N-Acetyl-S-(2-cyanoethyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXDHB`    | `n_acetyl_s_34_dihydroxybutyl_l_cysteine_ng_ml`   | N-Acetyl-S-(3,4-dihydroxybutyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDDHBLC`  | `n_acetyl_s_34_dihydroxybutyl_l_cysteine_comment` | Comment code for N-Acetyl-S-(3,4-dihydroxybutyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXGAM`    | `n_acetyl_s_2_carbamoyl_2_hydroxyethyl_l_cysteine_ng_ml` | N-Acetyl-S-(2-carbamoyl-2-hydroxyethyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDGAMLC`  | `n_acetyl_s_2_carbamoyl_2_hydroxyethyl_l_cysteine_comment` | Comment code for N-Acetyl-S-(2-carbamoyl-2-hydroxyethyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXHEM`    | `n_acetyl_s_2_hydroxyethyl_l_cysteine_ng_ml`      | N-Acetyl-S-(2-hydroxyethyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDHEMLC`  | `n_acetyl_s_2_hydroxyethyl_l_cysteine_comment`    | Comment code for N-Acetyl-S-(2-hydroxyethyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXHP2`    | `n_acetyl_s_2_hydroxypropyl_l_cysteine_ng_ml`     | N-Acetyl-S-(2-hydroxypropyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDHP2LC`  | `n_acetyl_s_2_hydroxypropyl_l_cysteine_comment`   | Comment code for N-Acetyl-S-(2-hydroxypropyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXHPM`    | `n_acetyl_s_3_hydroxypropyl_l_cysteine_ng_ml`     | N-Acetyl-S-(3-hydroxypropyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDHPMLC`  | `n_acetyl_s_3_hydroxypropyl_l_cysteine_comment`   | Comment code for N-Acetyl-S-(3-hydroxypropyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXIPM3`   | `n_acetyl_s_3_hydroxypropyl_1_methyl_l_cysteine_ng_ml` | N-Acetyl-S-(3-hydroxypropyl-1-methyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDPM3LC`  | `n_acetyl_s_3_hydroxypropyl_1_methyl_l_cysteine_comment` | Comment code for N-Acetyl-S-(3-hydroxypropyl-1-methyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXMAD`    | `mandelic_acid_ng_ml`                            | Mandelic acid (ng/mL) |
+| 14.P_UVOC.XPT | `URDMADLC`  | `mandelic_acid_comment`                          | Comment code for Mandelic acid |
+| 14.P_UVOC.XPT | `URXMB3`    | `n_acetyl_s_4_hydroxy_2_butenyl_l_cysteine_ng_ml` | N-Acetyl-S-(4-hydroxy-2-butenyl)-L-cysteine (ng/mL) |
+| 14.P_UVOC.XPT | `URDMB3LC`  | `n_acetyl_s_4_hydroxy_2_butenyl_l_cysteine_comment` | Comment code for N-Acetyl-S-(4-hydroxy-2-butenyl)-L-cysteine |
+| 14.P_UVOC.XPT | `URXPHG`    | `phenylglyoxylic_acid_ng_ml`                     | Phenylglyoxylic acid (ng/mL) |
+| 14.P_UVOC.XPT | `URDPHGLC`  | `phenylglyoxylic_acid_comment`                   | Comment code for Phenylglyoxylic acid |
+| 14.P_UVOC.XPT | `URXPMM`    | `2_thioxothiazolidine_4_carboxylic_acid`         | 2-Thioxothiazolidine-4-carboxylic acid (ng/mL) |
+| 14.P_UVOC.XPT | `URDPMMLC`  | `2_thioxothiazolidine_4_carboxylic_acid_comment` | Comment code for 2-Thioxothiazolidine-4-carboxylic acid |
+| 15.P_UVOC2.XPT | `URXMUCA`   | `trans_trans_muconic_acid_ng_ml`       | Trans,trans-Muconic acid (ng/mL) |
+| 15.P_UVOC2.XPT | `URDMUCLC`  | `trans_trans_muconic_acid_comment`     | Comment code for Trans,trans-Muconic acid |
+| 15.P_UVOC2.XPT | `URXPHMA`   | `phenylmercapturic_acid_ng_ml`         | Phenylmercapturic acid (ng/mL) |
+| 15.P_UVOC2.XPT | `URDPMALC`  | `phenylmercapturic_acid_comment`       | Comment code for Phenylmercapturic acid |
 
 
 Add more rows as additional urine datasets are cleaned.
@@ -144,9 +188,46 @@ Add more rows as additional urine datasets are cleaned.
 
 | Dataset File | Original Column | New Column Name           | Description                          |
 |--------------|-----------------|---------------------------|--------------------------------------|
-| CBC_J.XPT    | LBXHGB          | hemoglobin_g_dL           | Hemoglobin (g/dL)                    |
-| CBC_J.XPT    | LBXWBCSI        | white_blood_cell_count    | White blood cell count (1000 cells/µL) |
-| ...          | ...             | ...                       | ...                                  |
+| 1.P_SSAGP.xpt | `SSAGP` | `alpha_1_agp_g_L` | Alpha-1-acid glycoprotein (g/L) |
+| 2.P_HDL.xpt | `LBDHDD` | `direct_hdl_mg_dl` | Direct HDL cholesterol (mg/dL) |
+| 2.P_HDL.xpt | `LBDHDDSI` | `direct_hdl_mmol_l` | Direct HDL cholesterol (mmol/L) |
+| 3.P_TRIGLY.xpt | `LBXTR`     | `triglyceride_mg_dl`               | Triglycerides (mg/dL)                                |
+| 3.P_TRIGLY.xpt | `LBDTRSI`   | `triglyceride_mmol_l`              | Triglycerides (mmol/L)                               |
+| 3.P_TRIGLY.xpt | `LBDLDL`    | `ldl_friedewald_mg_dl`             | LDL cholesterol (Friedewald equation, mg/dL)         |
+| 3.P_TRIGLY.xpt | `LBDLDLSI`  | `ldl_friedewald_mmol_l`            | LDL cholesterol (Friedewald equation, mmol/L)        |
+| 3.P_TRIGLY.xpt | `LBDLDLM`   | `ldl_martin_hopkins_mg_dl`         | LDL cholesterol (Martin–Hopkins method, mg/dL)       |
+| 3.P_TRIGLY.xpt | `LBDLDMSI`  | `ldl_martin_hopkins_mmol_l`        | LDL cholesterol (Martin–Hopkins method, mmol/L)      |
+| 3.P_TRIGLY.xpt | `LBDLDLN`   | `ldl_nih_mg_dl`                    | LDL cholesterol (NIH equation, mg/dL)                |
+| 3.P_TRIGLY.xpt | `LBDLDNSI`  | `ldl_nih_mmol_l`                   | LDL cholesterol (NIH equation, mmol/L)               |
+| 4.P_TCHOL.xpt | `LBXTC`   | `total_cholesterol_mg_dl`   | Total cholesterol (mg/dL)         |
+| 4.P_TCHOL.xpt | `LBDTCSI` | `total_cholesterol_mmol_l`  | Total cholesterol (mmol/L)        |
+| 5.P_CRCO.xpt | `LBXBCR`     | `chromium_blood_ug_l`        | Chromium in blood (µg/L)           |
+| 5.P_CRCO.xpt | `LBDBCRSI`   | `chromium_blood_nmol_l`      | Chromium in blood (nmol/L)         |
+| 5.P_CRCO.xpt | `LBDBCRLC`   | `chromium_blood_comment`     | Comment code for chromium          |
+| 5.P_CRCO.xpt | `LBXBCO`     | `cobalt_blood_ug_l`          | Cobalt in blood (µg/L)             |
+| 5.P_CRCO.xpt | `LBDBCOSI`   | `cobalt_blood_nmol_l`        | Cobalt in blood (nmol/L)           |
+| 5.P_CRCO.xpt | `LBDBCOLC`   | `cobalt_blood_comment`       | Comment code for cobalt            |
+| 6.P_CBC.xpt | `LBXWBCSI`                | `white_blood_cell_count`                 | White blood cell count (1000 cells/µL)    |
+| 6.P_CBC.xpt | `LBXLYPCT`                | `lymphocyte_percent`                     | Lymphocyte percentage                     |
+| 6.P_CBC.xpt | `LBXMOPCT`                | `monocyte_percent`                       | Monocyte percentage                       |
+| 6.P_CBC.xpt | `LBXNEPCT`                | `segmented_neutrophils_percent`          | Neutrophil percentage                     |
+| 6.P_CBC.xpt | `LBXEOPCT`                | `eosinophils_percent`                    | Eosinophil percentage                     |
+| 6.P_CBC.xpt | `LBXBAPCT`                | `basophils_percent`                      | Basophil percentage                       |
+| 6.P_CBC.xpt | `LBXLYNUM`                | `lymphocyte_number`                      | Lymphocyte count (1000 cells/µL)          |
+| 6.P_CBC.xpt | `LBXMONUM`                | `monocyte_number`                        | Monocyte count (1000 cells/µL)            |
+| 6.P_CBC.xpt | `LBXNENUM`                | `segmented_neutrophils_number`           | Neutrophil count (1000 cells/µL)          |
+| 6.P_CBC.xpt | `LBXEONUM`                | `eosinophils_number`                     | Eosinophil count (1000 cells/µL)          |
+| 6.P_CBC.xpt | `LBXBANUM`                | `basophils_number`                       | Basophil count (1000 cells/µL)            |
+| 6.P_CBC.xpt | `LBXRBCSI`                | `red_blood_cell_count`                   | Red blood cell count (million cells/µL)   |
+| 6.P_CBC.xpt | `LBXHGB`                  | `hemoglobin`                             | Hemoglobin (g/dL)                         |
+| 6.P_CBC.xpt | `LBXHCT`                  | `hematocrit_percent`                     | Hematocrit (%)                            |
+| 6.P_CBC.xpt | `LBXMCVSI`                | `mean_cell_volume`                       | Mean cell volume (fL)                     |
+| 6.P_CBC.xpt | `LBXMC`                   | `mean_cell_hgb_concentration`            | Mean cell hemoglobin concentration (g/dL) |
+| 6.P_CBC.xpt | `LBXMH`                   | `mean_cell_hemoglobin`                   | Mean cell hemoglobin (pg)                 |
+| 6.P_CBC.xpt | `LBXRDW`                  | `red_cell_distribution_width`            | Red cell distribution width (%)           |
+| 6.P_CBC.xpt | `LBXPLTSI`                | `platelet_count`                         | Platelet count (1000 cells/µL)            |
+| 6.P_CBC.xpt | `LBXMPVSI`                | `mean_platelet_volume`                   | Mean platelet volume (fL)                 |
+| 6.P_CBC.xpt | `LBXNRSI`                 | `nucelated_red_blood_cells`              | Nucleated red blood cells (1000 cells/µL) |
 
 Add blood dataset rows as you clean them.
 
