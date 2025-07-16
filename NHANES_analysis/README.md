@@ -228,8 +228,11 @@ Add more rows as additional urine datasets are cleaned.
 | 6.P_CBC.xpt | `LBXPLTSI`                | `platelet_count`                         | Platelet count (1000 cells/µL)            |
 | 6.P_CBC.xpt | `LBXMPVSI`                | `mean_platelet_volume`                   | Mean platelet volume (fL)                 |
 | 6.P_CBC.xpt | `LBXNRSI`                 | `nucelated_red_blood_cells`              | Nucleated red blood cells (1000 cells/µL) |
+| 7.P_COT.xpt | `LBXCOT`          | `serum_cotinine_ng_ml`      | Serum cotinine level (ng/mL)    |
+| 7.P_COT.xpt | `LBDCOTLC`        | `serum_cotinine_comment`    | Comment code for serum cotinine |
+| 7.P_COT.xpt | `LBXHCOT`         | `serum_hydroxycotinine_ng_ml` | Serum hydroxycotinine level (ng/mL) |
+| 7.P_COT.xpt | `LBDHCOLC`        | `serum_hydroxycotinine_comment` | Comment code for serum hydroxycotinine |
 
-Add blood dataset rows as you clean them.
 
 ---
 
