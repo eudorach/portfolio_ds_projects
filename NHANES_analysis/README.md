@@ -234,7 +234,7 @@ Add more rows as additional urine datasets are cleaned.
 | 7.P_COT.xpt | `LBDHCOLC`        | `serum_hydroxycotinine_comment` | Comment code for serum hydroxycotinine |
 | 8.P_CMV.xpt     | `LBXIGG`   | `cmv_igg`         | Cytomegalovirus (CMV) IgG antibody |
 | 8.P_CMV.xpt     | `LBXIGM`   | `cmv_igm`         | Cytomegalovirus (CMV) IgM antibody |
-| 8.P_CMV.xpt     | `LBXIGGA`  | `cmv_igg_avidity` | Cytomegalovirus (CMV) IgG avidity |
+| 8.P_CMV.xpt     | `LBXIGGA`  | `cmv_igg_avidity` | Cytomegalovirus (CMV) IgG avidity (See Encoded Values)|
 | 9.P_ETHOX.xpt   | `LBXEOA`     | `eto_pmol_g_hb` | Ethylene oxide hemoglobin adduct level (pmol/g Hb) |
 | 9.P_ETHOX.xpt   | `LBDEOALC`   | `eto_comment`   | Comment code for ethylene oxide measurement         |
 | 10.P_FERTIN.xpt | `LBXFER`     | `ferritin_ng_ml` | Ferritin concentration (ng/mL)         |
@@ -247,6 +247,9 @@ Add more rows as additional urine datasets are cleaned.
 | 11.P_FETIB.xpt | `LBDTIB`    | `tibc_ug_dl`               | Total Iron Binding Capacity (µg/dL)              |
 | 11.P_FETIB.xpt | `LBDTIBSI`  | `tibc_umol_l`              | Total Iron Binding Capacity (µmol/L)             |
 | 11.P_FETIB.xpt | `LBDPCT`    | `transferrin_saturation`   | Transferrin saturation percentage (%)            |
+| 12.P_FOLATE.xpt | `LBDRFO`    | `rbc_folate_ng_ml`    | Red blood cell folate (ng/mL)        |
+| 12.P_FOLATE.xpt | `LBDRFOSI`  | `rbc_folate_nmol_l`   | Red blood cell folate (nmol/L)       |
+
 
 ---
 
@@ -299,6 +302,11 @@ Add more rows as additional urine datasets are cleaned.
 - `2` = Negative
 - `3` = Not Done
 
+#### CMV IgG avidity
+- `1` = Low
+- `2` = High
+- `3` = Indeterminate
+
 ### Functions
 
 #### `drop_rows_with_both_nans()`
@@ -307,6 +315,8 @@ Removes rows where both `col1` and `col2` are NaN.
 #### `get_common_nan_ids()`
 Identifies participant IDs with NaNs in both columns. Useful for understanding overlap in missing data.
 
+#### `standardize_id_column()`
+Renames the original identifier column to 'participant_id'
 ...
 
 ### Column Changes
