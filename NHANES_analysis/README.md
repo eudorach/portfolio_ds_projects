@@ -8,6 +8,15 @@ This project uses NHANES 2017–2020 datasets to explore relationships between b
 ## Data Sources
 - NHANES 2017–2020: [https://wwwn.cdc.gov/nchs/nhanes/](https://wwwn.cdc.gov/nchs/nhanes/)
 
+## Data Cleaning
+The NHANES data consists of multiple datasets grouped into distinct categories. For this project, I categorized them into:
+
+- Demographics
+- Body Measurements
+- Urine Lab Values
+- Blood Lab Values
+
+To improve efficiency and ensure reproducibility, I cleaned each category in a separate Jupyter notebook. This modular approach also improves readability and makes it easier to track preprocessing steps for each dataset type.
 
 ## Variable Key (Column Renaming)
 
