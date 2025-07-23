@@ -323,33 +323,8 @@ Add more rows as additional urine datasets are cleaned.
 | 19.P_PFAS.xpt | `LBDPFOSLC`                       | `sm_pfos_comment_code`                   | Serum PFOS comment code              |
 | 20.P_GLU.xpt | `GLUFSG`              | `fasting_glucose_mg_dl`   | Fasting glucose (mg/dL) |
 | 20.P_GLU.xpt | `GLUFSM`              | `fasting_glucose_mmol_l`  | Fasting glucose (mmol/L)|
-| 21.P_TST.xpt | `P0217HPR` (example variable name) | `17alpha_hydroxyprogesterone_ng_dl`       |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `17alpha_hydroxyprogesterone_nmol_l`      |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `17alpha_hydroxyprogesterone_comment_code`|             |
-| 21.P_TST.xpt | (corresponding variable name)      | `androstenedione_ng_dl`                     |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `androstenedione_nmol_l`                    |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `androstenedione_comment_code`              |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `anti_mullerian_hormone_ng_ml`              |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `anti_mullerian_hormone_pmol_l`             |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `anti_mullerian_hormone_comment_code`       |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estradiol_pg_ml`                           |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estradiol_pmol_l`                          |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estradiol_comment_code`                    |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estrone_ng_dl`                             |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estrone_pmol_l`                            |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estrone_comment_code`                      |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estrone_sulfate_pg_ml`                     |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estrone_sulfate_pmol_l`                    |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `estrone_sulfate_comment_code`              |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `follicle_stimulating_hormone_miu_ml`      |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `fsh_comment_code`                          |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `luteinizing_hormone_miu_ml`                |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `luteinizing_hormone_comment_code`          |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `progesterone_ng_dl`                        |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `progesterone_nmol_l`                       |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `progesterone_comment_code`                 |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `shbg_nmol_l`                              |             |
-| 21.P_TST.xpt | (corresponding variable name)      | `shbg_comment_code`                         |             |
+
+
 
 ---
 
