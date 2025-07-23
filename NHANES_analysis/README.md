@@ -323,7 +323,33 @@ Add more rows as additional urine datasets are cleaned.
 | 19.P_PFAS.xpt | `LBDPFOSLC`                       | `sm_pfos_comment_code`                   | Serum PFOS comment code              |
 | 20.P_GLU.xpt | `GLUFSG`              | `fasting_glucose_mg_dl`   | Fasting glucose (mg/dL) |
 | 20.P_GLU.xpt | `GLUFSM`              | `fasting_glucose_mmol_l`  | Fasting glucose (mmol/L)|
-
+| 21.P_TST.xpt | `LBX17H`      | `17alpha_hydroxyprogesterone_ng_dl`        | 17α-hydroxyprogesterone (ng/dL) |
+| 21.P_TST.xpt | `LBD17HSI`    | `17alpha_hydroxyprogesterone_nmol_l`       | 17α-hydroxyprogesterone (nmol/L) |
+| 21.P_TST.xpt | `LBD17HLC`    | `17alpha_hydroxyprogesterone_comment_code` | 17α-hydroxyprogesterone Comment Code |
+| 21.P_TST.xpt | `LBXAND`      | `androstenedione_ng_dl`                    | Androstenedione (ng/dL) |
+| 21.P_TST.xpt | `LBDANDSI`    | `androstenedione_nmol_l`                   | Androstenedione (nmol/L) |
+| 21.P_TST.xpt | `LBDANDLC`    | `androstenedione_comment_code`             | Androstenedione Comment Code |
+| 21.P_TST.xpt | `LBXAMH`      | `anti_mullerian_hormone_ng_ml`             | Anti-Mullerian hormone (ng/mL) |
+| 21.P_TST.xpt | `LBDAMHSI`    | `anti_mullerian_hormone_pmol_l`            | Anti-Mullerian hormone (pmol/L) |
+| 21.P_TST.xpt | `LBDAMHLC`    | `anti_mullerian_hormone_comment_code`      | Anti-Mullerian hormone Comment Code |
+| 21.P_TST.xpt | `LBXEST`      | `estradiol_pg_ml`                          | Estradiol (pg/mL) |
+| 21.P_TST.xpt | `LBDESTSI`    | `estradiol_pmol_l`                         | Estradiol (pmol/L) |
+| 21.P_TST.xpt | `LBDESTLC`    | `estradiol_comment_code`                   | Estradiol Comment Code |
+| 21.P_TST.xpt | `LBXESO`      | `estrone_ng_dl`                            | Estrone (ng/dL) |
+| 21.P_TST.xpt | `LBDESOSI`    | `estrone_pmol_l`                           | Estrone (pmol/L) |
+| 21.P_TST.xpt | `LBDESOLC`    | `estrone_comment_code`                     | Estrone Comment Code |
+| 21.P_TST.xpt | `LBXES1`      | `estrone_sulfate_pg_ml`                    | Estrone Sulfate (pg/mL) |
+| 21.P_TST.xpt | `LBDES1SI`    | `estrone_sulfate_pmol_l`                   | Estrone Sulfate (pmol/L) |
+| 21.P_TST.xpt | `LBDES1LC`    | `estrone_sulfate_comment_code`             | Estrone Sulfate Comment Code |
+| 21.P_TST.xpt | `LBXFSH`      | `follicle_stimulating_hormone_miu_ml`      | Follicle Stimulating Hormone (mIU/mL) |
+| 21.P_TST.xpt | `LBDDFSHLC`   | `fsh_comment_code`                         | FSH Comment Code |
+| 21.P_TST.xpt | `LBXLUH`      | `luteinizing_hormone_miu_ml`               | Luteinizing Hormone (mIU/mL) |
+| 21.P_TST.xpt | `LBDLUHLC`    | `luteinizing_hormone_comment_code`         | Luteinizing Hormone Comment Code |
+| 21.P_TST.xpt | `LBXPG4`      | `progesterone_ng_dl`                       | Progesterone (ng/dL) |
+| 21.P_TST.xpt | `LBDPG4SI`    | `progesterone_nmol_l`                      | Progesterone (nmol/L) |
+| 21.P_TST.xpt | `LBDPG4LC`    | `progesterone_comment_code`                | Progesterone Comment Code |
+| 21.P_TST.xpt | `LBXSHBG`     | `shbg_nmol_l`                              | SHBG (nmol/L) |
+| 21.P_TST.xpt | `LBDSHGLC`    | `shbg_comment_code`                        | SHBG Comment Code |
 
 
 ---
