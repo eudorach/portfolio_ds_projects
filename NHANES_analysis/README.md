@@ -258,6 +258,72 @@ Add more rows as additional urine datasets are cleaned.
 | 11.P_FETIB.xpt | `LBDPCT`    | `transferrin_saturation`   | Transferrin saturation percentage (%)            |
 | 12.P_FOLATE.xpt | `LBDRFO`    | `rbc_folate_ng_ml`    | Red blood cell folate (ng/mL)        |
 | 12.P_FOLATE.xpt | `LBDRFOSI`  | `rbc_folate_nmol_l`   | Red blood cell folate (nmol/L)       |
+| 13.P_FOLFMS.xpt | `LBDFOTSI`  | `serum_total_folate_nmol_l`              | Serum total folate (nmol/L)              |
+| 13.P_FOLFMS.xpt | `LBDFOTSI2` | `serum_total_folate_ng_ml`               | Serum total folate (ng/mL)               |
+| 13.P_FOLFMS.xpt | `LBDFMTH`   | `5_methyl_tetrahydrofolate_nmol_l`       | 5-Methyltetrahydrofolate (nmol/L)        |
+| 13.P_FOLFMS.xpt | `LBDCMTH`   | `5_methyl_tetrahydrofolate_cmt`          | Comment code for 5-Methyltetrahydrofolate |
+| 13.P_FOLFMS.xpt | `LBDFACID`  | `folic_acid_nmol_l`                      | Folic acid (nmol/L)                      |
+| 13.P_FOLFMS.xpt | `LBDCFACI`  | `folic_acid_cmt`                         | Comment code for folic acid              |
+| 13.P_FOLFMS.xpt | `LBDFTHF`   | `5_formyl_tetrahydrofolate_nmol_l`       | 5-Formyltetrahydrofolate (nmol/L)        |
+| 13.P_FOLFMS.xpt | `LBDCFTHF`  | `5_formyl_tetrahydrofolate_cmt`          | Comment code for 5-Formyltetrahydrofolate |
+| 13.P_FOLFMS.xpt | `LBDTHF`    | `tetrahydrofolate_nmol_l`                | Tetrahydrofolate (nmol/L)                |
+| 13.P_FOLFMS.xpt | `LBDCTHF`   | `tetrahydrofolate_cmt`                   | Comment code for tetrahydrofolate        |
+| 13.P_FOLFMS.xpt | `LBDFMNL`   | `510_methenyl_tetrahydrofolate_nmol_l`   | 5,10-Methenyltetrahydrofolate (nmol/L)   |
+| 13.P_FOLFMS.xpt | `LBDCMNL`   | `510_methenyl_tetrahydrofolate_cmt`      | Comment code for 5,10-Methenyltetrahydrofolate |
+| 13.P_FOLFMS.xpt | `LBDFOXP`   | `mefox_oxidation_product_nmol_l`         | MeFox oxidation product (nmol/L)         |
+| 13.P_FOLFMS.xpt | `LBDCOXP`   | `mefox_oxidation_product_cmt`            | Comment code for MeFox oxidation product |
+| 14.P_GHB.xpt | `LBXGH` | `glycohemoglobin_percent` | Glycohemoglobin (%) |
+| 15.P_HSCRP.xpt | `LBXHSCRP` | `hs_crp_mg_l`     | High-sensitivity C-reactive protein (mg/L) |
+| 15.P_HSCRP.xpt | `LBDHRPLC` | `hs_crp_cmt`      | High-sensitivity CRP comment               |
+| 16.P_IHGEM.xpt   | `LBXIHG`       | `mercury_inorganic_ug_l`         | Inorganic mercury (µg/L)                 |
+| 16.P_IHGEM.xpt   | `LBDIHGSI`     | `mercury_inorganic_nmol_l`       | Inorganic mercury (nmol/L)               |
+| 16.P_IHGEM.xpt   | `LBDIHGC`      | `mercury_inorganic_comment_code` | Inorganic mercury comment code           |
+| 16.P_IHGEM.xpt   | `LBXEHG`       | `mercury_ethyl_ug_l`             | Ethyl mercury (µg/L)                     |
+| 16.P_IHGEM.xpt   | `LBDEHGSI`     | `mercury_ethyl_nmol_l`           | Ethyl mercury (nmol/L)                   |
+| 16.P_IHGEM.xpt   | `LBDEHGC`      | `mercury_ethyl_comment_code`     | Ethyl mercury comment code               |
+| 16.P_IHGEM.xpt   | `LBXMHG`       | `mercury_methyl_ug_l`            | Methyl mercury (µg/L)                    |
+| 16.P_IHGEM.xpt   | `LBDMHGSI`     | `mercury_methyl_nmol_l`          | Methyl mercury (nmol/L)                  |
+| 16.P_IHGEM.xpt   | `LBDMHGC`      | `mercury_methyl_comment_code`    | Methyl mercury comment code              |
+| 17.P_INS.xpt   | `WTSAF2YR`     | `fasting_subsample_weight`  | Fasting subsample 2-year weight |
+| 17.P_INS.xpt   | `LBXINSI`      | `insulin_μu_ml`             | Insulin (µU/mL)                |
+| 17.P_INS.xpt   | `LBDINSI`      | `insulin_pmol_l`            | Insulin (pmol/L)               |
+| 17.P_INS.xpt   | `LBDINSC`      | `insulin_comment_code`      | Insulin comment code           |
+| 18.P_PBCD.xpt | `LBXBPB`                      | `blood_lead_ug_dl`              | Blood lead (µg/dL)             |
+| 18.P_PBCD.xpt | `LBDPBLC`                     | `blood_lead_comment_code`       | Blood lead comment code        |
+| 18.P_PBCD.xpt | `LBDPBNSI`                    | `blood_lead_umol_l`             | Blood lead (µmol/L)            |
+| 18.P_PBCD.xpt | `LBXBCd`                      | `blood_cadmium_ug_l`            | Blood cadmium (µg/L)           |
+| 18.P_PBCD.xpt | `LBDCdNSI`                    | `blood_cadmium_nmol_l`          | Blood cadmium (nmol/L)         |
+| 18.P_PBCD.xpt | `LBDCdLC`                     | `blood_cadmium_comment_code`    | Blood cadmium comment code     |
+| 18.P_PBCD.xpt | `LBXTHg`                      | `blood_mercury_total_ug_l`      | Blood mercury total (µg/L)     |
+| 18.P_PBCD.xpt | `LBDTHgNSI`                   | `blood_mercury_total_nmol_l`    | Blood mercury total (nmol/L)   |
+| 18.P_PBCD.xpt | `LBDTHgLC`                    | `blood_mercury_total_comment_code` | Blood mercury total comment code |
+| 18.P_PBCD.xpt | `LBXSEL`                      | `blood_selenium_ug_l`           | Blood selenium (µg/L)          |
+| 18.P_PBCD.xpt | `LBDSELNSI`                   | `blood_selenium_umol_l`         | Blood selenium (µmol/L)        |
+| 18.P_PBCD.xpt | `LBDSELLC`                   | `blood_selenium_comment_code`   | Blood selenium comment code    |
+| 18.P_PBCD.xpt | `LBXMNG`                      | `blood_manganese_ug_l`          | Blood manganese (µg/L)         |
+| 18.P_PBCD.xpt | `LBDMNGNSI`                   | `blood_manganese_nmol_l`        | Blood manganese (nmol/L)       |
+| 18.P_PBCD.xpt | `LBDMNGLC`                   | `blood_manganese_comment_code`  | Blood manganese comment code   |
+| 19.P_PFAS.xpt | `LBXPFOA`                             | `perfluorodecanoic_acid_ng_ml`          | Perfluorodecanoic acid (ng/mL)       |
+| 19.P_PFAS.xpt | `LBDPFOALC`                          | `perfluorodecanoic_acid_comment_code`   | Perfluorodecanoic acid comment code  |
+| 19.P_PFAS.xpt | `LBXPFH`                             | `perfluorohexane_sulfonic_acid_ng_ml`   | Perfluorohexane sulfonic acid (ng/mL)|
+| 19.P_PFAS.xpt | `LBDPFHLC`                          | `perfluorohexane_sulfonic_acid_comment_code` | Perfluorohexane sulfonic acid comment code |
+| 19.P_PFAS.xpt | `LBXNMPA`                            | `2_n_methyl_pfosaacetic_acid_ng_ml`     | 2-N-Methyl PFOSA acetic acid (ng/mL)|
+| 19.P_PFAS.xpt | `LBDNMPALC`                         | `2_n_methyl_pfosa_acetic_acid_comment_code` | 2-N-Methyl PFOSA acetic acid comment code |
+| 19.P_PFAS.xpt | `LBXPFNA`                            | `perfluorononanoic_acid_ng_ml`          | Perfluorononanoic acid (ng/mL)       |
+| 19.P_PFAS.xpt | `LBDPFNALC`                         | `perfluorononanoic_acid_comment_code`   | Perfluorononanoic acid comment code  |
+| 19.P_PFAS.xpt | `LBXPFUA`                            | `perfluoroundecanoic_acid_ng_ml`        | Perfluoroundecanoic acid (ng/mL)     |
+| 19.P_PFAS.xpt | `LBDPFUALC`                         | `perfluoroundecanoic_acid_comment_code` | Perfluoroundecanoic acid comment code|
+| 19.P_PFAS.xpt | `LBXPFOA`                            | `n_perfluorooctanoic_acid_ng_ml`        | N-Perfluorooctanoic acid (ng/mL)     |
+| 19.P_PFAS.xpt | `LBDPFOALC`                         | `n_perfluorooctanoic_acid_comment_code` | N-Perfluorooctanoic acid comment code|
+| 19.P_PFAS.xpt | `LBXPFOS`                           | `br_perfluorooctanoic_acid_iso_ng_ml`   | Br Perfluorooctanoic acid iso (ng/mL)|
+| 19.P_PFAS.xpt | `LBDPFOSLC`                        | `br_perfluorooctanoic_acid_iso_comment_code` | Br Perfluorooctanoic acid iso comment code |
+| 19.P_PFAS.xpt | `LBXPFOSNS`                        | `n_perfluorooctane_sulfonic_acid_ng_ml` | N-Perfluorooctane sulfonic acid (ng/mL)|
+| 19.P_PFAS.xpt | `LBDPFOSNSLC`                      | `n_perfluorooctane_sulfonic_acid_comment_code` | N-Perfluorooctane sulfonic acid comment code |
+| 19.P_PFAS.xpt | `LBXPFOS`                          | `sm_pfos_ng_ml`                         | Serum PFOS (ng/mL)                   |
+| 19.P_PFAS.xpt | `LBDPFOSLC`                       | `sm_pfos_comment_code`                   | Serum PFOS comment code              |
+| 20.P_GLU.xpt | `GLUFSG`              | `fasting_glucose_mg_dl`   | Fasting glucose (mg/dL) |
+| 20.P_GLU.xpt | `GLUFSM`              | `fasting_glucose_mmol_l`  | Fasting glucose (mmol/L)|
+
 
 
 ---
@@ -315,6 +381,60 @@ Add more rows as additional urine datasets are cleaned.
 - `1` = Low
 - `2` = High
 - `3` = Indeterminate
+
+#### Hepatitis A Antibody
+- `1` = Positive
+- `2` = Negative
+- `3` = Indeterminate
+
+#### Hepatitis B Surface Antibody
+- `1` = Positive
+- `2` = Negative
+- `3` = Indeterminate
+
+#### Hepatitis B Core Antigen/Antibody
+- `1` = Positive
+- `2` = Negative
+- `3` = Indeterminate
+
+### Hepatitis D Antibody
+- `1` = Positive
+- `2` = Negative
+- `3` = Indeterminate
+
+### Hepatitis D Antibody Retesting
+- `0` = Hep sAg positive, no surplus sample	
+- `1` =	Hep sAg positive, reactive	0	24	
+- `2` =	Hep sAg positive, non-reactive	20	44	
+- `6` = 	Hep sAg negative, not retested
+
+#### Hepatitis C RNA
+- `1` = Positive
+- `2` = Negative
+- `3` = Negative screening HCV antibody
+
+### Hepatitis C Antibody (confirmed)
+- `1` =	Positive	
+- `2` =	Negative	
+- `3` =	Negative Screening HCV Antibody	
+- `4` =	Positive HCV RNA
+
+#### Hepatitis C Genotype
+- `1` =	Genotype 1a	
+- `2` =	Genotype 1b		
+- `3` =	Gen 1 other than a/b/not determined		
+- `4` =	Genotype 2	
+- `5` =	Genotype 3		
+- `6` =	Genotype 4		
+- `7` =	Genotype 5	
+- `8` =	Genotype 6		
+- `9` =	Genotype undetermined
+
+#### Hepatitis E IgG/IgM
+- `1` = Positive
+- `2` = Negative
+- `3` = Indeterminate
+
 
 ### Functions
 
