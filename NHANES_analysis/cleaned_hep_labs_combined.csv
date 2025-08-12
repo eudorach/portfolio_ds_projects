@@ -1,4 +1,4 @@
-participant_id,hepatitis_a_antibody,hepatitis_b_antibody,hepatitis_b_core_antibody,hepatitis_b_surface_antigen,hepatitis_d_antibody_anti_hdv,hepatitis_c_rna,hepatitis_c_antibody_confirmed,hepatitis_c_genotype,hepatitis_e_igg_anti_hev,hepatitis_e_igm_anti_hev
+participant_id,hepatitis_a_antibody,hepatitis_b_surface_antibody,hepatitis_b_core_antibody,hepatitis_b_surface_antigen,hepatitis_d_antibody_anti_hdv,hepatitis_c_rna,hepatitis_c_antibody_confirmed,hepatitis_c_genotype,hepatitis_e_igg_anti_hev,hepatitis_e_igm_anti_hev
 109264.0,1.0,2.0,2.0,,,3.0,3.0,,2.0,2.0
 109265.0,1.0,,,,,,,,,
 109266.0,1.0,1.0,2.0,,,3.0,3.0,,2.0,2.0
