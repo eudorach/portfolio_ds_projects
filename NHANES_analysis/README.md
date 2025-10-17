@@ -3,6 +3,23 @@
 ## Overview
 This project uses NHANES 2017–2020 datasets to explore relationships between biomarkers (primarily from blood and urine lab results) and obesity. The final goal is to clean and organize this data into a relational database for predictive modeling and analysis.
 
+## Objective
+The goal of this project is to explore the relationships between clinical lab measurements and metabolic health, particularly focusing on obesity. By analyzing urine and blood lab values, the project aims to identify potential biomarkers associated with metabolic conditions. This includes assessing kidney function, thyroid function, and other metabolic indicators to better understand how these biological parameters relate to body mass index (BMI) and overall metabolic status.
+
+The analysis is structured to be reproducible and modular, with cleaned datasets stored in a relational database, enabling both descriptive and predictive analyses.
+
+### Urine Lab Analysis
+With the cleaned and individually exported data, the dataset is now ready for detailed analysis. The urine lab data will be analyzed first, followed by blood lab analyses.
+
+From the cleaned urine labs, the focus will be on values that are more directly associated with metabolic syndrome and related conditions. The urine labs selected for analysis are:
+
+* Albumin – Used to assess kidney function and nutritional status.
+* Creatinine – Another key marker of kidney function.
+* Iodine – An essential element for thyroid function, which plays a direct role in metabolism.
+
+These analytes were chosen for their relevance to metabolic health and potential associations with obesity and related physiological outcomes.
+
+### Blood Lab Analysis
 ---
 
 ## Data Sources
@@ -188,8 +205,6 @@ The body measures were done on both males and females and ages 0 - 150 years unl
 | 15.P_UVOC2.XPT | `URXPHMA`   | `phenylmercapturic_acid_ng_ml`         | Phenylmercapturic acid (ng/mL) |
 | 15.P_UVOC2.XPT | `URDPMALC`  | `phenylmercapturic_acid_comment`       | Comment code for Phenylmercapturic acid |
 
-
-Add more rows as additional urine datasets are cleaned.
 
 ---
 
