@@ -1,0 +1,30 @@
+Lipid Panel Analysis Summary
+
+The participants were limited to adults (aged 18 or greater) and BMI of under 50. 
+
+Triglyceride:
+- Right skewed data > natural log transformed for normal distribution
+- BMI vs Triglyceride correlation: 0.289
+- BMI vs Triglyceride correlation:
+	Female: 0.283
+	Male: 0.321
+
+Total Cholesterol
+- Normally distributed with slight right skew but good enough for regression
+- BMI vs Total Cholesterol correlation: 0.0573
+	Female: 0.022
+	Male: 0.085
+
+LDL
+- Normally distributed with slight right skew
+- BMI vs LDL correlation: 0.133
+	Female: 0.116
+	Male: 0.154
+
+HDL
+- Right skewed data > natural log transformed for normality
+- BMI vs HDL correlation: -0.295
+	Female: -0.330
+	Male: -0.340
+
+
