@@ -28,3 +28,12 @@ HDL
 	Male: -0.340
 
 
+The lipid panel seems to be a little more telling than the urine labs. 
+
+The two lipids that seems to show some correlation are the triglycerides and HDL. Triglyceride is positively correlated (0.289), especially in the male cohort (0.321). The HDL has a negative correlation (-0.295) and both genders seem to be affected about the same (-0.330 in females and -0.340 in males). 
+
+The total cholesterol is combining all of the cholesterols into one value. The decision was made to exclude the total cholesterol level in the regression model, since it is a bit duplicative. 
+
+The regression model shows that the lipids separately affect the BMI 11%, and the adjusted R squared is about the same as R-squared, meaning the model is not overfitted. The F-statistic shows that the log(triglyceride), LDL, and log(HDL) are statistically significant in predicting BMI. Triglycerides and HDL have clear relationship with BMI, which physiologically makes sense. 
+
+Lipid panel seems to show biologically significant correlation with BMI. However, statistically, only about 11% of the BMI is explained with the lipid panel. 
