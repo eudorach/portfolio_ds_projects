@@ -27,7 +27,7 @@ To evaluate how physiological biomarkers relate to obesity across multiple syste
 
 ---
 
-## [Data Pipeline Overview](/notebooks/01_data_cleaning)
+## [Data Pipeline Overview](./notebooks/01_data_cleaning)
 Raw NHANES datasets were processed using Python-based ETL pipelines.
 
 Key steps included:
@@ -54,7 +54,7 @@ Final database includes:
 
 ## Analysis Design
 
-### 1. [Urine Biomarkers](/notebooks/02_analysis/3.urine_lab_analysis_intergroup.ipynb)
+### 1. [Urine Biomarkers](./notebooks/02_analysis/3.urine_lab_analysis_intergroup.ipynb)
 Analyzed biomarkers:
 - Albumin
 - Creatinine
@@ -81,7 +81,7 @@ Includes:
 
 ### 3. Sex Hormones
 Focus:
-- [Sex Hormone Binding Globulin (SHBG)](/notebooks/02_analysis/7_blood_lab_SHBG.ipynb)
+- [Sex Hormone Binding Globulin (SHBG)](./notebooks/02_analysis/7_blood_lab_SHBG.ipynb)
 - Male cohort (20–49 years)
 
 Rationale:
