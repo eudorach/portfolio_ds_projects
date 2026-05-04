@@ -1,59 +1,124 @@
-# NHANES Obesity and Biomarkers Study
+# NHANES Obesity and Biomarkers Study (2017–2020)
 
-## Overview
-This project uses NHANES 2017–2020 datasets to explore relationships between biomarkers (primarily from blood and urine lab results) and obesity. The final goal is to clean and organize this data into a relational database for predictive modeling and analysis.
-
-## Objective
-The goal of this project is to explore the relationships between clinical lab measurements and metabolic health, particularly focusing on obesity. By analyzing urine and blood lab values, the project aims to identify potential biomarkers associated with metabolic conditions. This includes assessing kidney function, thyroid function, and other metabolic indicators to better understand how these biological parameters relate to body mass index (BMI) and overall metabolic status.
-
-The analysis is structured to be reproducible and modular, with cleaned datasets stored in a relational database, enabling both descriptive and predictive analyses.
-
-### Urine Lab Analysis
-With the cleaned and individually exported data, the dataset is now ready for detailed analysis. The urine lab data will be analyzed first, followed by blood lab analyses.
-
-From the cleaned urine labs, the focus will be on values that are more directly associated with metabolic syndrome and related conditions. The urine labs selected for analysis are:
-
-* Albumin – Used to assess kidney function and nutritional status.
-* Creatinine – Another key marker of kidney function.
-* Iodine – An essential element for thyroid function, which plays a direct role in metabolism.
-
-These analytes were chosen for their relevance to metabolic health and potential associations with obesity and related physiological outcomes.
-
-### Blood Lab Analysis
 ---
 
-## Data Sources
-- NHANES 2017–2020: [https://wwwn.cdc.gov/nchs/nhanes/](https://wwwn.cdc.gov/nchs/nhanes/)
+## Overview
+This project investigates associations between obesity (BMI) and clinical biomarkers using NHANES 2017–2020 data. The focus is on metabolic, renal, and endocrine markers and their relationship to obesity-related outcomes.
 
-## Data Cleaning
-The NHANES data consists of multiple datasets grouped into distinct categories. For this project, I categorized them into:
+Data was processed into a relational PostgreSQL database to enable reproducible analysis and modular querying.
+
+---
+
+## Objective
+To evaluate how physiological biomarkers relate to obesity across multiple systems:
+
+- Kidney function (urine biomarkers)
+- Glucose metabolism
+- Lipid metabolism
+- Thyroid-related metabolism
+- Sex hormone regulation
+
+---
+
+## Data Source
+- NHANES 2017–2020 cycles (CDC)
+- Public health survey dataset
+- Data structured into a PostgreSQL relational database
+
+---
+
+## [Data Pipeline Overview](./notebooks/01_data_cleaning)
+Raw NHANES datasets were processed using Python-based ETL pipelines.
+
+Key steps included:
+- Column standardization
+- Handling missing values
+- Feature selection based on clinical relevance
+- Export to relational database tables
+
+Each dataset was stored as a separate table linked via `participant_id`.
+
+---
+
+## Dataset Structure
+
+Final database includes:
 
 - Demographics
-- Body Measurements
-- Urine Lab Values
-- Blood Lab Values
+- Anthropometric measurements
+- Urine biomarkers
+- Blood biomarkers
+- Specialized biomarker subsets
 
-To improve efficiency and ensure reproducibility, I cleaned each category in a separate Jupyter notebook. This modular approach also improves readability and makes it easier to track preprocessing steps for each dataset type.
+---
 
-### Functions
+## Analysis Design
 
-#### `drop_rows_with_both_nans()`
-Removes rows where both `col1` and `col2` are NaN.
+### 1. [Urine Biomarkers](./notebooks/02_analysis/3.urine_lab_analysis_intergroup.ipynb)
+Analyzed biomarkers:
+- Albumin
+- Creatinine
+- Iodine
 
-#### `get_common_nan_ids()`
-Identifies participant IDs with NaNs in both columns. Useful for understanding overlap in missing data.
+Methods:
+- Log transformation for skewed distributions
+- Correlation analysis
+- Linear regression
+- Sex-stratified analysis
 
-#### `standardize_id_column()`
-Renames the original identifier column to 'participant_id'
-...
+---
 
-### Column Changes
-- Renamed columns are tracked in the [Variable Key](#variable-key-column-renaming)
-- Encoded values are kept in raw format; meanings are described above.
+### 2. Blood Biomarkers
+Includes:
+- CBC with differential
+- Glucose metabolism markers
+  - Fasting glucose
+  - HbA1c
+  - Insulin
+- Lipid panel
 
-## Merging Datasets
+---
 
-All datasets are merged using `participant_id` as the key. Merges are typically done using an inner join to preserve only complete records.
+### 3. Sex Hormones
+Focus:
+- [Sex Hormone Binding Globulin (SHBG)](./notebooks/02_analysis/7_blood_lab_SHBG.ipynb)
+- Male cohort (20–49 years)
 
-```python
-merged_df = df1.merge(df2, on='participant_id', how='inner')
+Rationale:
+Controlled subgroup chosen due to hormonal variability in females across menstrual cycles.
+
+---
+
+## Methodology Summary
+- Python (pandas, numpy) for preprocessing
+- PostgreSQL for structured storage
+- Statistical analysis in Python (scipy, statsmodels)
+- Visualization using seaborn and matplotlib
+
+Methods used:
+- Pearson / Spearman correlation
+- Ordinary Least Squares regression
+- Stratified subgroup analysis
+
+---
+
+## Reproducibility
+All processed datasets are stored in a PostgreSQL relational database. Analysis notebooks query directly from this database to ensure reproducibility and modular workflow design.
+
+---
+
+## Data Cleaning (Detailed Documentation)
+
+Detailed preprocessing steps, functions, and transformations are documented in the ETL notebooks.
+
+Key utilities include:
+- `standardize_id_column()` → ensures consistent participant ID mapping
+- `get_common_nan_ids()` → identifies overlapping missing values
+- `drop_rows_with_common_nan_ids()` → filters incomplete paired observations
+
+Column renaming and feature engineering are documented within each dataset-specific cleaning notebook.
+
+---
+
+## Data Source
+https://wwwn.cdc.gov/nchs/nhanes/
