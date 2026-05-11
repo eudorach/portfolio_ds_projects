@@ -11,7 +11,8 @@ The goal of these projects is to explore meaningful patterns in health-related d
 ### [NHANES 2017–2020 Analysis](./NHANES_analysis)
 An exploration of the National Health and Nutrition Examination Survey (NHANES) data to investigate potential physiological and environmental correlates of obesity. This project includes data cleaning, relational database design, and development of a predictive model based on lab and demographic variables.
 
-### Kaggle Appointment No Show Analysis
+### [Kaggle Appointment No Show Analysis](./Appointment_analysis)
+An exploration of a Kaggle appointment dataset to investigate the trend in patients no showing their appointments. 
 
 
 ---
