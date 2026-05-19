@@ -18,6 +18,8 @@ To evaluate how physiological biomarkers relate to obesity across multiple syste
 - Thyroid-related metabolism
 - Sex hormone regulation
 
+Analysis evolved from an initial predictive modeling approach to an exploratory design based on observed correlation strengths
+
 ---
 
 ## Data Source
@@ -27,7 +29,7 @@ To evaluate how physiological biomarkers relate to obesity across multiple syste
 
 ---
 
-## [Data Pipeline Overview](./notebooks/01_data_cleaning)
+## [Data Processing Pipeline](./notebooks/01_data_cleaning)
 Raw NHANES datasets were processed using Python-based ETL pipelines.
 
 Key steps included:
@@ -86,6 +88,13 @@ Focus:
 
 Rationale:
 Controlled subgroup chosen due to hormonal variability in females across menstrual cycles.
+
+---
+### Key Findings
+
+- SHBG showed a statistically significant inverse association with BMI in males aged 20–49 (OR = 0.50, 95% CI: 0.45–0.56)
+- Urine biomarkers showed no meaningful correlation with obesity outcomes
+- Glucose metabolism markers showed expected directional associations but insufficient strength for predictive modeling
 
 ---
 
