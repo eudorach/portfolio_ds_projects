@@ -30,8 +30,7 @@ Analysis evolved from an initial predictive modeling approach to an exploratory 
 ---
 
 ## [Data Processing Pipeline](./notebooks/01_data_cleaning)
-Raw NHANES datasets were processed using Python-based ETL pipelines. [scripts](./notebooks/01_data_cleaning
-/nhanes_utils.py)
+Raw NHANES datasets were processed using Python-based [ETL pipelines](./notebooks/01_data_cleaning/nhanes_utils.py).
 
 Key steps included:
 - Column standardization
