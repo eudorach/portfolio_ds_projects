@@ -72,12 +72,11 @@ Methods:
 
 ### 2. Blood Biomarkers
 Includes:
-- CBC with differential
-- Glucose metabolism markers
+- [Glucose metabolism markers](./notebooks/02_analysis/7_blood_lab_carbohydrate_metabolism.ipynb)
   - Fasting glucose
   - HbA1c
   - Insulin
-- Lipid panel
+- [Lipid panel](./notebooks/02_analysis/7_blood_lab_lipidpanel.ipynb)
 
 ---
 
