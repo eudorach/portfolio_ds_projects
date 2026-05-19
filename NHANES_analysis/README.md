@@ -125,8 +125,3 @@ Key utilities include:
 - `drop_rows_with_common_nan_ids()` → filters incomplete paired observations
 
 Column renaming and feature engineering are documented within each dataset-specific cleaning notebook.
-
----
-
-## Data Source
-https://wwwn.cdc.gov/nchs/nhanes/
