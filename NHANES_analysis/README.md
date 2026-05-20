@@ -70,17 +70,48 @@ Methods:
 
 ---
 
-### 2. Blood Biomarkers (In Progress)
-Includes:
-- [Glucose metabolism markers](./notebooks/02_analysis/7_blood_lab_carbohydrate_metabolism.ipynb)
-  - Fasting glucose
-  - HbA1c
-  - Insulin
-- [Lipid panel](./notebooks/02_analysis/7_blood_lab_lipidpanel.ipynb)
+### 2. Blood Biomarkers
+
+#### Carbohydrate Metabolism
+Clinical Motivation
+
+Insulin resistance and dysglycemia are central to obesity-related metabolic dysfunction. This analysis evaluates whether biomarkers of glucose regulation are independently associated with BMI and whether insulin provides stronger explanatory signal than downstream glycemic markers (fasting glucose and HbA1c).
+
+Cohort
+U.S. adults from NHANES with complete data on BMI, fasting glucose, fasting insulin, HbA1c, age, sex, and race/ethnicity (n = 3,146).
+Participants with missing metabolic biomarker data were excluded to ensure comparability across models.
+
+Approach
+Pearson correlations between BMI and metabolic biomarkers (overall and sex-stratified)
+Multivariable OLS regression with BMI as the outcome
+Models adjusted for age, sex, and race/ethnicity
+Separate univariate and multivariable models for each biomarker
+Joint models including insulin, glucose, and HbA1c to assess independent effects
+Effect heterogeneity assessed via sex-stratified correlations
+
+Findings
+Fasting insulin showed the strongest and most consistent association with BMI (r = 0.41 overall), with minimal variation across sex (males: r = 0.42; females: r = 0.43).
+
+Fasting glucose demonstrated a weaker association with BMI (r = 0.23 overall), with slightly higher correlation in females (r = 0.26) compared to males (r = 0.23).
+
+HbA1c showed a modest overall association with BMI (r = 0.21) but demonstrated notable sex differences, with a stronger association in females (r = 0.26) than males (r = 0.15).
+
+In adjusted regression models, fasting insulin remained the strongest independent predictor of BMI. HbA1c and fasting glucose remained statistically significant but were attenuated when modeled jointly with insulin. The combined model improved explanatory power (R² ≈ 0.24), indicating partial independence across metabolic pathways.
+
+Limitations & Next Steps
+This is a cross-sectional analysis; causality cannot be inferred. Reverse causation is plausible, as increased adiposity may contribute to elevated insulin and downstream glycemic dysregulation.
+
+Next steps include standardization of predictors to enable effect size comparison, formal testing of sex interactions (particularly HbA1c × sex), and evaluation of potential non-linear relationships between insulin and BMI.
+
+→ [Full analysis notebook](./notebooks/02_analysis/4.blood_lab_carbohydrate_metabolism.ipynb)
+
+- [Lipid panel](./notebooks/02_analysis/7_blood_lab_lipidpanel.ipynb) (in progress)
 
 ---
 
 ### 3. Sex Hormones
+
+#### Sex Hormone Binding Globulin
 Clinical Motivation
 SHBG is a key regulator of androgen and estrogen bioavailability. This analysis examines whether SHBG levels are independently associated with obesity after adjusting for key demographic covariates.
 
