@@ -81,20 +81,25 @@ Includes:
 ---
 
 ### 3. Sex Hormones
-Focus:
-- [Sex Hormone Binding Globulin (SHBG)](./notebooks/02_analysis/7_blood_lab_SHBG.ipynb)
-- Male cohort (20–49 years)
+Clinical Motivation
+SHBG is a key regulator of androgen and estrogen bioavailability. This analysis examines whether SHBG levels are independently associated with obesity after adjusting for key demographic covariates.
 
-Rationale:
-Controlled subgroup chosen due to hormonal variability in females across menstrual cycles.
+Cohort
+Adult males aged 20–49 (n = 1,447). This subgroup was selected to reduce hormonal variability introduced by female menstrual cycle fluctuations and age-related hormonal decline in older males.
 
----
-### Key Findings
+Approach
+SHBG categorized into quartiles to capture potential non-linear relationships
+Obesity defined as BMI ≥ 30 kg/m²
+Multivariable logistic regression adjusted for age and race/ethnicity
+Adjusted predicted probabilities derived holding covariates at mean values
 
-- SHBG showed a statistically significant inverse association with BMI in males aged 20–49 (OR = 0.50, 95% CI: 0.45–0.56)
-- Urine biomarkers showed no meaningful correlation with obesity outcomes
-- Glucose metabolism markers showed expected directional associations but insufficient strength for predictive modeling
+Findings
+Each increase in SHBG quartile corresponded to significantly lower odds of obesity (OR = 0.50, 95% CI: 0.45–0.56, p < 0.001), with a monotonic decrease in adjusted predicted obesity probability across quartiles. The association was consistent in both unadjusted and adjusted models.
 
+Limitations & Next Steps
+Cross-sectional design precludes causal inference. Reverse causation remains plausible. Analysis is being extended to a female cohort with appropriate hormonal covariates.
+
+→ [Full analysis notebook](./notebooks/02_analysis/7_blood_lab_SHBG.ipynb)
 ---
 
 ## Methodology Summary
