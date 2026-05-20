@@ -70,7 +70,7 @@ Methods:
 
 ---
 
-### 2. Blood Biomarkers
+### 2. Blood Biomarkers (In Progress)
 Includes:
 - [Glucose metabolism markers](./notebooks/02_analysis/7_blood_lab_carbohydrate_metabolism.ipynb)
   - Fasting glucose
