@@ -127,3 +127,22 @@ def clean_nhanes_module(
     df = df[~df[value_cols].isna().all(axis=1)].copy()
 
     return df
+
+def save_to_postgres(df, table_name, engine):
+    df.to_sql(
+        name=table_name,
+        con=engine,
+        if_exists="replace",
+        index=False
+    )
+    print(f"{table_name} saved to PostgreSQL")
+
+def load_xpt(path: str) -> pd.DataFrame:
+    df, meta = pyreadstat.read_xport(path)
+    return df
+
+def validate(df: pd.DataFrame, name: str):
+    print(f"\n---{name} ---")
+    print("Shape:", df.shape)
+    print("Nulls (top 5):")
+    print(df.isnull().sum().sort_values(ascending=False).head(5))
