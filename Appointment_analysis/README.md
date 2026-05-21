@@ -14,25 +14,33 @@ This project analyzes outpatient appointment attendance patterns using structure
 ---
 
 ## What I Found (Short Version)
-**Demographic factors showed stronger associations with no-show behavior than chronic disease status.**
+**1. Appointment lead time is the strongest driver of no-shows**
 
-Younger adult cohorts consistently demonstrated higher no-show rates compared to older adults, suggesting that age-related behavioral or socioeconomic factors may play a larger role than medical comorbidity burden alone.
+No-show rates increase substantially as the time between scheduling and appointment date increases. Same-day appointments show very low no-show rates (~2–7%), while appointments scheduled 30+ days in advance show significantly higher no-show rates (~20–40%). This pattern is consistent across all age groups.
 
-**Gender differences were modest but persistent across stratified cohorts.**
+**2. Age modifies baseline risk but does not override scheduling effects**
 
-Female patients represented a larger proportion of appointments overall, while subgroup analyses showed small but observable differences in attendance behavior across demographic strata.
+Younger patients (18–35) consistently exhibit higher no-show rates across all wait-time categories. Older patients (65+) show lower baseline risk but remain sensitive to long scheduling delays. This indicates that age acts as a risk modifier rather than a primary driver.
 
-**Chronic conditions alone added limited explanatory value.**
+**3. Highest-risk combinations occur at the intersection of age and wait time**
 
-Diabetes, hypertension, and alcoholism showed weaker independent associations with no-show behavior than expected when analyzed alongside age and gender cohorts.
+Stratified analysis shows that the highest no-show rates occur among younger patients with long appointment lead times. Conversely, older patients with short lead times consistently exhibit the lowest no-show rates.
 
-**Interaction effects provided more insight than single-variable analysis.**
+**4. SMS reminders are associated with higher observed no-show rates due to selection bias**
 
-Stratified cohort analysis suggested that combinations of demographic and behavioral variables may be more informative than isolated predictors alone, highlighting the importance of multivariable modeling in operational healthcare analytics.
+Across all age groups and wait-time strata, patients receiving SMS reminders exhibit higher no-show rates than those who do not. This pattern is consistent with non-random assignment of SMS reminders to higher-risk patients rather than a causal effect of SMS increasing no-shows.
 
-**Exploratory SQL analysis revealed the limitations of simple descriptive approaches.**
+Within comparable wait-time and age strata, SMS effects vary but do not show consistent evidence of uniformly reducing no-show behavior.
 
-Early aggregation queries identified broad attendance patterns, but subgroup interactions and overlapping demographic effects demonstrated why healthcare operational problems often require layered analytical approaches rather than single-factor explanations.
+**5. Interaction effects provide more insight than single-variable analysis**
+
+Multivariate stratification (age × wait time × SMS) reveals that no-show behavior is structured by overlapping risk factors rather than isolated predictors. Operational variables (wait time) dominate, while demographic and intervention variables modulate baseline risk.
+
+**6. Chronic conditions show limited explanatory power**
+
+Chronic conditions such as diabetes, hypertension, and alcoholism showed weak and inconsistent associations with no-show behavior when analyzed alongside age and scheduling variables. These factors did not meaningfully stratify no-show risk compared to operational (wait time) and demographic (age) variables.
+
+This suggests that clinical comorbidity alone is not a strong predictor of missed appointments in this dataset when compared to structural scheduling factors.
 
 ---
 
@@ -43,6 +51,8 @@ Public outpatient appointment dataset containing patient scheduling and attendan
 - Patient demographics (age, gender)
 - Chronic disease indicators (diabetes, hypertension, alcoholism)
 - Appointment attendance outcome (show vs. no-show)
+- SMS reminder status
+- Attendance outcome (show vs. no-show)
 
 Source: [Kaggle Medical Appointment No-Show dataset](https://www.kaggle.com/datasets/iamtanmayshukla/healthcare-no-shows-appointments-dataset)
 
@@ -70,18 +80,18 @@ The workflow emphasized:
 Key preprocessing steps included:
 
 - Creation of age-group cohorts
+- Computation of appointment lead time (scheduled vs appointment date)
 - Binary encoding of no-show outcomes
 - Standardization of categorical variables
-- Cohort stratification across demographic and clinical variables
 
 ### Exploratory Cohort Analysis
 
 Analyses included:
 
 - Age-stratified no-show rates
-- Gender subgroup comparisons
-- Chronic disease subgroup analysis
-- Multi-variable interaction exploration
+- Wait-time bucket analysis
+- SMS reminder comparisons
+- Multi-variable interaction exploration (age × wait time × SMS)
 
 ---
 
@@ -134,15 +144,16 @@ Tools:
 
 ## Real-World Operational Implications
 
-No-show prediction is fundamentally an operational healthcare problem. Identifying which patient populations are at higher risk for missed appointments can inform:
+No-show behavior is primarily driven by operational scheduling structure rather than patient-level clinical conditions alone.
 
-- Scheduling optimization strategies
-- Reminder and outreach interventions
-- Resource allocation
-- Staffing efficiency
-- Access-to-care initiatives
+Key implications include:
 
-This type of exploratory analysis mirrors the early stages of healthcare operations analytics, where simple cohort-level patterns often guide subsequent predictive modeling and intervention design.
+- Scheduling lead time is a critical operational lever for reducing no-shows
+- Demographic factors modify risk but do not dominate it
+- Reminder systems (SMS) are likely applied non-randomly and require careful interpretation
+- Intervention design should account for underlying risk stratification rather than assume uniform treatment effects
+
+This type of exploratory analysis reflects early-stage healthcare operations analytics, where cohort-level insights guide intervention and optimization strategies.
 
 ---
 
