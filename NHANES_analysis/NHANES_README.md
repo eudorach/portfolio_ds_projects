@@ -38,7 +38,7 @@ The honest pivot from predictive to exploratory modeling mid-project reflects re
 Raw NHANES XPT files were processed through Python-based ETL pipelines and loaded into a **PostgreSQL relational database**, with each domain (demographics, urine biomarkers, blood biomarkers) stored as a separate table linked via `participant_id`. This structure enables modular querying and reproducible analysis — the same design pattern used in clinical research data management systems.
 
 ### Data Processing Pipeline
-→ [ETL notebooks](https://github.com/eudorach/portfolio_ds_projects/blob/main/NHANES_analysis/notebooks/01_data_cleaning)
+→ [ETL notebooks](./notebooks/01_data_cleaning)
 
 Key steps:
 - Column standardization and participant ID mapping across datasets
@@ -52,10 +52,10 @@ Key steps:
 Albumin, creatinine, iodine — log-transformed for skewed distributions, analyzed via correlation and linear regression, stratified by sex.
 
 **2. Blood Biomarkers**
-- [Glucose metabolism](https://github.com/eudorach/portfolio_ds_projects/blob/main/NHANES_analysis/notebooks/02_analysis/7_blood_lab_carbohydrate_metabolism.ipynb): fasting glucose, HbA1c, insulin
-- [Lipid panel](https://github.com/eudorach/portfolio_ds_projects/blob/main/NHANES_analysis/notebooks/02_analysis/7_blood_lab_lipidpanel.ipynb): total cholesterol, HDL, LDL, triglycerides
+- [Glucose metabolism](./notebooks/02_analysis/7_blood_lab_carbohydrate_metabolism.ipynb): fasting glucose, HbA1c, insulin
+- Lipid panel (in progress): total cholesterol, HDL, LDL, triglycerides
 
-**3. [Sex Hormones — SHBG](https://github.com/eudorach/portfolio_ds_projects/blob/main/NHANES_analysis/notebooks/02_analysis/7_blood_lab_SHBG.ipynb)**
+**3. [Sex Hormones — SHBG](./notebooks/02_analysis/7_blood_lab_SHBG.ipynb)**
 Analysis restricted to males aged 20–49 to control for hormonal variability across menstrual cycles in females. SHBG's inverse relationship with BMI was the project's most clinically meaningful finding.
 
 ### Statistical Methods
