@@ -23,8 +23,8 @@ This project is my attempt to bring a clinician's intuition to a data analyst's 
 - **Combined metabolic markers explain meaningful variance in BMI** — the multivariable OLS model adjusted for age, sex, and race/ethnicity achieved R² ≈ 0.24, compared to R² ≈ 0.10–0.21 for single-predictor models. The adjusted logistic regression model demonstrated moderate explanatory performance (Pseudo R² ≈ 0.22).
 - **Demographic covariates were independently associated with obesity:** female sex (OR = 1.65, 95% CI: 1.39–1.96), age (OR ≈ 0.99/year, small inverse effect), and race/ethnicity showed heterogeneous associations across groups — findings that contextualize the biomarker results within known population-level disparities.
 
-**Sex hormones:**
-- **SHBG showed a statistically significant inverse association with BMI** in males aged 20–49 (OR = 0.50, 95% CI: 0.45–0.56) — a known but underutilized marker of metabolic dysfunction that warrants consideration alongside insulin-based markers.
+**Sex hormones (n = 1,447 adult males aged 20–49):**
+- **SHBG showed a strong, dose-dependent inverse association with obesity** — each increase in SHBG quartile corresponded to lower odds of obesity (OR = 0.50, 95% CI: 0.45–0.56, p < 0.001) after adjustment for age and race/ethnicity. Adjusted predicted probabilities confirmed a monotonic decrease in obesity risk across increasing quartiles, supporting the consistency of the association. Age was independently associated with higher odds of obesity (OR ≈ 1.02–1.05 per year). Analysis was restricted to males aged 20–49 to control for hormonal variability across the menstrual cycle in females. Due to the cross-sectional design, reverse causation — where increased adiposity drives SHBG suppression — cannot be excluded.
 
 **Urine biomarkers:**
 - Albumin, creatinine, and iodine showed no meaningful correlation with obesity outcomes — a finding worth noting for researchers designing renal endpoints in obesity trials.
