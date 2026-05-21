@@ -4,7 +4,7 @@
 
 ## Why This Project Exists
 
-As a physician assistant with experience in both surgical and clinical research settings, I've ordered hundreds of metabolic panels, lipid profiles, and hormone labs. I know what these numbers look like at the bedside — but I wanted to understand what they look like at the population level.
+As a physician assistant with experience in both surgical and clinical research settings, I've ordered hundreds of metabolic panels and lipid profiles. I know what these numbers look like at the bedside — but I wanted to understand what they look like at the population level.
 
 This project started with a clinical question I kept coming back to: **which biomarkers actually track meaningfully with obesity, and which ones are just noise?**
 
@@ -16,11 +16,20 @@ This project is my attempt to bring a clinician's intuition to a data analyst's 
 
 ## What I Found (The Short Version)
 
-- **SHBG is the strongest signal:** Sex Hormone Binding Globulin showed a statistically significant inverse association with BMI in males aged 20–49 (OR = 0.50, 95% CI: 0.45–0.56). This is clinically meaningful — SHBG suppression in obesity is a known but underutilized marker of metabolic dysfunction.
-- **Urine biomarkers disappointed:** Albumin, creatinine, and iodine showed no meaningful correlation with obesity outcomes in this dataset — a finding worth noting for researchers designing renal endpoints in obesity trials.
-- **Glucose markers trended as expected** but weren't strong enough to anchor a predictive model on their own, which pushed this project from predictive to exploratory in design.
+**Glucose metabolism (n = 3,146 adults):**
+- **Fasting insulin is the dominant metabolic signal**, showing the strongest and most consistent association with BMI (r = 0.41 overall; males: r = 0.42, females: r = 0.43). In adjusted logistic regression, each 1 µU/mL increase in fasting insulin was independently associated with higher odds of obesity (OR = 1.14, 95% CI: 1.13–1.16, p < 0.001).
+- **HbA1c shows a particularly strong adjusted association with obesity** — each 1% increase corresponded to approximately two-fold higher odds of obesity (OR = 2.11, 95% CI: 1.62–2.74, p < 0.001), reflecting the contribution of chronic glycemic burden beyond fasting insulin alone. Sex-stratified correlations showed stronger associations in females (r = 0.26) than males (r = 0.15).
+- **Fasting glucose is the weakest of the three** (r = 0.23), consistent with its tighter physiological regulation and lower sensitivity to early metabolic dysfunction.
+- **Combined metabolic markers explain meaningful variance in BMI** — the multivariable OLS model adjusted for age, sex, and race/ethnicity achieved R² ≈ 0.24, compared to R² ≈ 0.10–0.21 for single-predictor models. The adjusted logistic regression model demonstrated moderate explanatory performance (Pseudo R² ≈ 0.22).
+- **Demographic covariates were independently associated with obesity:** female sex (OR = 1.65, 95% CI: 1.39–1.96), age (OR ≈ 0.99/year, small inverse effect), and race/ethnicity showed heterogeneous associations across groups — findings that contextualize the biomarker results within known population-level disparities.
 
-The honest pivot from predictive to exploratory modeling mid-project reflects real-world data analysis — the data tells you what it can support.
+**Sex hormones:**
+- **SHBG showed a statistically significant inverse association with BMI** in males aged 20–49 (OR = 0.50, 95% CI: 0.45–0.56) — a known but underutilized marker of metabolic dysfunction that warrants consideration alongside insulin-based markers.
+
+**Urine biomarkers:**
+- Albumin, creatinine, and iodine showed no meaningful correlation with obesity outcomes — a finding worth noting for researchers designing renal endpoints in obesity trials.
+
+**A note on modeling approach:** Early in this project, single-biomarker correlations appeared too weak to anchor a predictive model. The glucose metabolism analysis clarified why — no individual marker carries enough signal, but combined metabolic markers together explain clinically relevant variance. The analytical design evolved accordingly, which is how real-world data analysis actually works.
 
 ---
 
@@ -61,6 +70,8 @@ Analysis restricted to males aged 20–49 to control for hormonal variability ac
 ### Statistical Methods
 - Pearson / Spearman correlation
 - Ordinary Least Squares regression
+- Multivariable linear regression (adjusted for age, sex, race/ethnicity)
+- Binary logistic regression (obesity as outcome, BMI ≥ 30 kg/m²)
 - Stratified subgroup analysis
 - Tools: pandas, numpy, scipy, statsmodels, seaborn, matplotlib
 
