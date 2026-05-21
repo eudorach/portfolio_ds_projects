@@ -52,7 +52,7 @@ Key steps:
 Albumin, creatinine, iodine — log-transformed for skewed distributions, analyzed via correlation and linear regression, stratified by sex.
 
 **2. Blood Biomarkers**
-- [Glucose metabolism](./notebooks/02_analysis/7_blood_lab_carbohydrate_metabolism.ipynb): fasting glucose, HbA1c, insulin
+- [Glucose metabolism](./notebooks/02_analysis/4.blood_lab_carbohydrate_metabolism.ipynb): fasting glucose, HbA1c, insulin
 - Lipid panel (in progress): total cholesterol, HDL, LDL, triglycerides
 
 **3. [Sex Hormones — SHBG](./notebooks/02_analysis/7_blood_lab_SHBG.ipynb)**
