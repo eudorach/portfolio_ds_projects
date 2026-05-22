@@ -34,30 +34,26 @@ COVARIATES = ["age", "sex", "race_ethnicity"]
 # 1. DATA LOADER
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def load_analysis_data(biomarkers, disease, engine):
+def load_analysis_data(biomarkers, disease, engine, filters=None):
     """
     Pulls and merges everything needed for an analysis from PostgreSQL.
 
     Parameters
     ----------
     biomarkers : str or list of str
-        One or more biomarker_name values from biomarker_registry.
     disease    : str
-        Key from DISEASE_CONFIGS (e.g. 'obesity', 'hypertension', 'diabetes').
     engine     : SQLAlchemy engine
-
-    Returns
-    -------
-    df : DataFrame with columns:
-         participant_id, <biomarker_name(s)>, <outcome_col(s)>,
-         age, sex, race_ethnicity, <binary_col>
+    filters    : dict, optional. Supported keys:
+                 - min_age          : int, minimum age (default 18)
+                 - exclude_diabetes : bool, exclude HbA1c >= 6.5% OR fasting glucose >= 126
     """
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
-    config = DISEASE_CONFIGS[disease]
+    filters = filters or {}
+    config  = DISEASE_CONFIGS[disease]
 
-    # ── 1. Pull biomarker values from long table ───────────────────────────────
+    # ── 1. Pull biomarker values ───────────────────────────────────────────────
     biomarker_placeholders = ", ".join([f"'{b}'" for b in biomarkers])
 
     bio_df = pd.read_sql(f"""
@@ -69,17 +65,15 @@ def load_analysis_data(biomarkers, disease, engine):
         WHERE br.biomarker_name IN ({biomarker_placeholders})
     """, engine)
 
-    # Pivot long → wide so each biomarker is its own column
     bio_wide = bio_df.pivot_table(
         index="participant_id",
         columns="biomarker_name",
         values="value",
-        aggfunc="mean"   # handles rare duplicates
+        aggfunc="mean"
     ).reset_index()
     bio_wide.columns.name = None
 
     # ── 2. Pull demographics + outcome columns ─────────────────────────────────
-    # Determine which outcome columns to pull
     if disease == "hypertension":
         outcome_cols = "systolic_bp, diastolic_bp"
     else:
@@ -92,19 +86,55 @@ def load_analysis_data(biomarkers, disease, engine):
         FROM participant_demographics
     """, engine)
 
-    df = df[df["age"] >= 18].copy()
-    print(f"Adults only (age >= 18): {len(df):,} participants")
-    
-    # ── 3. Special case: diabetes outcome (hba1c) lives in biomarkers ──────────
-    # If the outcome is already in bio_wide, don't pull it again
-    if disease == "diabetes" and "hba1c" in bio_wide.columns:
-        outcome_col = config["outcome_col"]
-        demo_df[outcome_col] = bio_wide.set_index("participant_id")["hba1c"]
-
-    # ── 4. Merge biomarkers + demographics ────────────────────────────────────
+    # ── 3. Merge ───────────────────────────────────────────────────────────────
     df = demo_df.merge(bio_wide, on="participant_id", how="inner")
 
-    # ── 5. Create binary disease column ───────────────────────────────────────
+    # ── 4. Apply age filter ────────────────────────────────────────────────────
+    min_age = filters.get("min_age", 18)
+    before  = len(df)
+    df = df[df["age"] >= min_age].copy()
+    print(f"After age filter (>= {min_age}): {len(df):,} participants")
+
+    # ── 5. Exclude diabetes if requested ──────────────────────────────────────
+    if filters.get("exclude_diabetes", False):
+        before = len(df)
+
+        # Pull glycohemoglobin + fasting glucose for ALL participants
+        # (even if they're not in the main biomarker list)
+        exclusion_df = pd.read_sql("""
+            SELECT pb.participant_id,
+                   br.biomarker_name,
+                   pb.value
+            FROM participant_biomarkers pb
+            JOIN biomarker_registry br USING (biomarker_id)
+            WHERE br.biomarker_name IN ('glycohemoglobin', 'fasting_glucose')
+        """, engine)
+
+        excl_wide = exclusion_df.pivot_table(
+            index="participant_id",
+            columns="biomarker_name",
+            values="value",
+            aggfunc="mean"
+        ).reset_index()
+        excl_wide.columns.name = None
+
+        df = df.merge(excl_wide, on="participant_id", how="left")
+
+        # Exclude if EITHER criterion is met
+        diabetic_mask = (
+            (df["glycohemoglobin"]  >= 6.5)  |
+            (df["fasting_glucose"]  >= 126)
+        )
+        df = df[~diabetic_mask].copy()
+
+        # Drop the exclusion columns if not in original biomarker list
+        for col in ["glycohemoglobin", "fasting_glucose"]:
+            if col not in biomarkers and col in df.columns:
+                df = df.drop(columns=[col])
+
+        print(f"After excluding diabetes: {len(df):,} ({before - len(df):,} excluded)")
+
+    # ── 6. Create binary disease column ───────────────────────────────────────
     binary_col = config["binary_col"]
 
     if disease == "hypertension":
@@ -113,18 +143,17 @@ def load_analysis_data(biomarkers, disease, engine):
             (df["diastolic_bp"] >= config["thresholds"]["diastolic_bp"]["value"])
         ).astype(int)
     else:
-        outcome = config["outcome_col"]
-        threshold = config["threshold"]
+        outcome    = config["outcome_col"]
+        threshold  = config["threshold"]
         df[binary_col] = (df[outcome] >= threshold).astype(int)
 
-    # ── 6. Drop rows missing any key column ───────────────────────────────────
+    # ── 7. Drop rows missing any key column ───────────────────────────────────
     key_cols = biomarkers + COVARIATES + [binary_col]
-    before = len(df)
+    before   = len(df)
     df = df.dropna(subset=key_cols).copy()
-    print(f"Participants after dropping missing values: {len(df):,} ({before - len(df):,} dropped)")
+    print(f"After dropping missing values: {len(df):,} ({before - len(df):,} dropped)")
 
     return df
-
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # 2. CORRELATION
