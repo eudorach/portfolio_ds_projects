@@ -22,6 +22,7 @@ DISEASE_CONFIGS = {
         "threshold":      30,
         "threshold_dir":  "gte",
         "label":          "Obesity",
+        "min_age":       18, 
         "notes":          "WHO definition: BMI >= 30 kg/m²"
     },
 
@@ -38,6 +39,7 @@ DISEASE_CONFIGS = {
     },
     "threshold_logic": "either",   # case if systolic OR diastolic meets threshold
     "label":          "Hypertension",
+    "min_age":       18, 
     "notes":          "ACC/AHA 2017: systolic BP >= 130 mmHg OR diastolic BP >= 80 mmHg"
     },
 
@@ -48,6 +50,7 @@ DISEASE_CONFIGS = {
         "threshold":      6.5,
         "threshold_dir":  "gte",
         "label":          "Diabetes",
+        "min_age":       18, 
         "notes":          "ADA definition: HbA1c >= 6.5%"
     },
 
