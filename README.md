@@ -38,7 +38,9 @@ This project evolved from an initial exploratory analysis into a fully engineere
 - Carbohydrate metabolism markers explained 18.5% of BMI variance vs 5.3% for urine biomarkers
 - Urine biomarkers showed no clinically meaningful association with obesity after multivariable adjustment — a valid null finding suggesting these markers reflect renal function rather than adiposity
 
-📂 [Exploratory Analysis](./NHANES_analysis/exploratory/notebooks/02_analysis) | [Pipeline](./NHANES_analysis/pipeline/)
+📂 [Exploratory Analysis](./NHANES_analysis/exploratory/) — initial one-off analyses conducted prior to pipeline development. Note that methodology was refined during pipeline development and results may differ slightly from the pipeline analyses.
+
+📂 [Pipeline](./NHANES_analysis/pipeline/) — refined, reproducible system built from the exploratory work. All finalized analyses are conducted here using reusable functions and a structured database backend.
 
 ---
 
