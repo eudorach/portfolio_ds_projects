@@ -159,7 +159,7 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
 # 2. CORRELATION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_correlation(biomarkers, disease, engine, method="spearman", log_transform = False):
+def run_correlation(biomarkers, disease, engine, method="spearman", log_transform = False, filters=None):
     """
     Runs correlation between each biomarker and the continuous outcome.
 
@@ -223,7 +223,7 @@ def run_correlation(biomarkers, disease, engine, method="spearman", log_transfor
 # 3. SCATTER PLOT
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_scatter(biomarker, disease, engine, hue_col="sex_label"):
+def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None):
     """
     Scatter plot of a single biomarker vs the continuous outcome.
 
@@ -280,7 +280,7 @@ def run_scatter(biomarker, disease, engine, hue_col="sex_label"):
 # 4. LINEAR REGRESSION (continuous outcome)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_linear_regression(biomarkers, disease, engine):
+def run_linear_regression(biomarkers, disease, engine, filters=None):
     """
     Linear regression: outcome ~ biomarker(s) + age + sex + race_ethnicity.
     Works for single or multiple biomarkers (multivariate).
@@ -321,7 +321,7 @@ def run_linear_regression(biomarkers, disease, engine):
 # 5. LOGISTIC REGRESSION (binary outcome)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_logistic_regression(biomarkers, disease, engine):
+def run_logistic_regression(biomarkers, disease, engine, filters=None):
     """
     Logistic regression: binary_outcome ~ biomarker(s) + age + sex + race_ethnicity.
     Works for single or multiple biomarkers (multivariate).
