@@ -1,3 +1,6 @@
+> **Update:** This project has evolved into a fully reusable analysis pipeline.
+> See the [NHANES Biomarker Analysis Pipeline](./pipeline/README.md) for the latest version.
+
 # NHANES Obesity and Biomarkers Study (2017–2020)
 
 ---
