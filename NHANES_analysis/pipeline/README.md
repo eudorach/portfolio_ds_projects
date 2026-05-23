@@ -101,8 +101,8 @@ All functions follow the same interface — pass biomarker names, a disease, and
 ```python
 run_correlation(biomarkers, disease, engine, method, log_transform, filters)
 run_scatter(biomarker, disease, engine, filters)
-run_linear_regression(biomarkers, disease, engine, filters)
-run_logistic_regression(biomarkers, disease, engine, filters)
+run_linear_regression(biomarkers, disease, engine, log_transform, filters)
+run_logistic_regression(biomarkers, disease, engine, log_transform, filters)
 ```
 
 ### Cohort Filters
@@ -110,8 +110,9 @@ Filters are passed as a dictionary at analysis time — no config changes needed
 
 ```python
 filters = {
-    "min_age":          18,       # adults only
-    "exclude_diabetes": True,     # exclude HbA1c >= 6.5% or fasting glucose >= 126 mg/dL
+    "min_age":           18,            # adults only
+    "exclude_diabetes":  True,          # exclude diabetic participants
+    "diabetes_criteria": "hba1c_only"   # use HbA1c >= 6.5% as exclusion criterion
 }
 ```
 
@@ -129,20 +130,77 @@ Diseases are defined once and reused across all analyses:
 ## Analyses Conducted
 
 ### 1. Urine Biomarkers vs BMI
-**Cohort:** Adults ≥ 18 years  
+**Cohort:** Adults ≥ 18 years (n = 2,846)  
 **Biomarkers:** Urine albumin, urine creatinine, urine iodine  
-**Methods:** Pearson correlation, linear regression, logistic regression  
+**Methods:** Pearson correlation (log-transformed), linear regression, logistic regression  
 **Covariates:** Age, sex, race/ethnicity  
 
+#### Correlation Results
+| Biomarker | r | p-value | Significant |
+|---|---|---|---|
+| Urine Creatinine | 0.163 | < 0.001 | Yes |
+| Urine Albumin | 0.152 | < 0.001 | Yes |
+| Urine Iodine | 0.085 | < 0.001 | Yes |
+
+#### Linear Regression (outcome: BMI, R² = 0.053)
+| Predictor | Coefficient | p-value |
+|---|---|---|
+| Creatinine (urine) | 0.017 | < 0.001 |
+| Albumin (urine) | 0.001 | 0.104 |
+| Iodine (urine) | -0.0002 | 0.357 |
+| Age | 0.037 | < 0.001 |
+| Sex | 1.821 | < 0.001 |
+| Race/ethnicity | -0.488 | < 0.001 |
+
+#### Logistic Regression (outcome: Obesity yes/no)
+| Predictor | OR | 95% CI | p-value |
+|---|---|---|---|
+| Creatinine (urine) | 1.004 | 1.003–1.005 | < 0.001 |
+| Albumin (urine) | 1.000 | 1.000–1.000 | 0.275 |
+| Iodine (urine) | 1.000 | 1.000–1.000 | 0.588 |
+| Age | 1.007 | 1.002–1.011 | 0.003 |
+| Sex | 1.587 | 1.356–1.857 | < 0.001 |
+| Race/ethnicity | 0.863 | 0.821–0.906 | < 0.001 |
+
+#### Key Findings
+Urine biomarkers showed no clinically meaningful association with obesity after adjusting for age, sex, and race/ethnicity (R² = 0.053). Only creatinine reached statistical significance, likely reflecting its known association with muscle mass rather than adiposity. These findings suggest urine biomarkers measured in this panel are not strong predictors of obesity status.
+
+---
+
 ### 2. Carbohydrate Metabolism vs BMI
-**Cohort:** Adults ≥ 18 years, excluding diabetes (HbA1c < 6.5% AND fasting glucose < 126 mg/dL)  
-**Biomarkers:** Fasting glucose, insulin, glycohemoglobin  
+**Cohort:** Adults ≥ 18 years, excluding diabetes (HbA1c < 6.5%) (n = 3,423)  
+**Biomarkers:** Fasting glucose, insulin, glycohemoglobin (HbA1c)  
 **Methods:** Pearson correlation, linear regression, logistic regression  
 **Covariates:** Age, sex, race/ethnicity  
-**Key findings:**
-- Insulin showed the strongest positive correlation with BMI (r = 0.30)
-- Glycohemoglobin and fasting glucose showed moderate positive correlations (r ≈ 0.20)
-- All associations remained significant after adjusting for age, sex, and race/ethnicity
+**Note:** Fasting glucose was excluded from regression models due to multicollinearity with HbA1c.
+
+#### Correlation Results
+| Biomarker | r | p-value | Significant |
+|---|---|---|---|
+| Insulin | 0.364 | < 0.001 | Yes |
+| Fasting Glucose | 0.232 | < 0.001 | Yes |
+| Glycohemoglobin (HbA1c) | 0.228 | < 0.001 | Yes |
+
+#### Linear Regression (outcome: BMI, R² = 0.185)
+| Predictor | Coefficient | p-value |
+|---|---|---|
+| Glycohemoglobin | 3.950 | < 0.001 |
+| Insulin | 0.152 | < 0.001 |
+| Age | -0.030 | < 0.001 |
+| Sex | 1.515 | < 0.001 |
+| Race/ethnicity | -0.433 | < 0.001 |
+
+#### Logistic Regression (outcome: Obesity yes/no)
+| Predictor | OR | 95% CI | p-value |
+|---|---|---|---|
+| Glycohemoglobin | 2.259 | 1.795–2.844 | < 0.001 |
+| Insulin | 1.118 | 1.105–1.130 | < 0.001 |
+| Age | 0.994 | 0.989–0.999 | 0.012 |
+| Sex | 1.582 | 1.353–1.849 | < 0.001 |
+| Race/ethnicity | 0.888 | 0.846–0.933 | < 0.001 |
+
+#### Key Findings
+Carbohydrate metabolism markers showed meaningful associations with obesity, explaining 18.5% of BMI variance. Insulin was the strongest correlate of BMI (r = 0.364), consistent with its role in insulin resistance and adiposity. Each 1% increase in HbA1c was associated with 2.26x higher odds of obesity (OR = 2.26, 95% CI: 1.80–2.84), and each 1 µU/mL increase in insulin was associated with 12% higher odds of obesity (OR = 1.12). Females had 58% higher odds of obesity compared to males (OR = 1.58), consistent with known sex differences in adiposity.
 
 ---
 
@@ -150,22 +208,20 @@ Diseases are defined once and reused across all analyses:
 
 ```
 NHANES_analysis/
-│
-├── notebooks/
-│   ├── 01_data_loading/
-│   │   └── nhanes_data_load.ipynb       # Load XPT files → PostgreSQL
-│   ├── 02_registry/
-│   │   └── nhanes_scraper.ipynb         # Build biomarker_registry
-│   ├── 03_long_tables/
-│   │   └── nhanes_long_tables.ipynb     # Build participant_biomarkers
-│   └── 04_analysis/
-│       ├── urine_biomarkers_bmi.ipynb
-│       └── carb_metabolism_bmi.ipynb
-│
-├── nhanes_utils.py                      # Data loading and cleaning utilities
-├── nhanes_analysis.py                   # Reusable analysis functions
-├── disease_config.py                    # Disease state definitions
-└── README.md
+├── exploratory/                         ← original one-off analyses
+│   └── notebooks/
+└── pipeline/                            ← reusable system (this project)
+    ├── nhanes_utils.py                  ← data loading and cleaning utilities
+    ├── nhanes_analysis.py               ← reusable analysis functions
+    ├── disease_config.py                ← disease state definitions
+    ├── notebooks/
+    │   ├── 01_data_loading.ipynb
+    │   ├── 02_registry.ipynb
+    │   ├── 03_long_tables.ipynb
+    │   └── analysis/
+    │       ├── urine_biomarkers_bmi.ipynb
+    │       └── carb_metabolism_bmi.ipynb
+    └── README.md
 ```
 
 ---
@@ -174,8 +230,8 @@ NHANES_analysis/
 
 ### Requirements
 ```
-pip install pandas numpy sqlalchemy psycopg2 pyreadstat 
-            requests beautifulsoup4 scipy statsmodels 
+pip install pandas numpy sqlalchemy psycopg2 pyreadstat
+            requests beautifulsoup4 scipy statsmodels
             matplotlib seaborn
 ```
 
@@ -188,16 +244,32 @@ engine = create_engine("postgresql://user:password@localhost:5432/nhanes")
 
 ### Running an Analysis
 ```python
-from nhanes_analysis import run_correlation, run_linear_regression
+from nhanes_analysis import run_correlation, run_linear_regression, run_logistic_regression
 from disease_config import DISEASE_CONFIGS
 
-# Example: carbohydrate biomarkers vs BMI in adults without diabetes
+# Carbohydrate metabolism vs BMI in adults without diabetes
+filters = {"min_age": 18, "exclude_diabetes": True, "diabetes_criteria": "hba1c_only"}
+
 run_correlation(
     biomarkers=["fasting_glucose", "glycohemoglobin", "insulin"],
     disease="obesity",
     engine=engine,
     method="pearson",
-    filters={"min_age": 18, "exclude_diabetes": True}
+    filters=filters
+)
+
+run_linear_regression(
+    biomarkers=["glycohemoglobin", "insulin"],
+    disease="obesity",
+    engine=engine,
+    filters=filters
+)
+
+run_logistic_regression(
+    biomarkers=["glycohemoglobin", "insulin"],
+    disease="obesity",
+    engine=engine,
+    filters=filters
 )
 ```
 
@@ -206,11 +278,11 @@ run_correlation(
 ## Skills Demonstrated
 
 - **Data Engineering** — PostgreSQL schema design, long table architecture, automated codebook scraping
-- **Epidemiological Methods** — cohort definition, exclusion criteria, covariate adjustment
-- **Statistical Analysis** — correlation, linear and logistic regression, odds ratios
-- **Clinical Domain Knowledge** — biomarker interpretation, disease definitions based on clinical guidelines
+- **Epidemiological Methods** — cohort definition, exclusion criteria, covariate adjustment, multicollinearity assessment
+- **Statistical Analysis** — Pearson correlation, linear and logistic regression, odds ratios with 95% CIs
+- **Clinical Domain Knowledge** — biomarker interpretation, disease definitions based on ACC/AHA, WHO, and ADA clinical guidelines
 - **Python** — reusable function design, SQLAlchemy, pandas, statsmodels, seaborn
-- **Reproducibility** — version-controlled, modular codebase that separates data, config, and analysis
+- **Reproducibility** — version-controlled, modular codebase that separates data, config, and analysis layers
 
 ---
 

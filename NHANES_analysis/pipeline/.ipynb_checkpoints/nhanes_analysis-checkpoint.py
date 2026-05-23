@@ -2,16 +2,6 @@
 nhanes_analysis.py
 ------------------
 Reusable analysis functions for NHANES pipeline.
-
-All functions take:
-- biomarkers : str or list of str  (biomarker_name from biomarker_registry)
-- disease    : str                 (key from DISEASE_CONFIGS)
-- engine     : SQLAlchemy engine   (PostgreSQL connection)
-
-Usage:
-    from nhanes_analysis import load_analysis_data, run_correlation, run_scatter
-                                   run_regression, run_logistic_regression
-    from disease_config import DISEASE_CONFIGS
 """
 
 import pandas as pd
@@ -19,14 +9,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
-from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.preprocessing import StandardScaler
 import statsmodels.formula.api as smf
-import statsmodels.api as sm
 from diagnosis_config import DISEASE_CONFIGS
 
-
-# ── Covariates always included in regression models ────────────────────────────
 COVARIATES = ["age", "sex", "race_ethnicity"]
 
 
@@ -35,18 +20,6 @@ COVARIATES = ["age", "sex", "race_ethnicity"]
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def load_analysis_data(biomarkers, disease, engine, filters=None):
-    """
-    Pulls and merges everything needed for an analysis from PostgreSQL.
-
-    Parameters
-    ----------
-    biomarkers : str or list of str
-    disease    : str
-    engine     : SQLAlchemy engine
-    filters    : dict, optional. Supported keys:
-                 - min_age          : int, minimum age (default 18)
-                 - exclude_diabetes : bool, exclude HbA1c >= 6.5% OR fasting glucose >= 126
-    """
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
@@ -55,7 +28,6 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
 
     # ── 1. Pull biomarker values ───────────────────────────────────────────────
     biomarker_placeholders = ", ".join([f"'{b}'" for b in biomarkers])
-
     bio_df = pd.read_sql(f"""
         SELECT pb.participant_id,
                br.biomarker_name,
@@ -91,16 +63,14 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
 
     # ── 4. Apply age filter ────────────────────────────────────────────────────
     min_age = filters.get("min_age", 18)
-    before  = len(df)
     df = df[df["age"] >= min_age].copy()
     print(f"After age filter (>= {min_age}): {len(df):,} participants")
 
     # ── 5. Exclude diabetes if requested ──────────────────────────────────────
     if filters.get("exclude_diabetes", False):
-        before = len(df)
+        before   = len(df)
+        criteria = filters.get("diabetes_criteria", "both")
 
-        # Pull glycohemoglobin + fasting glucose for ALL participants
-        # (even if they're not in the main biomarker list)
         exclusion_df = pd.read_sql("""
             SELECT pb.participant_id,
                    br.biomarker_name,
@@ -118,16 +88,32 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
         ).reset_index()
         excl_wide.columns.name = None
 
-        df = df.merge(excl_wide, on="participant_id", how="left")
+        # Only merge columns we don't already have in df
+        cols_to_add = [col for col in ["glycohemoglobin", "fasting_glucose"]
+                       if col not in df.columns]
+        if cols_to_add:
+            excl_subset = excl_wide[["participant_id"] + cols_to_add]
+            df = df.merge(excl_subset, on="participant_id", how="left")
 
-        # Exclude if EITHER criterion is met
-        diabetic_mask = (
-            (df["glycohemoglobin"]  >= 6.5)  |
-            (df["fasting_glucose"]  >= 126)
-        )
+        # Drop rows where we can't confirm non-diabetic status
+        if criteria == "hba1c_only":
+            df = df.dropna(subset=["glycohemoglobin"]).copy()
+        else:
+            df = df.dropna(subset=["glycohemoglobin", "fasting_glucose"]).copy()
+
+        # Exclude confirmed diabetics
+        if criteria == "hba1c_only":
+            diabetic_mask = (df["glycohemoglobin"] >= 6.5)
+        elif criteria == "glucose_only":
+            diabetic_mask = (df["fasting_glucose"] >= 126)
+        else:
+            diabetic_mask = (
+                (df["glycohemoglobin"] >= 6.5) |
+                (df["fasting_glucose"] >= 126)
+            )
         df = df[~diabetic_mask].copy()
 
-        # Drop the exclusion columns if not in original biomarker list
+        # Drop exclusion columns if not in original biomarker list
         for col in ["glycohemoglobin", "fasting_glucose"]:
             if col not in biomarkers and col in df.columns:
                 df = df.drop(columns=[col])
@@ -143,8 +129,8 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
             (df["diastolic_bp"] >= config["thresholds"]["diastolic_bp"]["value"])
         ).astype(int)
     else:
-        outcome    = config["outcome_col"]
-        threshold  = config["threshold"]
+        outcome   = config["outcome_col"]
+        threshold = config["threshold"]
         df[binary_col] = (df[outcome] >= threshold).astype(int)
 
     # ── 7. Drop rows missing any key column ───────────────────────────────────
@@ -155,62 +141,40 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
 
     return df
 
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # 2. CORRELATION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_correlation(biomarkers, disease, engine, method="spearman", log_transform = False, filters=None):
-    """
-    Runs correlation between each biomarker and the continuous outcome.
-
-    Parameters
-    ----------
-    biomarkers : str or list of str
-    disease    : str
-    engine     : SQLAlchemy engine
-    method     : 'spearman' (default) or 'pearson'
-
-    Returns
-    -------
-    results_df : DataFrame with biomarker, correlation, p_value, n
-    """
+def run_correlation(biomarkers, disease, engine, method="spearman", log_transform=False, filters=None):
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
     config = DISEASE_CONFIGS[disease]
+    outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
 
-    # Hypertension uses systolic as the primary continuous outcome
-    if disease == "hypertension":
-        outcome_col = "systolic_bp"
-    else:
-        outcome_col = config["outcome_col"]
-
-    df = load_analysis_data(biomarkers, disease, engine)
+    df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
     results = []
     for bio in biomarkers:
         clean = df[[bio, outcome_col]].dropna()
-
-        # Apply log transformation if requested
         if log_transform:
-            clean = clean[clean[bio] > 0]   # log requires positive values
+            clean = clean[clean[bio] > 0]
             clean[bio] = np.log(clean[bio])
-
         n = len(clean)
         if method == "spearman":
             corr, pval = stats.spearmanr(clean[bio], clean[outcome_col])
         else:
             corr, pval = stats.pearsonr(clean[bio], clean[outcome_col])
-
         results.append({
-            "biomarker":    bio,
-            "outcome":      outcome_col,
-            "correlation":  round(corr, 4),
-            "p_value":      round(pval, 6),
-            "n":            n,
+            "biomarker":     bio,
+            "outcome":       outcome_col,
+            "correlation":   round(corr, 4),
+            "p_value":       round(pval, 6),
+            "n":             n,
             "log_transform": log_transform,
-            "method":       method,
-            "significant":  pval < 0.05
+            "method":        method,
+            "significant":   pval < 0.05
         })
 
     results_df = pd.DataFrame(results).sort_values("correlation", ascending=False)
@@ -224,26 +188,11 @@ def run_correlation(biomarkers, disease, engine, method="spearman", log_transfor
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None):
-    """
-    Scatter plot of a single biomarker vs the continuous outcome.
+    config      = DISEASE_CONFIGS[disease]
+    outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
 
-    Parameters
-    ----------
-    biomarker : str
-    disease   : str
-    engine    : SQLAlchemy engine
-    hue_col   : column to color points by (default 'sex_label')
-    """
-    config = DISEASE_CONFIGS[disease]
+    df = load_analysis_data(biomarker, disease, engine, filters=filters)
 
-    if disease == "hypertension":
-        outcome_col = "systolic_bp"
-    else:
-        outcome_col = config["outcome_col"]
-
-    df = load_analysis_data(biomarker, disease, engine)
-
-    # Pull sex_label separately if needed for hue
     if hue_col == "sex_label":
         sex_labels = pd.read_sql(
             "SELECT participant_id, sex_label FROM participant_demographics", engine
@@ -251,65 +200,36 @@ def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None):
         df = df.merge(sex_labels, on="participant_id", how="left")
 
     fig, ax = plt.subplots(figsize=(8, 5))
-    sns.scatterplot(
-        data=df,
-        x=biomarker,
-        y=outcome_col,
-        hue=hue_col if hue_col in df.columns else None,
-        alpha=0.4,
-        s=20,
-        ax=ax
-    )
-    sns.regplot(
-        data=df,
-        x=biomarker,
-        y=outcome_col,
-        scatter=False,
-        color="red",
-        ax=ax
-    )
-
+    sns.scatterplot(data=df, x=biomarker, y=outcome_col,
+                    hue=hue_col if hue_col in df.columns else None,
+                    alpha=0.4, s=20, ax=ax)
+    sns.regplot(data=df, x=biomarker, y=outcome_col,
+                scatter=False, color="red", ax=ax)
     ax.set_title(f"{biomarker} vs {outcome_col} — {config['label']}", fontsize=13)
-    ax.set_xlabel(biomarker)
-    ax.set_ylabel(outcome_col)
     plt.tight_layout()
     plt.show()
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 4. LINEAR REGRESSION (continuous outcome)
+# 4. LINEAR REGRESSION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_linear_regression(biomarkers, disease, engine, filters=None):
-    """
-    Linear regression: outcome ~ biomarker(s) + age + sex + race_ethnicity.
-    Works for single or multiple biomarkers (multivariate).
-
-    Parameters
-    ----------
-    biomarkers : str or list of str
-    disease    : str
-    engine     : SQLAlchemy engine
-
-    Returns
-    -------
-    Statsmodels OLS results summary
-    """
+def run_linear_regression(biomarkers, disease, engine, log_transform=False, filters=None):
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
-    config = DISEASE_CONFIGS[disease]
+    config      = DISEASE_CONFIGS[disease]
+    outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
 
-    if disease == "hypertension":
-        outcome_col = "systolic_bp"
-    else:
-        outcome_col = config["outcome_col"]
+    df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
-    df = load_analysis_data(biomarkers, disease, engine)
+    if log_transform:
+        for bio in biomarkers:
+            df = df[df[bio] > 0]
+            df[bio] = np.log(df[bio])
 
-    # Build formula string
     predictors = biomarkers + COVARIATES
-    formula = f"{outcome_col} ~ " + " + ".join(predictors)
+    formula    = f"{outcome_col} ~ " + " + ".join(predictors)
     print(f"\nFormula: {formula}")
 
     model = smf.ols(formula=formula, data=df).fit()
@@ -318,51 +238,36 @@ def run_linear_regression(biomarkers, disease, engine, filters=None):
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 5. LOGISTIC REGRESSION (binary outcome)
+# 5. LOGISTIC REGRESSION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_logistic_regression(biomarkers, disease, engine, filters=None):
-    """
-    Logistic regression: binary_outcome ~ biomarker(s) + age + sex + race_ethnicity.
-    Works for single or multiple biomarkers (multivariate).
-    Reports odds ratios and 95% confidence intervals.
-
-    Parameters
-    ----------
-    biomarkers : str or list of str
-    disease    : str
-    engine     : SQLAlchemy engine
-
-    Returns
-    -------
-    odds_df    : DataFrame with odds ratios, CIs, and p-values
-    model      : Statsmodels logit model
-    """
+def run_logistic_regression(biomarkers, disease, engine, log_transform=False, filters=None):
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
     config  = DISEASE_CONFIGS[disease]
     bin_col = config["binary_col"]
 
-    df = load_analysis_data(biomarkers, disease, engine)
+    df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
-    # Build formula
+    if log_transform:
+        for bio in biomarkers:
+            df = df[df[bio] > 0]
+            df[bio] = np.log(df[bio])
+
     predictors = biomarkers + COVARIATES
-    formula = f"{bin_col} ~ " + " + ".join(predictors)
+    formula    = f"{bin_col} ~ " + " + ".join(predictors)
     print(f"\nFormula: {formula}")
 
-    model = smf.logit(formula=formula, data=df).fit(disp=False)
-
-    # Extract odds ratios + 95% CI
+    model  = smf.logit(formula=formula, data=df).fit(disp=False)
     odds_df = pd.DataFrame({
-        "odds_ratio":  np.exp(model.params),
-        "ci_lower":    np.exp(model.conf_int()[0]),
-        "ci_upper":    np.exp(model.conf_int()[1]),
-        "p_value":     model.pvalues
+        "odds_ratio": np.exp(model.params),
+        "ci_lower":   np.exp(model.conf_int()[0]),
+        "ci_upper":   np.exp(model.conf_int()[1]),
+        "p_value":    model.pvalues
     }).round(4)
-
     odds_df["significant"] = odds_df["p_value"] < 0.05
+
     print(f"\nLogistic Regression — {config['label']}")
     print(odds_df.to_string())
-
     return odds_df, model
