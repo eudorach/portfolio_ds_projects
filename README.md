@@ -23,7 +23,7 @@ A reusable epidemiological analysis pipeline for exploring relationships between
 This project evolved from an initial exploratory analysis into a fully engineered, scalable pipeline — reflecting a deliberate shift from one-off notebooks toward production-grade, reusable infrastructure.
 
 **Pipeline architecture includes:**
-- Automated codebook scraping to build a 201-biomarker registry from CDC documentation
+- Automated codebook scraping to build a 349-biomarker registry from CDC documentation
 - Long-table PostgreSQL schema design for scalable biomarker storage
 - Reusable analysis functions supporting any biomarker/disease combination without code changes
 - Flexible cohort filter system for age, disease exclusions, and subgroup definitions
@@ -38,7 +38,7 @@ This project evolved from an initial exploratory analysis into a fully engineere
 - Carbohydrate metabolism markers explained 18.5% of BMI variance vs 5.3% for urine biomarkers
 - Urine biomarkers showed no clinically meaningful association with obesity after multivariable adjustment — a valid null finding suggesting these markers reflect renal function rather than adiposity
 
-📂 [Exploratory Analysis](./NHANES_analysis/exploratory/) | [Pipeline](./NHANES_analysis/pipeline/)
+📂 [Exploratory Analysis](./NHANES_analysis/exploratory/notebooks/02_analysis) | [Pipeline](./NHANES_analysis/pipeline/)
 
 ---
 
