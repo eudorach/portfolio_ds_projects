@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
 import statsmodels.formula.api as smf
-from disease_config import DISEASE_CONFIGS
+from diagnosis_config import DISEASE_CONFIGS
 
 COVARIATES = ["age", "sex", "race_ethnicity"]
 
@@ -62,10 +62,23 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
     df = demo_df.merge(bio_wide, on="participant_id", how="inner")
 
     # ── 4. Apply age filter ────────────────────────────────────────────────────
-    min_age = filters.get("min_age", 18)
-    df = df[df["age"] >= min_age].copy()
-    print(f"After age filter (>= {min_age}): {len(df):,} participants")
+    min_age = filters.get("min_age", None)
+    max_age = filters.get("max_age", None)
+    age_range = filters.get("age_range", None)  # tuple e.g. (30, 60)
 
+    if age_range:
+        df = df[(df["age"] >= age_range[0]) & (df["age"] <= age_range[1])].copy()
+        print(f"After age filter ({age_range[0]}–{age_range[1]}): {len(df):,} participants")
+    elif min_age and max_age:
+        df = df[(df["age"] >= min_age) & (df["age"] <= max_age)].copy()
+        print(f"After age filter ({min_age}–{max_age}): {len(df):,} participants")
+    elif min_age:
+        df = df[df["age"] >= min_age].copy()
+        print(f"After age filter (>= {min_age}): {len(df):,} participants")
+    elif max_age:
+        df = df[df["age"] <= max_age].copy()
+        print(f"After age filter (<= {max_age}): {len(df):,} participants")
+        
     # ── 5. Exclude diabetes if requested ──────────────────────────────────────
     if filters.get("exclude_diabetes", False):
         before   = len(df)
