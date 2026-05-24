@@ -197,7 +197,7 @@ All analyses adjust for age, sex, and race/ethnicity. Biomarkers were log-transf
 
 ### Key Findings Across Analyses
 
-- **Urine biomarkers** explained only 5.3% of BMI variance — no clinically meaningful association with obesity after adjustment. A valid null finding suggesting these markers reflect renal function, not adiposity.
+- **Urine biomarkers** explained only 6.3% of BMI variance — no clinically meaningful association with obesity after adjustment. A valid null finding suggesting these markers reflect renal function, not adiposity.
 - **Carbohydrate metabolism markers** were strong predictors of obesity, explaining 32.9% of BMI variance. Insulin was the strongest correlate (r = 0.556). Each 1% increase in HbA1c was associated with 2.26x higher odds of obesity.
 - **SHBG** showed a strong inverse association with BMI in younger males (r = -0.352). Each 1 nmol/L increase in SHBG was associated with 5.3% lower odds of obesity, consistent with the known relationship between low SHBG and insulin resistance.
 
