@@ -309,7 +309,7 @@ NHANES_analysis/
     ├── nhanes_analysis.py               ← reusable analysis functions
     ├── diagnosis_config.py              ← disease state definitions
     ├── raw_table_loading.py
-    ├── analysis_notebooks/
+    ├── notebooks/
     │   ├── foundational_tables_config.ipynb
     │   ├── raw_data_uploads.ipynb
     │   └── analysis/
