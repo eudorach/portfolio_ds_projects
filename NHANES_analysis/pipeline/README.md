@@ -191,7 +191,7 @@ All analyses adjust for age, sex, and race/ethnicity. Biomarkers were log-transf
 |---|---|---|---|---|---|---|
 | [Urine Biomarkers vs BMI](./notebooks/analysis/1.urine_bmi_analysis.ipynb) | Adults ≥ 18 | 2,898 | Creatinine (urine) | 0.163 | 0.063 | 1.004 (NS) |
 | [Carb Metabolism vs BMI](./notebooks/analysis/2.blood_carbohydrate_metabolism.ipynb) | Adults ≥ 18, no diabetes | 3,478 | Insulin | 0.556 | 0.329 | 1.118*** |
-| [SHBG vs BMI](./notebooks/analysis/3.shbg_bmi_analysis.ipynb) | Males 22–49 | 1,387 | SHBG | -0.352 | 0.155 | 0.947*** |
+| [SHBG vs BMI](./notebooks/analysis/3.shbg_bmi_analysis.ipynb) **female cohort analysis in progress**| Males 22–49 | 1,387 | SHBG | -0.352 | 0.155 | 0.947*** |
 
 *** p < 0.001 | NS = not significant
 
