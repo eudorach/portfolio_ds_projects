@@ -2,22 +2,24 @@
 
 A reusable epidemiological analysis pipeline for exploring relationships between laboratory biomarkers and chronic disease outcomes using the **NHANES 2017-2020 Pre-Pandemic dataset**.
 
+> **Note:** This pipeline evolved from an initial exploratory analysis (see [exploratory/](../exploratory/)). Methodology was refined during pipeline development — the pipeline analyses should be considered the canonical version.
+
 ---
 
 ## Background
 
-This project was built by a clinician transitioning into data analytics, combining domain expertise in laboratory medicine and chronic disease with a scalable data engineering approach. The goal was to move beyond one-off analyses toward a system that can answer new epidemiological questions without rewriting code.
+Built by a clinician transitioning into data analytics, this project combines domain expertise in laboratory medicine and chronic disease with scalable data engineering. The goal was to move beyond one-off analyses toward a system that can answer new epidemiological questions without rewriting code.
 
-The National Health and Nutrition Examination Survey (NHANES) is a CDC program that assesses the health and nutritional status of adults and children in the United States. The 2017-2020 pre-pandemic cycle is a combined dataset representing one of the most comprehensive population-level health surveys available.
+NHANES is a CDC program assessing the health and nutritional status of Americans. The 2017-2020 pre-pandemic cycle is one of the most comprehensive population-level health surveys available.
 
 ---
 
 ## Project Goals
 
 - Build a **reusable, scalable pipeline** for NHANES biomarker analysis
-- Enable analysis across **multiple disease states** (obesity, hypertension, diabetes) without hardcoding column names or rewriting analysis code
-- Apply **clinical domain knowledge** to make methodologically sound decisions (cohort definitions, biomarker selection, exclusion criteria)
-- Demonstrate end-to-end data engineering: raw data ingestion → database design → analysis → results
+- Enable analysis across **multiple disease states** without hardcoding column names or rewriting code
+- Apply **clinical domain knowledge** to cohort definitions, biomarker selection, and exclusion criteria
+- Demonstrate end-to-end data engineering: raw ingestion → database design → analysis → results
 
 ---
 
@@ -35,9 +37,11 @@ The National Health and Nutrition Examination Survey (NHANES) is a CDC program t
 ```
 Raw XPT Files
       ↓
+raw_table_loading.py     ← automated batch ingestion
+      ↓
 PostgreSQL (raw schema)
       ↓
-biomarker_registry       ← maps NHANES codes to human-readable names + units
+biomarker_registry       ← maps NHANES codes → human-readable names + units
       ↓
 participant_biomarkers   ← long format: one row per participant per biomarker
 participant_demographics ← one row per participant: outcomes + covariates
@@ -49,11 +53,40 @@ Results
 
 ### Why a Long Table Design?
 
-Traditional NHANES analyses hardcode column names (e.g. `LBXGH` for HbA1c) making code brittle and hard to reuse. This pipeline uses a **long table design** where:
+Traditional NHANES analyses hardcode column names (e.g. `LBXGH` for HbA1c) — brittle and hard to reuse. This pipeline uses a long table design where:
 
 - Adding a new biomarker = inserting a row in `biomarker_registry`, no schema changes
 - Running a new analysis = calling the same functions with different inputs
 - All NHANES codes are abstracted away — analysis code only uses human-readable names
+
+---
+
+## Project Structure
+
+```
+NHANES_analysis/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── exploratory/
+│   └── notebooks/
+│       ├── 01_data_cleaning/
+│       └── 02_analysis/
+├── pipeline/
+│   ├── nhanes_utils.py                  ← data loading and cleaning utilities
+│   ├── nhanes_analysis.py               ← reusable analysis functions
+│   ├── diagnosis_config.py              ← disease state definitions
+│   ├── raw_table_loading.py             ← automated raw data ingestion
+│   ├── notebooks/
+│   │   ├── foundational_tables_config.ipynb
+│   │   ├── raw_data_upload_pipeline.ipynb
+│   │   └── analysis/
+│   │       ├── 1.urine_bmi_analysis.ipynb
+│   │       ├── 2.blood_carbohydrate_metabolism.ipynb
+│   │       └── 3.shbg_bmi_analysis.ipynb
+│   └── README.md
+└── README.md
+```
 
 ---
 
@@ -94,9 +127,25 @@ Traditional NHANES analyses hardcode column names (e.g. `LBXGH` for HbA1c) makin
 
 ---
 
+## Raw Data Ingestion (`raw_table_loading.py`)
+
+Automates batch ingestion of NHANES `.xpt` files into PostgreSQL. Eliminates manual file-by-file loading and ensures reproducible database construction.
+
+**Key features:**
+- Scans a directory for all `.xpt` files and loads them in one pass
+- Assigns semantic table names (e.g. `raw_demographics`, `raw_blood_glycohemoglobin`)
+- Preserves original NHANES structure in a raw schema layer
+- Modular — supports extension to additional NHANES cycles
+
+```bash
+python raw_table_loading.py
+```
+
+---
+
 ## Analysis Functions (`nhanes_analysis.py`)
 
-All functions follow the same interface — pass biomarker names, a disease, and optional cohort filters:
+All functions share the same interface — pass biomarker names, a disease, and optional cohort filters:
 
 ```python
 run_cohort_descriptives(biomarkers, disease, engine, filters)
@@ -110,24 +159,19 @@ run_quartile_analysis(biomarker, disease, engine, log_transform, filters)
 ```
 
 ### Cohort Filters
-Filters are passed as a dictionary at analysis time — no config changes needed:
 
 ```python
 filters = {
-    "min_age":           18,            # minimum age
-    "max_age":           65,            # maximum age
-    "age_range":         (22, 49),      # age range (alternative to min/max)
-    "sex":               1,             # 1 = Males only, 2 = Females only
-    "exclude_diabetes":  True,          # exclude diabetic participants
-    "diabetes_criteria": "hba1c_only"   # exclusion criterion
+    "min_age":           18,          # minimum age
+    "max_age":           65,          # maximum age
+    "age_range":         (22, 49),    # age range (alternative to min/max)
+    "sex":               1,           # 1 = Males only, 2 = Females only
+    "exclude_diabetes":  True,        # exclude diabetic participants
+    "diabetes_criteria": "hba1c_only" # exclusion criterion
 }
 ```
 
-### Log Transformation Policy
-Biomarkers were natural log-transformed for correlation and linear regression to address right skewness and meet normality assumptions. For logistic regression, untransformed values were retained to facilitate clinically interpretable odds ratios — allowing direct interpretation per unit change in the original measurement scale.
-
 ### Disease Configuration (`diagnosis_config.py`)
-Diseases are defined once and reused across all analyses:
 
 | Disease | Outcome | Definition |
 |---|---|---|
@@ -139,264 +183,59 @@ Diseases are defined once and reused across all analyses:
 
 ## Analyses Conducted
 
----
+All analyses adjust for age, sex, and race/ethnicity. Biomarkers were log-transformed for correlation and linear regression. Untransformed values used for logistic regression to preserve clinical interpretability of odds ratios.
 
-### 1. Urine Biomarkers vs BMI
+### Results Summary
 
-**Cohort:** Adults ≥ 18 years (n = 2,898)  
-**Biomarkers:** Urine albumin, urine creatinine, urine iodine  
-**Covariates:** Age, sex, race/ethnicity  
-
-#### Cohort Description
-| Variable | Mean ± SD | Median (IQR) |
-|---|---|---|
-| Age (years) | 49.62 ± 18.25 | 51.0 (34.0–64.0) |
-| BMI (kg/m²) | 29.75 ± 7.45 | 28.5 (24.5–33.6) |
-| Systolic BP (mmHg) | 124.80 ± 19.92 | 122.0 (110.0–136.0) |
-| Diastolic BP (mmHg) | 75.01 ± 11.69 | 74.0 (67.0–82.0) |
-
-Sex: Female 51.1%, Male 48.9%
-
-#### Biomarker Descriptives
-| Biomarker | Unit | Mean | SD | Median | Skewness | Log transform? |
+| Analysis | Cohort | n | Strongest Biomarker | r | R² | Key OR |
 |---|---|---|---|---|---|---|
-| Albumin (urine) | µg/mL | 54.71 | 399.31 | 8.70 | 22.28 | Yes |
-| Creatinine (urine) | mg/dL | 127.99 | 84.39 | 111.00 | 1.26 | Yes |
-| Iodine (urine) | µg/L | 238.29 | 812.82 | 123.65 | 19.30 | Yes |
+| [Urine Biomarkers vs BMI](./notebooks/analysis/1.urine_bmi_analysis.ipynb) | Adults ≥ 18 | 2,898 | Creatinine (urine) | 0.163 | 0.063 | 1.004 (NS) |
+| [Carb Metabolism vs BMI](./notebooks/analysis/2.blood_carbohydrate_metabolism.ipynb) | Adults ≥ 18, no diabetes | 3,478 | Insulin | 0.556 | 0.329 | 1.118*** |
+| [SHBG vs BMI](./notebooks/analysis/3.shbg_bmi_analysis.ipynb) | Males 22–49 | 1,387 | SHBG | -0.352 | 0.155 | 0.947*** |
 
-#### Correlation Results (Pearson, log-transformed)
-| Biomarker | r | p-value | Significant |
-|---|---|---|---|
-| Creatinine (urine) | 0.163 | < 0.001 | Yes |
-| Albumin (urine) | 0.152 | < 0.001 | Yes |
-| Iodine (urine) | 0.085 | < 0.001 | Yes |
+*** p < 0.001 | NS = not significant
 
-#### Linear Regression (outcome: BMI, log-transformed, R² = 0.053)
-| Predictor | Coefficient | p-value |
-|---|---|---|
-| Creatinine (urine) | 0.017 | < 0.001 |
-| Albumin (urine) | 0.001 | 0.104 |
-| Iodine (urine) | -0.0002 | 0.357 |
-| Age | 0.037 | < 0.001 |
-| Sex | 1.821 | < 0.001 |
-| Race/ethnicity | -0.488 | < 0.001 |
+### Key Findings Across Analyses
 
-#### Logistic Regression (outcome: Obesity yes/no, untransformed)
-| Predictor | OR | 95% CI | p-value |
-|---|---|---|---|
-| Creatinine (urine) | 1.004 | 1.003–1.005 | < 0.001 |
-| Albumin (urine) | 1.000 | 1.000–1.000 | 0.275 |
-| Iodine (urine) | 1.000 | 1.000–1.000 | 0.588 |
-| Age | 1.007 | 1.002–1.011 | 0.003 |
-| Sex | 1.587 | 1.356–1.857 | < 0.001 |
-| Race/ethnicity | 0.863 | 0.821–0.906 | < 0.001 |
+- **Urine biomarkers** explained only 5.3% of BMI variance — no clinically meaningful association with obesity after adjustment. A valid null finding suggesting these markers reflect renal function, not adiposity.
+- **Carbohydrate metabolism markers** were strong predictors of obesity, explaining 32.9% of BMI variance. Insulin was the strongest correlate (r = 0.556). Each 1% increase in HbA1c was associated with 2.26x higher odds of obesity.
+- **SHBG** showed a strong inverse association with BMI in younger males (r = -0.352). Each 1 nmol/L increase in SHBG was associated with 5.3% lower odds of obesity, consistent with the known relationship between low SHBG and insulin resistance.
 
-#### Key Findings
-Urine biomarkers showed no clinically meaningful association with obesity after adjusting for age, sex, and race/ethnicity (R² = 0.053). Only creatinine reached statistical significance, likely reflecting its known association with muscle mass rather than adiposity. Albumin and iodine were not significant predictors of obesity status. These findings suggest urine biomarkers measured in this panel reflect renal function rather than adiposity.
-
----
-
-### 2. Carbohydrate Metabolism vs BMI
-
-**Cohort:** Adults ≥ 18 years, excluding diabetes (HbA1c < 6.5%) (n = 3,478)  
-**Biomarkers:** Fasting glucose, insulin, glycohemoglobin (HbA1c)  
-**Covariates:** Age, sex, race/ethnicity  
-**Note:** Fasting glucose excluded from regression models due to multicollinearity with HbA1c.
-
-#### Cohort Description
-| Variable | Mean ± SD | Median (IQR) |
-|---|---|---|
-| Age (years) | 47.76 ± 18.23 | 47.0 (32.0–62.0) |
-| BMI (kg/m²) | 29.28 ± 7.37 | 28.0 (24.2–32.8) |
-| Systolic BP (mmHg) | 122.40 ± 18.65 | 119.0 (109.0–132.0) |
-| Diastolic BP (mmHg) | 74.55 ± 11.64 | 73.0 (67.0–82.0) |
-
-Sex: Female 52.1%, Male 47.9%
-
-#### Biomarker Descriptives
-| Biomarker | Unit | Mean | SD | Median | Skewness | Log transform? |
-|---|---|---|---|---|---|---|
-| Fasting glucose | mg/dL | 102.77 | 12.98 | 101.00 | 1.54 | Yes |
-| Insulin | µU/mL | 12.96 | 15.92 | 9.41 | 12.36 | Yes |
-| Glycohemoglobin | % | 5.50 | 0.40 | 5.50 | -0.14 | No |
-
-#### Correlation Results (Pearson, log-transformed)
-| Biomarker | r | p-value | Significant |
-|---|---|---|---|
-| Insulin | 0.556 | < 0.001 | Yes |
-| Fasting Glucose | 0.233 | < 0.001 | Yes |
-| Glycohemoglobin | 0.225 | < 0.001 | Yes |
-
-#### Linear Regression (outcome: BMI, log-transformed, R² = 0.329)
-| Predictor | Coefficient | p-value |
-|---|---|---|
-| Glycohemoglobin | 11.755 | < 0.001 |
-| Insulin | 5.194 | < 0.001 |
-| Age | -0.011 | 0.088 |
-| Sex | 1.286 | < 0.001 |
-| Race/ethnicity | -0.264 | < 0.001 |
-
-#### Logistic Regression (outcome: Obesity yes/no, untransformed)
-| Predictor | OR | 95% CI | p-value |
-|---|---|---|---|
-| Glycohemoglobin | 2.259 | 1.795–2.844 | < 0.001 |
-| Insulin | 1.118 | 1.105–1.130 | < 0.001 |
-| Age | 0.994 | 0.989–0.999 | 0.012 |
-| Sex | 1.582 | 1.353–1.849 | < 0.001 |
-| Race/ethnicity | 0.888 | 0.846–0.933 | < 0.001 |
-
-#### Key Findings
-Carbohydrate metabolism markers showed meaningful associations with obesity, explaining 32.9% of BMI variance after log transformation. Insulin was the strongest correlate of BMI (r = 0.556), consistent with its central role in insulin resistance and adiposity. Each 1% increase in HbA1c was associated with 2.26x higher odds of obesity (OR = 2.26, 95% CI: 1.80–2.84), and each 1 µU/mL increase in insulin was associated with 12% higher odds of obesity (OR = 1.12). Females had 58% higher odds of obesity compared to males (OR = 1.58), consistent with known sex differences in body fat distribution.
-
----
-
-### 3. SHBG vs BMI (Males, Ages 22–49)
-
-**Cohort:** Males aged 22–49 years (n = 1,387)  
-**Biomarker:** Sex hormone-binding globulin (SHBG)  
-**Covariates:** Age, race/ethnicity (sex excluded — male-only cohort)  
-
-#### Cohort Description
-| Variable | Mean ± SD | Median (IQR) |
-|---|---|---|
-| Age (years) | 35.80 ± 8.21 | 36.0 (29.0–43.0) |
-| BMI (kg/m²) | 29.72 ± 6.98 | 28.5 (25.0–33.3) |
-| Systolic BP (mmHg) | 121.87 ± 13.66 | 120.0 (113.0–129.0) |
-| Diastolic BP (mmHg) | 76.30 ± 11.31 | 76.0 (68.0–83.0) |
-
-#### Biomarker Descriptives
-| Biomarker | Unit | Mean | SD | Median | Skewness | Log transform? |
-|---|---|---|---|---|---|---|
-| SHBG | nmol/L | 30.24 | 14.66 | 27.42 | 1.56 | Yes |
-
-#### Correlation Results (Pearson, log-transformed)
-| Biomarker | r | p-value | Significant |
-|---|---|---|---|
-| SHBG | -0.352 | < 0.001 | Yes |
-
-#### Linear Regression (outcome: BMI, log-transformed, R² = 0.155)
-| Predictor | Coefficient | p-value |
-|---|---|---|
-| SHBG | -5.422 | < 0.001 |
-| Age | 0.121 | < 0.001 |
-| Race/ethnicity | -0.452 | < 0.001 |
-
-#### Logistic Regression (outcome: Obesity yes/no, untransformed)
-| Predictor | OR | 95% CI | p-value |
-|---|---|---|---|
-| SHBG | 0.947 | 0.937–0.957 | < 0.001 |
-| Age | 1.032 | 1.018–1.047 | < 0.001 |
-| Race/ethnicity | 0.853 | 0.798–0.913 | < 0.001 |
-
-#### Key Findings
-SHBG showed a strong inverse association with BMI in males aged 22–49 (r = -0.352). Each 1 nmol/L increase in SHBG was associated with 5.3% lower odds of obesity (OR = 0.947), consistent with the known relationship between low SHBG and insulin resistance and metabolic syndrome in males. Age was positively associated with obesity odds in this cohort (OR = 1.032), reflecting increasing metabolic risk with age even in younger males.
-
----
-
-## Project Structure
-
-```
-NHANES_analysis/
-├── data
-│   ├── processed
-│   ├── raw
-├── exploratory/                         
-│   └── notebooks/
-│       ├── 01_data_cleaning
-│       └── 02_analysis                  ← initial one-off analyses (starting point)
-├── README.md
-└── pipeline/                            ← refined, reusable system (this project)
-    ├── nhanes_utils.py                  ← data loading and cleaning utilities
-    ├── nhanes_analysis.py               ← reusable analysis functions
-    ├── diagnosis_config.py              ← disease state definitions
-    ├── raw_table_loading.py
-    ├── notebooks/
-    │   ├── foundational_tables_config.ipynb
-    │   ├── raw_data_upload_pipeline.ipynb
-    │   └── analysis/
-    │       ├── 1.urine_bmi_analysis.ipynb
-    │       ├── 2.blood_carbohydrate_metabolism.ipynb
-    │       └── 3.shbg_bmi_analysis.ipynb
-    └── README.md
-```
-
-## Raw Data Ingestion Pipeline
-
-The pipeline includes an automated ingestion system that loads NHANES raw `.xpt` files into a structured PostgreSQL database. This step forms the foundation of the data architecture by preserving original data integrity while enabling downstream transformation and analysis.
-
----
-
-### Overview
-
-The ingestion process is fully automated and eliminates the need for manual file-by-file loading. It standardizes file handling, applies consistent table naming conventions, and ensures all raw datasets are reproducibly stored in a relational database.
-
-The pipeline performs the following steps:
-
-- Scans a specified directory for NHANES `.xpt` files  
-- Reads each file into a pandas DataFrame using `pyreadstat`  
-- Standardizes basic schema elements (e.g., participant identifier alignment)  
-- Assigns semantic table names based on dataset identity (e.g., demographics, anthropometry, laboratory modules)  
-- Loads each dataset into PostgreSQL as a raw table  
-
----
-
-### Key Features
-
-- Fully automated batch ingestion of NHANES `.xpt` files  
-- Semantic table naming (e.g., `raw_demographics`, `raw_anthropometry`)  
-- Preserves original NHANES structure in a raw database layer  
-- Reproducible database construction from local files  
-- Modular design supporting extension to additional NHANES cycles and datasets  
-
----
-
-### Usage
-
-Run the ingestion pipeline from the project root:
-
-```bash
-python raw_table_loading.py
+*See individual notebooks for full cohort descriptions, biomarker distributions, and detailed regression outputs.*
 
 ---
 
 ## Setup
 
 ### Requirements
-```
-pip install pandas numpy sqlalchemy psycopg2 pyreadstat
-            requests beautifulsoup4 scipy statsmodels
+```bash
+pip install pandas numpy sqlalchemy psycopg2 pyreadstat \
+            requests beautifulsoup4 scipy statsmodels \
             matplotlib seaborn
 ```
 
-### Database
-Requires a running PostgreSQL instance. Update your connection string:
+### Database Connection
 ```python
 from sqlalchemy import create_engine
 engine = create_engine("postgresql://user:password@localhost:5432/nhanes")
 ```
 
-### Running an Analysis
+### Example Analysis
 ```python
 from nhanes_analysis import (run_cohort_descriptives, run_biomarker_descriptives,
                               run_distribution_plots, run_correlation,
                               run_linear_regression, run_logistic_regression)
 from diagnosis_config import DISEASE_CONFIGS
 
-# Example: SHBG vs BMI in males aged 22-49
+# SHBG vs BMI in males aged 22-49
 filters = {"age_range": (22, 49), "sex": 1}
 
 _ = run_cohort_descriptives(["shbg"], "obesity", engine, filters=filters)
 _ = run_biomarker_descriptives(["shbg"], "obesity", engine, filters=filters)
 run_distribution_plots(["shbg"], "obesity", engine, filters=filters)
-
-run_correlation(["shbg"], "obesity", engine, method="pearson",
-                log_transform=True, filters=filters)
-
-run_linear_regression(["shbg"], "obesity", engine,
-                      log_transform=True, filters=filters)
-
-_ = run_logistic_regression(["shbg"], "obesity", engine,
-                             log_transform=False, filters=filters)
+run_correlation(["shbg"], "obesity", engine, method="pearson", log_transform=True, filters=filters)
+run_linear_regression(["shbg"], "obesity", engine, log_transform=True, filters=filters)
+_ = run_logistic_regression(["shbg"], "obesity", engine, log_transform=False, filters=filters)
 ```
 
 ---
@@ -404,7 +243,7 @@ _ = run_logistic_regression(["shbg"], "obesity", engine,
 ## Methodological Notes
 
 - **Log transformation:** Applied for correlation and linear regression to address right skewness. Not applied for logistic regression to preserve clinical interpretability of odds ratios
-- **Covariate adjustment:** All models adjust for age, sex, and race/ethnicity. Sex is automatically excluded from models when a single-sex cohort filter is applied
+- **Covariate adjustment:** All models adjust for age, sex, and race/ethnicity. Sex is automatically excluded when a single-sex cohort filter is applied
 - **Diabetes exclusion:** Participants excluded based on HbA1c ≥ 6.5% where clinically appropriate
 - **Missing data:** Complete case analysis — participants missing any key variable are excluded
 
@@ -412,12 +251,12 @@ _ = run_logistic_regression(["shbg"], "obesity", engine,
 
 ## Skills Demonstrated
 
-- **Data Engineering** — PostgreSQL schema design, long table architecture, automated codebook scraping
+- **Data Engineering** — automated batch ingestion, PostgreSQL schema design, long table architecture, codebook scraping
 - **Epidemiological Methods** — cohort definition, exclusion criteria, covariate adjustment, multicollinearity assessment
 - **Statistical Analysis** — Pearson correlation, linear and logistic regression, odds ratios with 95% CIs
-- **Clinical Domain Knowledge** — biomarker interpretation, disease definitions based on ACC/AHA, WHO, and ADA clinical guidelines
+- **Clinical Domain Knowledge** — biomarker interpretation, disease definitions per ACC/AHA, WHO, and ADA guidelines
 - **Python** — reusable function design, SQLAlchemy, pandas, statsmodels, seaborn
-- **Reproducibility** — version-controlled, modular codebase that separates data, config, and analysis layers
+- **Reproducibility** — modular, version-controlled codebase separating data, config, and analysis layers
 
 ---
 
