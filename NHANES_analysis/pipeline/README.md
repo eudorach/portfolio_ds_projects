@@ -106,6 +106,7 @@ run_correlation(biomarkers, disease, engine, method, log_transform, filters)
 run_scatter(biomarker, disease, engine, filters)
 run_linear_regression(biomarkers, disease, engine, log_transform, filters)
 run_logistic_regression(biomarkers, disease, engine, log_transform, filters)
+run_quartile_analysis(biomarker, disease, engine, log_transform, filters)
 ```
 
 ### Cohort Filters
@@ -125,7 +126,7 @@ filters = {
 ### Log Transformation Policy
 Biomarkers were natural log-transformed for correlation and linear regression to address right skewness and meet normality assumptions. For logistic regression, untransformed values were retained to facilitate clinically interpretable odds ratios — allowing direct interpretation per unit change in the original measurement scale.
 
-### Disease Configuration (`disease_config.py`)
+### Disease Configuration (`diagnosis_config.py`)
 Diseases are defined once and reused across all analyses:
 
 | Disease | Outcome | Definition |
@@ -296,20 +297,25 @@ SHBG showed a strong inverse association with BMI in males aged 22–49 (r = -0.
 
 ```
 NHANES_analysis/
-├── exploratory/                         ← initial one-off analyses (starting point)
+├── data
+│   ├── processed
+│   ├── raw
+├── exploratory/                         
 │   └── notebooks/
+│       ├── 01_data_cleaning
+│       └── 02_analysis                  ← initial one-off analyses (starting point)
 └── pipeline/                            ← refined, reusable system (this project)
     ├── nhanes_utils.py                  ← data loading and cleaning utilities
     ├── nhanes_analysis.py               ← reusable analysis functions
-    ├── disease_config.py                ← disease state definitions
-    ├── notebooks/
-    │   ├── 01_data_loading.ipynb
-    │   ├── 02_registry.ipynb
-    │   ├── 03_long_tables.ipynb
+    ├── diagnosis_config.py              ← disease state definitions
+    ├── raw_table_loading.py
+    ├── analysis_notebooks/
+    │   ├── foundational_tables_config.ipynb
+    │   ├── raw_data_uploads.ipynb
     │   └── analysis/
-    │       ├── urine_biomarkers_bmi.ipynb
-    │       ├── carb_metabolism_bmi.ipynb
-    │       └── shbg_males_bmi.ipynb
+    │       ├── 1.urine_bmi_analysis.ipynb
+    │       ├── 2.blood_carbohydrate_metabolism.ipynb
+    │       └── 3.shbg_bmi_analysis.ipynb
     └── README.md
 ```
 
@@ -336,7 +342,7 @@ engine = create_engine("postgresql://user:password@localhost:5432/nhanes")
 from nhanes_analysis import (run_cohort_descriptives, run_biomarker_descriptives,
                               run_distribution_plots, run_correlation,
                               run_linear_regression, run_logistic_regression)
-from disease_config import DISEASE_CONFIGS
+from diagnosis_config import DISEASE_CONFIGS
 
 # Example: SHBG vs BMI in males aged 22-49
 filters = {"age_range": (22, 49), "sex": 1}
