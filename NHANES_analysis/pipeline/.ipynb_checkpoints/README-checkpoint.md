@@ -25,7 +25,7 @@ The National Health and Nutrition Examination Survey (NHANES) is a CDC program t
 
 - **Source:** [CDC NHANES 2017-March 2020 Pre-Pandemic](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?cycle=2017-2020)
 - **Tables loaded:** 46 laboratory tables (blood and urine), demographics, anthropometry, blood pressure
-- **Total biomarkers registered:** 349
+- **Total biomarkers registered:** 345
 - **Format:** XPT files loaded into PostgreSQL
 
 ---
@@ -304,6 +304,7 @@ NHANES_analysis/
 │   └── notebooks/
 │       ├── 01_data_cleaning
 │       └── 02_analysis                  ← initial one-off analyses (starting point)
+├── README.md
 └── pipeline/                            ← refined, reusable system (this project)
     ├── nhanes_utils.py                  ← data loading and cleaning utilities
     ├── nhanes_analysis.py               ← reusable analysis functions
@@ -311,13 +312,50 @@ NHANES_analysis/
     ├── raw_table_loading.py
     ├── notebooks/
     │   ├── foundational_tables_config.ipynb
-    │   ├── raw_data_uploads.ipynb
+    │   ├── raw_data_upload_pipeline.ipynb
     │   └── analysis/
     │       ├── 1.urine_bmi_analysis.ipynb
     │       ├── 2.blood_carbohydrate_metabolism.ipynb
     │       └── 3.shbg_bmi_analysis.ipynb
     └── README.md
 ```
+
+## Raw Data Ingestion Pipeline
+
+The pipeline includes an automated ingestion system that loads NHANES raw `.xpt` files into a structured PostgreSQL database. This step forms the foundation of the data architecture by preserving original data integrity while enabling downstream transformation and analysis.
+
+---
+
+### Overview
+
+The ingestion process is fully automated and eliminates the need for manual file-by-file loading. It standardizes file handling, applies consistent table naming conventions, and ensures all raw datasets are reproducibly stored in a relational database.
+
+The pipeline performs the following steps:
+
+- Scans a specified directory for NHANES `.xpt` files  
+- Reads each file into a pandas DataFrame using `pyreadstat`  
+- Standardizes basic schema elements (e.g., participant identifier alignment)  
+- Assigns semantic table names based on dataset identity (e.g., demographics, anthropometry, laboratory modules)  
+- Loads each dataset into PostgreSQL as a raw table  
+
+---
+
+### Key Features
+
+- Fully automated batch ingestion of NHANES `.xpt` files  
+- Semantic table naming (e.g., `raw_demographics`, `raw_anthropometry`)  
+- Preserves original NHANES structure in a raw database layer  
+- Reproducible database construction from local files  
+- Modular design supporting extension to additional NHANES cycles and datasets  
+
+---
+
+### Usage
+
+Run the ingestion pipeline from the project root:
+
+```bash
+python raw_table_loading.py
 
 ---
 
