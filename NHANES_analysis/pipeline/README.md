@@ -25,7 +25,7 @@ The National Health and Nutrition Examination Survey (NHANES) is a CDC program t
 
 - **Source:** [CDC NHANES 2017-March 2020 Pre-Pandemic](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?cycle=2017-2020)
 - **Tables loaded:** 46 laboratory tables (blood and urine), demographics, anthropometry, blood pressure
-- **Total biomarkers registered:** 201
+- **Total biomarkers registered:** 349
 - **Format:** XPT files loaded into PostgreSQL
 
 ---
