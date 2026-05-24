@@ -78,6 +78,15 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
     elif max_age:
         df = df[df["age"] <= max_age].copy()
         print(f"After age filter (<= {max_age}): {len(df):,} participants")
+    
+    # ── 4b. Apply sex filter ───────────────────────────────────────────────────
+    sex_filter = filters.get("sex", None)  # 1 = Male, 2 = Female
+
+    if sex_filter:
+        before = len(df)
+        df = df[df["sex"] == sex_filter].copy()
+        sex_label = "Males" if sex_filter == 1 else "Females"
+        print(f"After sex filter ({sex_label}): {len(df):,} participants ({before - len(df):,} excluded)")
         
     # ── 5. Exclude diabetes if requested ──────────────────────────────────────
     if filters.get("exclude_diabetes", False):
@@ -472,8 +481,13 @@ def run_linear_regression(biomarkers, disease, engine, log_transform=False, filt
         for bio in biomarkers:
             df = df[df[bio] > 0]
             df[bio] = np.log(df[bio])
+    
+    # Remove sex from covariates if sex filter is applied
+    covariates = COVARIATES.copy()
+    if filters and filters.get("sex"):
+        covariates.remove("sex")
 
-    predictors = biomarkers + COVARIATES
+    predictors = biomarkers + covariates
     formula    = f"{outcome_col} ~ " + " + ".join(predictors)
     print(f"\nFormula: {formula}")
 
@@ -499,8 +513,17 @@ def run_logistic_regression(biomarkers, disease, engine, log_transform=False, fi
         for bio in biomarkers:
             df = df[df[bio] > 0]
             df[bio] = np.log(df[bio])
+    # ← add this temporarily
+    print("biomarkers:", biomarkers)
+    print("sample insulin values after log:", df["insulin"].head().tolist())
+    print("sample glycohemoglobin values after log:", df["glycohemoglobin"].head().tolist())
+            
+    # Remove sex from covariates if sex filter is applied
+    covariates = COVARIATES.copy()
+    if filters and filters.get("sex"):
+        covariates.remove("sex")
 
-    predictors = biomarkers + COVARIATES
+    predictors = biomarkers + covariates
     formula    = f"{bin_col} ~ " + " + ".join(predictors)
     print(f"\nFormula: {formula}")
 
