@@ -31,11 +31,13 @@ This project evolved from an initial exploratory analysis into a fully engineere
 **Analyses conducted:**
 - Urine biomarkers (albumin, creatinine, iodine) vs BMI — adults ≥ 18 (n = 2,846)
 - Carbohydrate metabolism markers (HbA1c, insulin, fasting glucose) vs BMI — adults ≥ 18 without diabetes (n = 3,423)
+- Sex hormone binding globulin (SHBG) vs BMI - males aged 22–49 years (n = 1,387)
 
 **Key findings:**
 - Insulin was the strongest correlate of BMI among carbohydrate metabolism markers (r = 0.364), consistent with insulin resistance in obesity
 - Each 1% increase in HbA1c was associated with 2.26x higher odds of obesity (OR = 2.26, 95% CI: 1.80–2.84)
 - Carbohydrate metabolism markers explained 18.5% of BMI variance vs 5.3% for urine biomarkers
+- Each 1 nmol/L increase in SHBG was associated with 5.3% lower odds of obesity (OR = 0.947), consistent with the known relationship between low SHBG and insulin resistance and metabolic syndrome in males
 - Urine biomarkers showed no clinically meaningful association with obesity after multivariable adjustment — a valid null finding suggesting these markers reflect renal function rather than adiposity
 
 📂 [Exploratory Analysis](./NHANES_analysis/exploratory/) — initial one-off analyses conducted prior to pipeline development. Note that methodology was refined during pipeline development and results may differ slightly from the pipeline analyses.
