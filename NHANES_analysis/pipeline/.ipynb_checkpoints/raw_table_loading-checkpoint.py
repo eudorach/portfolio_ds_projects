@@ -23,9 +23,9 @@ TABLE_NAME_MAP = {
     "P_TFR":     "raw_blood_transferrin",
     "P_TRIGLY":  "raw_blood_triglyceride",
     "P_VOCWB":   "raw_blood_voc",
-    "P_UCM":     "raw_chromium",
-    "P_FR":      "raw_flame_retardants",
-    "P_SSFR":    "raw_flame_retardants_surplus",
+    "P_UCM":     "raw_urine_chromium",
+    "P_FR":      "raw_urine_flame_retardants",
+    "P_SSFR":    "raw_urine_flame_retardants_surplus",
     "P_UAS":     "raw_speciated_arsenic",
     "P_UTAS":    "raw_total_arsenic",
     "P_ALB_CR":  "raw_urine_albcr",
@@ -38,13 +38,19 @@ TABLE_NAME_MAP = {
     "P_UCPREG":  "raw_urine_pregnancy",
     "P_UVOC":    "raw_urine_voc",
     "P_UVOC2":   "raw_urine_voc_2",
+    "P_BMX": "raw_bmx",
+    "BPOscillometric_P_BPXO.xpt": "raw_blood_pressure",
+    "P_DEMO": "raw_demographics"
 }
 
+
 import os
-from nhanes_utils import save_to_postgres
+from nhanes_utils import (
+    save_to_postgres,
+    load_xpt)
 
 def ingest_folder(folder_path, engine, name_map):
-    for file i nos.listdir(folder_path):
+    for file in os.listdir(folder_path):
         if file.endswith(".xpt"):
             
             base = file.replace(".XPT", "").replace(".xpt", "")
