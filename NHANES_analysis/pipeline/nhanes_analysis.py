@@ -539,3 +539,176 @@ def run_logistic_regression(biomarkers, disease, engine, log_transform=False, fi
     print(f"\nLogistic Regression — {config['label']}")
     print(odds_df.to_string())
     return odds_df, model
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 9. QUARTILE ANALYSIS
+# ═══════════════════════════════════════════════════════════════════════════════
+ 
+def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filters=None):
+    """
+    Quartile analysis for a single biomarker vs outcome.
+ 
+    For each quartile (Q1 = reference):
+    - Mean outcome (e.g. BMI) per quartile → bar chart
+    - Logistic regression ORs with Q1 as reference → forest plot
+    - Spearman correlation per quartile → trend table
+ 
+    Parameters
+    ----------
+    biomarker    : str — single biomarker name
+    disease      : str
+    engine       : SQLAlchemy engine
+    log_transform: bool — log transform before quartile assignment
+    filters      : dict, optional
+ 
+    Returns
+    -------
+    quartile_df  : DataFrame with per-quartile summary stats and ORs
+    """
+    if isinstance(biomarker, list):
+        if len(biomarker) > 1:
+            print("⚠ run_quartile_analysis() accepts one biomarker at a time. Using first.")
+        biomarker = biomarker[0]
+ 
+    config      = DISEASE_CONFIGS[disease]
+    outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
+    binary_col  = config["binary_col"]
+ 
+    df = load_analysis_data(biomarker, disease, engine, filters=filters)
+ 
+    # ── 1. Optional log transform ──────────────────────────────────────────────
+    if log_transform:
+        df = df[df[biomarker] > 0].copy()
+        df[biomarker] = np.log(df[biomarker])
+ 
+    # ── 2. Assign quartiles ────────────────────────────────────────────────────
+    df["quartile"] = pd.qcut(df[biomarker], q=4, labels=["Q1", "Q2", "Q3", "Q4"])
+ 
+    # Get quartile cut points for labeling
+    quartile_bins = pd.qcut(df[biomarker], q=4, retbins=True)[1]
+    quartile_labels = {
+        "Q1": f"Q1 ({quartile_bins[0]:.2f}–{quartile_bins[1]:.2f})",
+        "Q2": f"Q2 ({quartile_bins[1]:.2f}–{quartile_bins[2]:.2f})",
+        "Q3": f"Q3 ({quartile_bins[2]:.2f}–{quartile_bins[3]:.2f})",
+        "Q4": f"Q4 ({quartile_bins[3]:.2f}–{quartile_bins[4]:.2f})",
+    }
+ 
+    print(f"\n{'='*55}")
+    print(f"Quartile Analysis — {biomarker} vs {outcome_col}")
+    print(f"{'='*55}")
+ 
+    # ── 3. Summary stats per quartile ──────────────────────────────────────────
+    summary = df.groupby("quartile", observed=True).agg(
+        n            = (biomarker, "count"),
+        mean_outcome = (outcome_col, "mean"),
+        sd_outcome   = (outcome_col, "std"),
+        n_cases      = (binary_col, "sum"),
+    ).round(3)
+    summary["pct_cases"] = (summary["n_cases"] / summary["n"] * 100).round(1)
+    summary.index = [quartile_labels[q] for q in summary.index]
+ 
+    print("\nSummary per Quartile:")
+    print(summary.to_string())
+ 
+    # ── 4. Correlation per quartile ────────────────────────────────────────────
+    print("\nSpearman Correlation per Quartile:")
+    corr_rows = []
+    for q in ["Q1", "Q2", "Q3", "Q4"]:
+        subset = df[df["quartile"] == q][[biomarker, outcome_col]].dropna()
+        if len(subset) > 10:
+            corr, pval = stats.spearmanr(subset[biomarker], subset[outcome_col])
+            corr_rows.append({
+                "Quartile":    quartile_labels[q],
+                "n":           len(subset),
+                "Spearman r":  round(corr, 4),
+                "p_value":     round(pval, 4),
+                "significant": pval < 0.05
+            })
+    corr_df = pd.DataFrame(corr_rows).set_index("Quartile")
+    print(corr_df.to_string())
+ 
+    # ── 5. Logistic regression with Q1 as reference ───────────────────────────
+    covariates = COVARIATES.copy()
+    if filters and filters.get("sex"):
+        covariates.remove("sex")
+ 
+    df["quartile"] = pd.Categorical(df["quartile"], categories=["Q1","Q2","Q3","Q4"])
+    formula = f"{binary_col} ~ C(quartile, Treatment('Q1')) + " + " + ".join(covariates)
+    print(f"\nLogistic Formula: {formula}")
+ 
+    logit_model = smf.logit(formula=formula, data=df).fit(disp=False)
+ 
+    odds_df = pd.DataFrame({
+        "odds_ratio": np.exp(logit_model.params),
+        "ci_lower":   np.exp(logit_model.conf_int()[0]),
+        "ci_upper":   np.exp(logit_model.conf_int()[1]),
+        "p_value":    logit_model.pvalues
+    }).round(4)
+ 
+    # Keep only quartile rows
+    quartile_or = odds_df[odds_df.index.str.contains("quartile")]
+    quartile_or.index = ["Q2 vs Q1", "Q3 vs Q1", "Q4 vs Q1"]
+ 
+    print("\nOdds Ratios vs Q1 (reference):")
+    print(quartile_or.to_string())
+ 
+    # ── 6. Linear regression per quartile ─────────────────────────────────────
+    lm_formula = f"{outcome_col} ~ C(quartile, Treatment('Q1')) + " + " + ".join(covariates)
+    lm_model   = smf.ols(formula=lm_formula, data=df).fit()
+ 
+    lm_coefs = pd.DataFrame({
+        "coef":    lm_model.params,
+        "ci_lower": lm_model.conf_int()[0],
+        "ci_upper": lm_model.conf_int()[1],
+        "p_value":  lm_model.pvalues
+    }).round(4)
+ 
+    lm_quartile = lm_coefs[lm_coefs.index.str.contains("quartile")]
+    lm_quartile.index = ["Q2 vs Q1", "Q3 vs Q1", "Q4 vs Q1"]
+ 
+    print(f"\nLinear Regression Coefficients vs Q1 (R² = {lm_model.rsquared:.3f}):")
+    print(lm_quartile.to_string())
+ 
+    # ── 7. Visualizations ─────────────────────────────────────────────────────
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+ 
+    # Bar chart — mean outcome per quartile
+    q_labels  = [quartile_labels[q] for q in ["Q1", "Q2", "Q3", "Q4"]]
+    means     = [df[df["quartile"] == q][outcome_col].mean() for q in ["Q1", "Q2", "Q3", "Q4"]]
+    sds       = [df[df["quartile"] == q][outcome_col].std()  for q in ["Q1", "Q2", "Q3", "Q4"]]
+ 
+    axes[0].bar(q_labels, means, yerr=sds, capsize=5,
+                color=["#4C72B0", "#55A868", "#C44E52", "#8172B2"], alpha=0.8)
+    axes[0].set_title(f"Mean {outcome_col} by {biomarker} Quartile", fontsize=12)
+    axes[0].set_xlabel(f"{biomarker} Quartile")
+    axes[0].set_ylabel(f"Mean {outcome_col}")
+    axes[0].tick_params(axis='x', rotation=15)
+ 
+    # Forest plot — ORs per quartile
+    q_compare = ["Q2 vs Q1", "Q3 vs Q1", "Q4 vs Q1"]
+    ors        = quartile_or["odds_ratio"].values
+    ci_lower   = quartile_or["ci_lower"].values
+    ci_upper   = quartile_or["ci_upper"].values
+    y_pos      = range(len(q_compare))
+ 
+    axes[1].errorbar(
+        ors, y_pos,
+        xerr=[ors - ci_lower, ci_upper - ors],
+        fmt="o", color="steelblue", capsize=5, markersize=8
+    )
+    axes[1].axvline(x=1, color="red", linestyle="--", linewidth=1)
+    axes[1].set_yticks(list(y_pos))
+    axes[1].set_yticklabels(q_compare)
+    axes[1].set_xlabel("Odds Ratio (95% CI)")
+    axes[1].set_title(f"OR for Obesity by {biomarker} Quartile\n(Q1 = reference)", fontsize=12)
+ 
+    # Annotate ORs on forest plot
+    for i, (or_val, lo, hi) in enumerate(zip(ors, ci_lower, ci_upper)):
+        axes[1].text(hi + 0.05, i, f"{or_val:.2f} ({lo:.2f}–{hi:.2f})",
+                     va="center", fontsize=9)
+ 
+    fig.suptitle(f"{biomarker} Quartile Analysis — {config['label']}", fontsize=13)
+    plt.tight_layout()
+    plt.show()
+ 
+    return summary, quartile_or
