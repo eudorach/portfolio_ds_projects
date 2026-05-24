@@ -513,10 +513,6 @@ def run_logistic_regression(biomarkers, disease, engine, log_transform=False, fi
         for bio in biomarkers:
             df = df[df[bio] > 0]
             df[bio] = np.log(df[bio])
-    # ← add this temporarily
-    print("biomarkers:", biomarkers)
-    print("sample insulin values after log:", df["insulin"].head().tolist())
-    print("sample glycohemoglobin values after log:", df["glycohemoglobin"].head().tolist())
             
     # Remove sex from covariates if sex filter is applied
     covariates = COVARIATES.copy()
