@@ -1,115 +1,55 @@
-# 🧪 Clinical & Public Health Data Analytics Portfolio
+# Clinical Data & AI Pipeline Portfolio
 
-Welcome to my personal analytics portfolio. This repository contains independent projects focused on clinical, biomedical, and public health datasets.
+**Healthcare builder at the intersection of surgical medicine and data engineering.**
 
-Each project is designed to replicate real-world healthcare analytics workflows, including:
+I'm a Physician Assistant with surgical clinical experience, now building scalable data pipelines and AI-augmented workflows for healthcare and real-world evidence. My work combines deep domain knowledge — understanding how healthcare actually operates at the point of care — with the technical ability to build systems that make that knowledge scalable and reproducible.
 
-- Structured data extraction and transformation (ETL)
-- SQL-based cohort and relational analysis
-- Statistical modeling and regression-based inference
-- Stratified and interaction-based exploratory analysis
-- Careful separation of association vs. causation in observational data
-
-The goal of this portfolio is to bridge clinical domain expertise with data science methodology, with a focus on population health and healthcare operations analytics.
+I build with Python, SQL, and PostgreSQL, and leverage LLMs (Claude, GPT-4) as core development tools — not shortcuts, but force multipliers for producing higher-quality, faster-iterated work.
 
 ---
 
-## 📁 Projects
+## Featured Project
 
-### 🧬 NHANES Biomarker Analysis Pipeline (2017–2020)
+### [NHANES Biomarker Analysis Pipeline](https://github.com/eudorach/portfolio_ds_projects/blob/main/NHANES_analysis/pipeline/README.md)
 
-A reusable epidemiological analysis pipeline for exploring relationships between laboratory biomarkers and chronic disease outcomes using the NHANES 2017-2020 pre-pandemic dataset.
+A reusable, end-to-end epidemiological pipeline built on the NHANES 2017–2020 Pre-Pandemic dataset — one of the most comprehensive population-level health surveys available.
 
-This project evolved from an initial exploratory analysis into a fully engineered, scalable pipeline — reflecting a deliberate shift from one-off notebooks toward production-grade, reusable infrastructure.
+**What it does:**
+- Automated ingestion of 46 NHANES laboratory tables (`.xpt` format) into a structured PostgreSQL database
+- Long-table architecture with a `biomarker_registry` that maps 345 biomarkers from raw NHANES codes to human-readable names — enabling new analyses without schema changes or hardcoded column references
+- Reusable analysis functions (correlation, linear/logistic regression, quartile analysis, distribution plots) that accept any biomarker and disease combination via config — no rewriting code
+- Clinically grounded cohort definitions based on ACC/AHA, WHO, and ADA guidelines
+- Methodologically sound decisions: log transformation policy, multicollinearity handling, covariate adjustment, sex-stratified cohorts
 
-**Pipeline architecture includes:**
-- Automated codebook scraping to build a 349-biomarker registry from CDC documentation
-- Long-table PostgreSQL schema design for scalable biomarker storage
-- Reusable analysis functions supporting any biomarker/disease combination without code changes
-- Flexible cohort filter system for age, disease exclusions, and subgroup definitions
+**Analyses completed:**
+- Urine biomarkers vs. BMI (n = 2,898)
+- Carbohydrate metabolism markers vs. BMI, excluding diabetic participants (n = 3,478)
+- SHBG vs. BMI in males aged 22–49 (n = 1,387)
 
-**Analyses conducted:**
-- Urine biomarkers (albumin, creatinine, iodine) vs BMI — adults ≥ 18 (n = 2,846)
-- Carbohydrate metabolism markers (HbA1c, insulin, fasting glucose) vs BMI — adults ≥ 18 without diabetes (n = 3,423)
-- Sex hormone binding globulin (SHBG) vs BMI - males aged 22–49 years (n = 1,387)
+**Stack:** Python · PostgreSQL · SQLAlchemy · pandas · statsmodels · seaborn · pyreadstat
 
-**Key findings:**
-- Insulin was the strongest correlate of BMI among carbohydrate metabolism markers (r = 0.364), consistent with insulin resistance in obesity
-- Each 1% increase in HbA1c was associated with 2.26x higher odds of obesity (OR = 2.26, 95% CI: 1.80–2.84)
-- Carbohydrate metabolism markers explained 18.5% of BMI variance vs 6.3% for urine biomarkers
-- Each 1 nmol/L increase in SHBG was associated with 5.3% lower odds of obesity (OR = 0.947), consistent with the known relationship between low SHBG and insulin resistance and metabolic syndrome in males
-- Urine biomarkers showed no clinically meaningful association with obesity after multivariable adjustment — a valid null finding suggesting these markers reflect renal function rather than adiposity
-
-📂 [Exploratory Analysis](./NHANES_analysis/exploratory/) — initial one-off analyses conducted prior to pipeline development. Note that methodology was refined during pipeline development and results may differ slightly from the pipeline analyses.
-
-📂 [Pipeline](./NHANES_analysis/pipeline/) — refined, reproducible system built from the exploratory work. All finalized analyses are conducted here using reusable functions and a structured database backend.
+**What makes it different:** Most NHANES analyses are one-off scripts. This is a system — designed so that asking a new clinical question is a matter of configuration, not rewriting code. That's the point.
 
 ---
 
-### 🏥 Medical Appointment No-Show Analysis (Kaggle Dataset)
+## Skills & Approach
 
-A healthcare operations analysis of outpatient appointment attendance behavior, focusing on structural and demographic drivers of no-show risk.
-
-This project examines how scheduling design and patient characteristics interact to influence appointment adherence.
-
-**Key analytical components include:**
-- SQL-based cohort and stratified analysis (DuckDB)
-- Feature engineering of appointment lead time
-- Interaction analysis across age, wait time, and SMS reminders
-- Visualization of risk structure via heatmaps
-
-**Key findings:**
-- Appointment lead time is the strongest predictor of no-show behavior
-- Age acts as a risk modifier, with younger patients consistently exhibiting higher no-show rates
-- SMS reminders are associated with higher observed risk due to non-random targeting of higher-risk patients
-- No-show behavior follows a structured operational gradient rather than isolated demographic effects
+| Area | Detail |
+|---|---|
+| **Clinical Domain** | Surgical medicine, perioperative workflows, procedural and CPT coding, point-of-care clinical decision-making |
+| **Data Engineering** | PostgreSQL schema design, long-table architecture, automated ingestion pipelines, modular reusable code |
+| **Analysis** | Pearson correlation, linear & logistic regression, odds ratios, epidemiological methods, covariate adjustment |
+| **Python** | pandas, SQLAlchemy, statsmodels, seaborn, pyreadstat |
+| **AI-Augmented Development** | Daily use of LLMs (Claude, GPT-4) for code generation, iteration, and QA — building the way modern data teams actually work |
 
 ---
 
-## 🧭 Analytical Framework
+## Background
 
-Across projects, I use a consistent healthcare analytics workflow:
+Surgical clinical experience gives me something most data engineers don't have: I understand how healthcare actually works at the point of care — the sequencing, the stakes, the documentation, the data that gets generated and why. I know how procedural and perioperative data is structured, what CPT codes represent in practice, and where real-world health data gets messy.
 
-1. Data ingestion and transformation (ETL pipelines where applicable)
-2. SQL-based cohort and relational analysis
-3. Exploratory data analysis with stratified subgrouping
-4. Regression-based statistical inference (linear and logistic models)
-5. Explicit interpretation of confounding and observational bias
+That clinical foundation, combined with a genuine drive to build systems and solve hard problems, is what I bring to healthcare data work.
 
 ---
 
-## 🛠️ Tools & Technologies
-
-- **Databases:** PostgreSQL, DuckDB
-- **Python:** pandas, numpy, scipy, statsmodels, seaborn, matplotlib
-- **Data engineering:** SQLAlchemy, pyreadstat, BeautifulSoup (web scraping)
-- **Statistical methods:** Pearson/Spearman correlation, OLS regression, logistic regression, odds ratios
-
----
-
-## 📌 Project Status
-
-All projects are ongoing and serve as structured demonstrations of healthcare analytics workflows, from raw data processing to interpretable statistical insights.
-
-**Future directions include:**
-- CKD and metabolic syndrome analysis using the existing pipeline
-- Hypertension biomarker analysis
-- Survey-weighted analyses for population-level inference
-- Causal inference methods for observational healthcare data
-- Additional population health datasets (dietary, behavioral, clinical utilization)
-
----
-
-## 🔬 Key Skills Demonstrated
-
-- **Data engineering** — pipeline design, long-table schema, automated registry building
-- **Epidemiological methods** — cohort definition, exclusion criteria, covariate adjustment
-- **Statistical analysis** — correlation, linear and logistic regression, odds ratios with 95% CIs
-- **Clinical domain knowledge** — biomarker interpretation, disease definitions from ACC/AHA, WHO, and ADA guidelines
-- **Reproducibility** — modular, version-controlled codebase separating data, config, and analysis layers
-
----
-
-## 🧠 Notes
-
-These projects are exploratory and observational in nature. Findings describe statistical associations and should not be interpreted as causal relationships.
+*All projects are version-controlled, modular, and documented for reproducibility.*
