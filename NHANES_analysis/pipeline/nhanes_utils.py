@@ -212,3 +212,72 @@ def scrape_codebook(table_name, year_start=2017):
         })
 
     return records
+
+def build_participant_long_table(engine, registry_table, id_col, cycle=None, value_col="value"):
+    """
+    Generic long-table builder for any NHANES registry.
+    
+    Parameters:
+    -----------
+    engine          : SQLAlchemy engine
+    registry_table  : str — registry table name (e.g. "biomarker_registry", "medhx_registry")
+    id_col          : str — the ID column in the registry (e.g. "biomarker_id", "medhx_id")
+    cycle           : str — survey cycle label (e.g. "2017-2020", "2015-2016")
+    value_col       : str — name for the output value column (default "value")
+    """
+    
+    # 1. Load the registry
+    registry = pd.read_sql(f"SELECT {id_col}, raw_col, source_table FROM {registry_table}", engine)
+    
+    # 2. Group registry by source table
+    tables = registry.groupby("source_table")
+    
+    all_chunks = []
+    
+    for table_name, group in tables:
+        print(f"Processing {table_name}...", end=" ")
+        
+        # 3. Load raw table
+        raw_df = pd.read_sql(f"SELECT * FROM {table_name}", engine)
+        
+        # Standardize participant ID
+        if "SEQN" in raw_df.columns:
+            raw_df = raw_df.rename(columns={"SEQN": "participant_id"})
+        
+        # 4. Find which registry columns actually exist in this table
+        valid = group[group["raw_col"].isin(raw_df.columns)]
+        
+        if valid.empty:
+            print(f"⚠ No matching columns found, skipping")
+            continue
+        
+        # 5. Keep only participant_id + relevant columns
+        cols_to_keep = ["participant_id"] + valid["raw_col"].tolist()
+        raw_df = raw_df[cols_to_keep]
+        
+        # 6. Add cycle column before melting
+        raw_df["cycle"] = cycle
+        
+        # 7. Melt wide → long
+        melted = raw_df.melt(
+            id_vars=["participant_id", "cycle"],
+            value_vars=valid["raw_col"].tolist(),
+            var_name="raw_col",
+            value_name=value_col
+        )
+        
+        # 8. Swap raw_col → registry ID
+        melted = melted.merge(valid[["raw_col", id_col]], on="raw_col")
+        melted = melted[["participant_id", id_col, value_col, "cycle"]]
+        
+        # 9. Drop null values
+        melted = melted.dropna(subset=[value_col])
+        
+        all_chunks.append(melted)
+        print(f"✓ {len(melted)} rows")
+    
+    # 10. Combine all chunks
+    result = pd.concat(all_chunks, ignore_index=True)
+    print(f"\nTotal rows: {len(result):,}")
+    
+    return result
