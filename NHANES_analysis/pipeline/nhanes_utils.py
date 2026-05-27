@@ -146,3 +146,69 @@ def validate(df: pd.DataFrame, name: str):
     print("Shape:", df.shape)
     print("Nulls (top 5):")
     print(df.isnull().sum().sort_values(ascending=False).head(5))
+
+# Remove the module-level BASE_URL entirely
+
+def scrape_codebook(table_name, year_start=2017):
+    """
+    Fetches the CDC codebook page for a given table and extracts:
+    - variable name (raw NHANES code, e.g. LBXGH)
+    - label (human-readable description)
+    - unit (if available)
+    
+    Args:
+        table_name (str): NHANES table name (e.g. 'LAB_GHB')
+        year_start (int): First year of the NHANES cycle (e.g. 2017, 2019, 2021)
+                         Defaults to 2017 for the 2017-2020 pre-pandemic cycle.
+    
+    Returns a list of dicts, one per variable.
+    """
+    url = f"https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/{year_start}/DataFiles/{table_name}.htm"
+    
+    try:
+        response = requests.get(url, timeout=15)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"  ✗ Failed to fetch {table_name}: {e}")
+        return []
+    
+    soup = BeautifulSoup(response.text, "html.parser")
+    records = []
+
+    for block in soup.find_all("div", class_="pagebreak"):
+        h3 = block.find("h3")
+        if not h3:
+            continue
+        h3_text = h3.get_text(separator=" ", strip=True)
+        parts = h3_text.split(" - ", 1)
+        raw_col = parts[0].strip().upper()
+        label   = parts[1].strip() if len(parts) > 1 else ""
+
+        unit = ""
+        unit_match = re.search(r'\(([^)]+)\)\s*$', label)
+        if unit_match:
+            unit = unit_match.group(1).strip()
+            label = label[:unit_match.start()].strip()
+
+        skip_patterns = [
+            r'^WTSA',
+            r'^WTSAF',
+            r'^SDMVPSU',
+            r'^SDMVSTRA',
+            r'_LC$',
+            r'SI$',
+        ]
+        if any(re.search(pat, raw_col) for pat in skip_patterns):
+            continue
+        if raw_col == "SEQN":
+            continue
+
+        records.append({
+            "source_table": table_name,
+            "raw_col":      raw_col,
+            "label":        label,
+            "unit":         unit,
+            "year_start":   year_start,  # useful metadata to store
+        })
+
+    return records
