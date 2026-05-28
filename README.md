@@ -4,7 +4,7 @@
 
 I'm a Physician Assistant with surgical clinical experience, now building scalable data pipelines and AI-augmented workflows for healthcare and real-world evidence. My work combines deep domain knowledge — understanding how healthcare actually operates at the point of care — with the technical ability to build systems that make that knowledge scalable and reproducible.
 
-I build with Python, SQL, and PostgreSQL, and leverage LLMs (Claude, GPT-4) as core development tools — not shortcuts, but force multipliers for producing higher-quality, faster-iterated work.
+I build with Python, SQL, and PostgreSQL, and leverage LLMs (Claude, GPT-4) as core development tools — as force multipliers for producing higher-quality, faster-iterated work.
 
 ---
 
