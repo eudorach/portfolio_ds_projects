@@ -323,7 +323,7 @@ def run_biomarker_descriptives(biomarkers, disease, engine, filters=None):
 # 4. DISTRIBUTION PLOTS
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_distribution_plots(biomarkers, disease, engine, filters=None):
+def run_distribution_plots(biomarkers, disease, engine, filters=None, df=None):
     """
     Plots raw and log-transformed distributions for each biomarker.
     - ≤ 3 biomarkers → one row per biomarker, raw and log side by side
@@ -338,9 +338,11 @@ def run_distribution_plots(biomarkers, disease, engine, filters=None):
     """
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
+        
+    if df is None:
+        df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
     config = DISEASE_CONFIGS[disease]
-    df     = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
     n_bio  = len(biomarkers)
 
