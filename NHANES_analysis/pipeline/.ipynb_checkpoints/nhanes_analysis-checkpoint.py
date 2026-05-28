@@ -12,14 +12,14 @@ from scipy import stats
 import statsmodels.formula.api as smf
 from diagnosis_config import DISEASE_CONFIGS
 
-COVARIATES = ["age", "sex", "race_ethnicity"]
-
-
 # ═══════════════════════════════════════════════════════════════════════════════
 # 1. DATA LOADER
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def load_analysis_data(biomarkers, disease, engine, filters=None):
+def load_analysis_data(biomarkers, disease, engine, filters=None, covariates=None):
+    if covariates=None:
+        covariates = ['sex','age','race_ethnicity']
+        
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
@@ -156,7 +156,7 @@ def load_analysis_data(biomarkers, disease, engine, filters=None):
         df[binary_col] = (df[outcome] >= threshold).astype(int)
 
     # ── 7. Drop rows missing any key column ───────────────────────────────────
-    key_cols = biomarkers + COVARIATES + [binary_col]
+    key_cols = biomarkers + covariates + [binary_col]
     before   = len(df)
     df = df.dropna(subset=key_cols).copy()
     print(f"After dropping missing values: {len(df):,} ({before - len(df):,} dropped)")
@@ -468,7 +468,10 @@ def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None):
 # 7. LINEAR REGRESSION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_linear_regression(biomarkers, disease, engine, log_transform=False, filters=None):
+def run_linear_regression(biomarkers, disease, engine, log_transform=False, filters=None, covariates=None):
+    if covariates = None:
+        covariates = ['age','sex','race_ethnicity']
+        
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
@@ -483,7 +486,7 @@ def run_linear_regression(biomarkers, disease, engine, log_transform=False, filt
             df[bio] = np.log(df[bio])
     
     # Remove sex from covariates if sex filter is applied
-    covariates = COVARIATES.copy()
+    covariates = covariates.copy()
     if filters and filters.get("sex"):
         covariates.remove("sex")
 
@@ -500,7 +503,10 @@ def run_linear_regression(biomarkers, disease, engine, log_transform=False, filt
 # 8. LOGISTIC REGRESSION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_logistic_regression(biomarkers, disease, engine, log_transform=False, filters=None):
+def run_logistic_regression(biomarkers, disease, engine, log_transform=False, filters=None, covariates=None):
+    if covariates = None:
+        covariates = ['age','sex','race_ethnicity']
+        
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
@@ -515,7 +521,7 @@ def run_logistic_regression(biomarkers, disease, engine, log_transform=False, fi
             df[bio] = np.log(df[bio])
             
     # Remove sex from covariates if sex filter is applied
-    covariates = COVARIATES.copy()
+    covariates = covariates.copy()
     if filters and filters.get("sex"):
         covariates.remove("sex")
 
@@ -540,7 +546,7 @@ def run_logistic_regression(biomarkers, disease, engine, log_transform=False, fi
 # 9. QUARTILE ANALYSIS
 # ═══════════════════════════════════════════════════════════════════════════════
  
-def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filters=None):
+def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filters=None, covariates=None):
     """
     Quartile analysis for a single biomarker vs outcome.
  
@@ -561,6 +567,9 @@ def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filte
     -------
     quartile_df  : DataFrame with per-quartile summary stats and ORs
     """
+    if covariates = None:
+        covariates = ['age','sex','race_ethnicity']
+    
     if isinstance(biomarker, list):
         if len(biomarker) > 1:
             print("⚠ run_quartile_analysis() accepts one biomarker at a time. Using first.")
@@ -624,7 +633,7 @@ def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filte
     print(corr_df.to_string())
  
     # ── 5. Logistic regression with Q1 as reference ───────────────────────────
-    covariates = COVARIATES.copy()
+    covariates = covariates.copy()
     if filters and filters.get("sex"):
         covariates.remove("sex")
  
