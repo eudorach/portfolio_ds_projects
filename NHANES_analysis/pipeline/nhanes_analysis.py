@@ -17,7 +17,7 @@ from diagnosis_config import DISEASE_CONFIGS
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def load_analysis_data(biomarkers, disease, engine, filters=None, covariates=None):
-    if covariates=None:
+    if covariates is None:
         covariates = ['sex','age','race_ethnicity']
         
     if isinstance(biomarkers, str):
@@ -469,7 +469,7 @@ def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def run_linear_regression(biomarkers, disease, engine, log_transform=False, filters=None, covariates=None):
-    if covariates = None:
+    if covariates is None:
         covariates = ['age','sex','race_ethnicity']
         
     if isinstance(biomarkers, str):
@@ -504,7 +504,7 @@ def run_linear_regression(biomarkers, disease, engine, log_transform=False, filt
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def run_logistic_regression(biomarkers, disease, engine, log_transform=False, filters=None, covariates=None):
-    if covariates = None:
+    if covariates is None:
         covariates = ['age','sex','race_ethnicity']
         
     if isinstance(biomarkers, str):
@@ -567,7 +567,7 @@ def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filte
     -------
     quartile_df  : DataFrame with per-quartile summary stats and ORs
     """
-    if covariates = None:
+    if covariates is None:
         covariates = ['age','sex','race_ethnicity']
     
     if isinstance(biomarker, list):
