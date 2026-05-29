@@ -2,6 +2,8 @@
 
 A reusable epidemiological analysis pipeline for exploring biomarker-disease relationships using the **NHANES 2017–2020 Pre-Pandemic dataset** — built by a clinician transitioning into data analytics.
 
+*Evolved from exploratory analysis of the datasets (see [exploratory](../../exploratory)
+
 ---
 
 ## The Problem with Most NHANES Analyses
