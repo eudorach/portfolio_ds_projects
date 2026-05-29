@@ -41,21 +41,22 @@ Codebooks for all 39 lab tables and 11 medical history tables were automatically
 
 Three analyses were conducted to validate the pipeline across different biomarker panels and disease contexts.
 
-### 1. Urine Biomarkers vs Obesity
+### [1. Urine Biomarkers vs Obesity](./notebooks/analysis/1.urine_bmi_analysis.ipynb)
 **Cohort:** Adults ≥ 18 (n = 2,898) | **Biomarkers:** Albumin, creatinine, iodine
 
 Low predictive power (R² = 0.053). Only creatinine reached significance — likely reflecting its association with muscle mass rather than adiposity. These markers measure renal function, not fat.
 
-### 2. Carbohydrate Metabolism vs Obesity
+### [2. Carbohydrate Metabolism vs Obesity](./notebooks/analysis/2.blood_carbohydrate_metabolism.ipynb)
 **Cohort:** Adults ≥ 18, diabetics excluded (n = 3,478) | **Biomarkers:** Insulin, HbA1c, fasting glucose
 
 Strong associations (R² = 0.329). Insulin was the strongest correlate of BMI (r = 0.556). Each 1% increase in HbA1c was associated with 2.26× higher odds of obesity. Fasting glucose excluded from regression due to multicollinearity with HbA1c.
 
-### 3. SHBG vs Obesity in Males 22–49
+### [3. SHBG vs Obesity in Males 22–49](./notebooks/analysis/3.shbg_bmi_analysis.ipynb)
 **Cohort:** Males aged 22–49 (n = 1,387) | **Biomarker:** SHBG
 
 Strong inverse relationship (r = −0.352). Each 1 nmol/L increase in SHBG = 5.3% lower odds of obesity (OR = 0.947), consistent with known links between low SHBG, insulin resistance, and metabolic syndrome.
 
+In progress: female cohort SHBG analysis
 ---
 
 ## Analysis Functions
