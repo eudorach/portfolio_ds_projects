@@ -323,7 +323,7 @@ def run_biomarker_descriptives(biomarkers, disease, engine, filters=None):
 # 4. DISTRIBUTION PLOTS
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_distribution_plots(biomarkers, disease, engine, filters=None, df=None):
+def run_distribution_plots(biomarkers, disease, engine, filters=None, df=None, save_path=None):
     """
     Plots raw and log-transformed distributions for each biomarker.
     - ≤ 3 biomarkers → one row per biomarker, raw and log side by side
@@ -395,6 +395,8 @@ def run_distribution_plots(biomarkers, disease, engine, filters=None, df=None):
 
     fig.suptitle(f"Biomarker Distributions — {config['label']}", fontsize=13, y=1.01)
     plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=150, bbox_inches="tight")
     plt.show()
 
 
@@ -443,7 +445,7 @@ def run_correlation(biomarkers, disease, engine, method="spearman", log_transfor
 # 6. SCATTER PLOT
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None):
+def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None, save_path=None):
     config      = DISEASE_CONFIGS[disease]
     outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
 
@@ -463,6 +465,8 @@ def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None):
                 scatter=False, color="red", ax=ax)
     ax.set_title(f"{biomarker} vs {outcome_col} — {config['label']}", fontsize=13)
     plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=150, bbox_inches="tight")
     plt.show()
 
 
@@ -548,7 +552,7 @@ def run_logistic_regression(biomarkers, disease, engine, log_transform=False, fi
 # 9. QUARTILE ANALYSIS
 # ═══════════════════════════════════════════════════════════════════════════════
  
-def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filters=None, covariates=None):
+def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filters=None, covariates=None, save_path=None):
     """
     Quartile analysis for a single biomarker vs outcome.
  
@@ -716,6 +720,8 @@ def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filte
  
     fig.suptitle(f"{biomarker} Quartile Analysis — {config['label']}", fontsize=13)
     plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=150, bbox_inches="tight")
     plt.show()
  
     return summary, quartile_or
