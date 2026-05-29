@@ -56,12 +56,12 @@ Strong associations (R² = 0.329). Insulin was the strongest correlate of BMI (r
 ### [3. SHBG vs Obesity in Males 22–49](./notebooks/analysis/3.shbg_bmi_analysis.ipynb)
 **Cohort:** Males aged 22–49 (n = 1,387) | **Biomarker:** SHBG
 
+Strong inverse relationship (r = −0.352). Each 1 nmol/L increase in SHBG = 5.3% lower odds of obesity (OR = 0.947), consistent with known links between low SHBG, insulin resistance, and metabolic syndrome.
+
 ![Alt text](./figures/shbg_distribution.png)
 ![Alt text](./figures/shbg_quartile_forest.png)
 
-Strong inverse relationship (r = −0.352). Each 1 nmol/L increase in SHBG = 5.3% lower odds of obesity (OR = 0.947), consistent with known links between low SHBG, insulin resistance, and metabolic syndrome.
-
-In progress: female cohort SHBG analysis
+*In progress: female cohort SHBG analysis*
 ---
 
 ## Analysis Functions
