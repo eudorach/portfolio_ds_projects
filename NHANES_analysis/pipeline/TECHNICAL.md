@@ -32,7 +32,7 @@ NHANES_analysis/
 │   │   └── medical_history/          ← questionnaire .xpt files
 │   └── processed/
 ├── pipeline/
-│   ├── images/                       ← plots for README
+│   ├── figures/                       ← plots for README
 │   ├── notebooks/
 │   │   ├── raw_data_upload_pipeline.ipynb     ← ingest raw XPT files → PostgreSQL
 │   │   ├── foundational_tables_config.ipynb   ← build registries + long tables
