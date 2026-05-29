@@ -100,3 +100,6 @@ Python · PostgreSQL · pandas · statsmodels · SQLAlchemy · seaborn · Beauti
 ## Data Source
 
 CDC NHANES 2017–March 2020 Pre-Pandemic: https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?cycle=2017-2020
+
+---
+*For database schema, setup instructions, and function reference → [TECHNICAL.md](TECHNICAL.md)*
