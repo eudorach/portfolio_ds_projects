@@ -1,55 +1,66 @@
-# Clinical Data & AI Pipeline Portfolio
+# Portfolio — Clinical Data Analytics & Real-World Evidence
 
-**Healthcare builder at the intersection of surgical medicine and data engineering.**
-
-I'm a Physician Assistant with surgical clinical experience, now building scalable data pipelines and AI-augmented workflows for healthcare and real-world evidence. My work combines deep domain knowledge — understanding how healthcare actually operates at the point of care — with the technical ability to build systems that make that knowledge scalable and reproducible.
-
-I build with Python, SQL, and PostgreSQL, and leverage LLMs (Claude, GPT-4) as core development tools — as force multipliers for producing higher-quality, faster-iterated work.
+I'm a clinician building toward clinical data analytics, with a focus on real-world evidence and population health. These projects sit at the intersection of clinical domain knowledge and data engineering.
 
 ---
 
-## Featured Project
+## Featured Project: NHANES Biomarker Analysis Pipeline
 
-### [NHANES Biomarker Analysis Pipeline](https://github.com/eudorach/portfolio_ds_projects/blob/main/NHANES_analysis/pipeline/README.md)
+**A reusable, registry-based epidemiological analysis pipeline built on NHANES 2017–2020 pre-pandemic data.**
 
-A reusable, end-to-end epidemiological pipeline built on the NHANES 2017–2020 Pre-Pandemic dataset — one of the most comprehensive population-level health surveys available.
+39 laboratory tables · 347 biomarkers · 11 medical history modules · 2,093,413 biomarker rows · 15,560 participants · PostgreSQL
 
-**What it does:**
-- Automated ingestion of 46 NHANES laboratory tables (`.xpt` format) into a structured PostgreSQL database
-- Long-table architecture with a `biomarker_registry` that maps 345 biomarkers from raw NHANES codes to human-readable names — enabling new analyses without schema changes or hardcoded column references
-- Reusable analysis functions (correlation, linear/logistic regression, quartile analysis, distribution plots) that accept any biomarker and disease combination via config — no rewriting code
-- Clinically grounded cohort definitions based on ACC/AHA, WHO, and ADA guidelines
-- Methodologically sound decisions: log transformation policy, multicollinearity handling, covariate adjustment, sex-stratified cohorts
+The core architectural decision: a **registry pattern** where every biomarker and medical history variable maps to a human-readable name in a central registry table. NHANES column codes (`LBXGH`, `URXUMA`) never appear in analysis code. Adding a new biomarker means inserting one row. Running a new analysis means calling the same functions with different inputs.
 
-**Analyses completed:**
-- Urine biomarkers vs. BMI (n = 2,898)
-- Carbohydrate metabolism markers vs. BMI, excluding diabetic participants (n = 3,478)
-- SHBG vs. BMI in males aged 22–49 (n = 1,387)
+### Evidence Generated
 
-**Stack:** Python · PostgreSQL · SQLAlchemy · pandas · statsmodels · seaborn · pyreadstat
+| Analysis | Cohort | Key Finding |
+|---|---|---|
+| Urine biomarkers vs obesity | Adults ≥ 18 (n=2,898) | Low predictive value (R²=0.053); creatinine significant, likely via muscle mass |
+| Carbohydrate metabolism vs obesity | Adults ≥ 18, diabetics excluded (n=3,478) | Insulin strongest correlate (r=0.556); each 1% HbA1c → 2.26× obesity odds |
+| SHBG vs obesity — males 22–49 | Males 22–49 (n=1,387) | Strong inverse relationship (r=−0.352); highest vs lowest SHBG quartile: 83% lower obesity odds |
+| SHBG vs obesity — females 18–44 | Females 18–44, negative pregnancy test (n=1,578) | Consistent inverse relationship (r=−0.270); 79% lower obesity odds in highest SHBG quartile |
+| Reproductive hormones by cycle phase | Females 18–44, phase-classified (n=1,316) | Estrone-SHBG relationship is phase-dependent — only emerges in luteal phase (β=0.255, p<0.001) |
 
-**What makes it different:** Most NHANES analyses are one-off scripts. This is a system — designed so that asking a new clinical question is a matter of configuration, not rewriting code. That's the point.
+The reproductive hormone analysis required data-driven menstrual cycle phase classification using a **Gaussian Mixture Model on log-transformed progesterone** — because NHANES doesn't capture cycle phase directly.
+
+### Pipeline Flow
+
+```
+Raw XPT Files → PostgreSQL (raw schema)
+      ↓
+biomarker_registry + medhx_registry    ← auto-scraped from CDC codebooks
+      ↓
+participant_biomarkers (2M+ rows)
+participant_medhx (1.5M+ rows)
+participant_demographics (15,560 rows)
+      ↓
+nhanes_analysis.py                     ← 8 reusable analysis functions
+      ↓
+Cohort descriptives · Correlation · Linear regression · Logistic regression · Quartile analysis
+```
+
+### Methodological Standards
+
+- Disease definitions from clinical guidelines (WHO, ACC/AHA 2017, ADA)
+- Log transformation applied where skewness > 1; untransformed values retained for logistic regression to preserve interpretable odds ratios
+- Covariates configurable per analysis; sex auto-excluded for single-sex cohorts
+- Survey weights collected and stored for future population-level inference
+- Cross-sectional design — all associations observational, causality not inferred
+
+**→ [NHANES Pipeline](NHANES_analysis/pipeline/README.md)**
 
 ---
 
-## Skills & Approach
+## Additional Projects
 
-| Area | Detail |
-|---|---|
-| **Clinical Domain** | Surgical medicine, perioperative workflows, procedural and CPT coding, point-of-care clinical decision-making |
-| **Data Engineering** | PostgreSQL schema design, long-table architecture, automated ingestion pipelines, modular reusable code |
-| **Analysis** | Pearson correlation, linear & logistic regression, odds ratios, epidemiological methods, covariate adjustment |
-| **Python** | pandas, SQLAlchemy, statsmodels, seaborn, pyreadstat |
-| **AI-Augmented Development** | Daily use of LLMs (Claude, GPT-4) for code generation, iteration, and QA — building the way modern data teams actually work |
+### Appointment No-Show Analysis
+Exploratory analysis of a Kaggle appointment dataset examining patterns in patient no-shows.
+
+**→ [Appointment Analysis](Appointment_analysis/)**
 
 ---
 
-## Background
+## Stack
 
-Surgical clinical experience gives me something most data engineers don't have: I understand how healthcare actually works at the point of care — the sequencing, the stakes, the documentation, the data that gets generated and why. I know how procedural and perioperative data is structured, what CPT codes represent in practice, and where real-world health data gets messy.
-
-That clinical foundation, combined with a genuine drive to build systems and solve hard problems, is what I bring to healthcare data work.
-
----
-
-*All projects are version-controlled, modular, and documented for reproducibility.*
+Python · PostgreSQL · pandas · statsmodels · scikit-learn · SQLAlchemy · seaborn · BeautifulSoup · Jupyter
