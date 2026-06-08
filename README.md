@@ -19,8 +19,8 @@ The core architectural decision: a **registry pattern** where every biomarker an
 | Urine biomarkers vs obesity | Adults ≥ 18 (n=2,898) | Low predictive value (R²=0.053); creatinine significant, likely via muscle mass |
 | Carbohydrate metabolism vs obesity | Adults ≥ 18, diabetics excluded (n=3,478) | Insulin strongest correlate (r=0.556); each 1% HbA1c → 2.26× obesity odds |
 | SHBG vs obesity — males 22–49 | Males 22–49 (n=1,387) | Strong inverse relationship (r=−0.352); highest vs lowest SHBG quartile: 83% lower obesity odds |
-| SHBG vs obesity — females 18–44 | Females 18–44, negative pregnancy test (n=1,578) | Consistent inverse relationship (r=−0.270); 79% lower obesity odds in highest SHBG quartile |
-| Reproductive hormones by cycle phase | Females 18–44, phase-classified (n=1,316) | Estrone-SHBG relationship is phase-dependent — only emerges in luteal phase (β=0.255, p<0.001) |
+| SHBG vs obesity — females 18–44 | Females 18–44, negative pregnancy test (n=1,308) | Consistent inverse relationship (r=−0.321); 82.9% lower obesity odds in highest SHBG quartile |
+| Reproductive hormones by cycle phase | Females 18–44, phase-classified (n=1,308) | Estrone-SHBG relationship is phase-dependent — only emerges in luteal phase (β=0.255, p<0.001) |
 
 The reproductive hormone analysis required data-driven menstrual cycle phase classification using a **Gaussian Mixture Model on log-transformed progesterone** — because NHANES doesn't capture cycle phase directly.
 
