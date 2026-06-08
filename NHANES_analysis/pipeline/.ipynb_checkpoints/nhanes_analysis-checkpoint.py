@@ -146,6 +146,7 @@ def load_analysis_data(biomarkers, disease, engine, filters=None, covariates=Non
     binary_col = config["binary_col"]
 
     if disease == "hypertension":
+        df = df.dropna(subset=["systolic_bp", "diastolic_bp"]).copy()
         df[binary_col] = (
             (df["systolic_bp"]  >= config["thresholds"]["systolic_bp"]["value"]) |
             (df["diastolic_bp"] >= config["thresholds"]["diastolic_bp"]["value"])
@@ -153,6 +154,7 @@ def load_analysis_data(biomarkers, disease, engine, filters=None, covariates=Non
     else:
         outcome   = config["outcome_col"]
         threshold = config["threshold"]
+        df = df.dropna(subset=[outcome])
         df[binary_col] = (df[outcome] >= threshold).astype(int)
 
     # ── 7. Drop rows missing any key column ───────────────────────────────────
@@ -168,7 +170,7 @@ def load_analysis_data(biomarkers, disease, engine, filters=None, covariates=Non
 # 2. COHORT DESCRIPTIVES
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_cohort_descriptives(biomarkers, disease, engine, filters=None):
+def run_cohort_descriptives(biomarkers, disease, engine, filters=None, df=None):
     """
     Descriptive statistics for the filtered cohort.
     - Categorical: sex, race/ethnicity — counts and percentages
@@ -199,7 +201,9 @@ def run_cohort_descriptives(biomarkers, disease, engine, filters=None):
     """, engine)
 
     # Get filtered participant IDs by running load_analysis_data
-    df = load_analysis_data(biomarkers, disease, engine, filters=filters)
+    if df is None:
+        df = load_analysis_data(biomarkers, disease, engine, filters=filters)
+
     filtered_ids = df["participant_id"]
 
     # Filter demographics to matched cohort
@@ -256,7 +260,7 @@ def run_cohort_descriptives(biomarkers, disease, engine, filters=None):
 # 3. BIOMARKER DESCRIPTIVES
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_biomarker_descriptives(biomarkers, disease, engine, filters=None):
+def run_biomarker_descriptives(biomarkers, disease, engine, filters=None, df=None):
     """
     Descriptive statistics for each biomarker in the filtered cohort.
     Flags skewness > 1 as a recommendation to consider log transformation.
@@ -276,7 +280,9 @@ def run_biomarker_descriptives(biomarkers, disease, engine, filters=None):
         biomarkers = [biomarkers]
 
     config = DISEASE_CONFIGS[disease]
-    df     = load_analysis_data(biomarkers, disease, engine, filters=filters)
+    
+    if df is None:
+        df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
     # Pull units from registry for display
     placeholders = ", ".join([f"'{b}'" for b in biomarkers])
@@ -404,14 +410,15 @@ def run_distribution_plots(biomarkers, disease, engine, filters=None, df=None, s
 # 5. CORRELATION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_correlation(biomarkers, disease, engine, method="spearman", log_transform=False, filters=None):
+def run_correlation(biomarkers, disease, engine, method="spearman", log_transform=False, filters=None, df=None):
     if isinstance(biomarkers, str):
         biomarkers = [biomarkers]
 
     config = DISEASE_CONFIGS[disease]
     outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
 
-    df = load_analysis_data(biomarkers, disease, engine, filters=filters)
+    if df is None:
+        df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
     results = []
     for bio in biomarkers:
@@ -445,11 +452,12 @@ def run_correlation(biomarkers, disease, engine, method="spearman", log_transfor
 # 6. SCATTER PLOT
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None, save_path=None):
+def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None, save_path=None, df=None):
     config      = DISEASE_CONFIGS[disease]
     outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
 
-    df = load_analysis_data(biomarker, disease, engine, filters=filters)
+    if df is None:
+        df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
     if hue_col == "sex_label":
         sex_labels = pd.read_sql(
@@ -474,7 +482,7 @@ def run_scatter(biomarker, disease, engine, hue_col="sex_label", filters=None, s
 # 7. LINEAR REGRESSION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_linear_regression(biomarkers, disease, engine, log_transform=False, filters=None, covariates=None):
+def run_linear_regression(biomarkers, disease, engine, log_transform=False, filters=None, covariates=None, df=None):
     if covariates is None:
         covariates = ['age','sex','race_ethnicity']
         
@@ -484,7 +492,8 @@ def run_linear_regression(biomarkers, disease, engine, log_transform=False, filt
     config      = DISEASE_CONFIGS[disease]
     outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
 
-    df = load_analysis_data(biomarkers, disease, engine, filters=filters)
+    if df is None:
+        df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
     if log_transform:
         for bio in biomarkers:
@@ -509,7 +518,7 @@ def run_linear_regression(biomarkers, disease, engine, log_transform=False, filt
 # 8. LOGISTIC REGRESSION
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_logistic_regression(biomarkers, disease, engine, log_transform=False, filters=None, covariates=None):
+def run_logistic_regression(biomarkers, disease, engine, log_transform=False, filters=None, covariates=None, df=None):
     if covariates is None:
         covariates = ['age','sex','race_ethnicity']
         
@@ -519,7 +528,8 @@ def run_logistic_regression(biomarkers, disease, engine, log_transform=False, fi
     config  = DISEASE_CONFIGS[disease]
     bin_col = config["binary_col"]
 
-    df = load_analysis_data(biomarkers, disease, engine, filters=filters)
+    if df is None:
+        df = load_analysis_data(biomarkers, disease, engine, filters=filters)
 
     if log_transform:
         for bio in biomarkers:
@@ -552,7 +562,7 @@ def run_logistic_regression(biomarkers, disease, engine, log_transform=False, fi
 # 9. QUARTILE ANALYSIS
 # ═══════════════════════════════════════════════════════════════════════════════
  
-def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filters=None, covariates=None, save_path=None):
+def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filters=None, covariates=None, save_path=None, df=None):
     """
     Quartile analysis for a single biomarker vs outcome.
  
@@ -585,7 +595,8 @@ def run_quartile_analysis(biomarker, disease, engine, log_transform=False, filte
     outcome_col = "systolic_bp" if disease == "hypertension" else config["outcome_col"]
     binary_col  = config["binary_col"]
  
-    df = load_analysis_data(biomarker, disease, engine, filters=filters)
+    if df is None:
+        df = load_analysis_data(biomarkers, disease, engine, filters=filters)
  
     # ── 1. Optional log transform ──────────────────────────────────────────────
     if log_transform:
