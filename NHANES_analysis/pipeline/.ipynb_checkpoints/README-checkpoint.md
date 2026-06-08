@@ -1,265 +1,119 @@
 # NHANES Biomarker Analysis Pipeline
 
-A reusable epidemiological analysis pipeline for exploring relationships between laboratory biomarkers and chronic disease outcomes using the **NHANES 2017-2020 Pre-Pandemic dataset**.
+A reusable epidemiological analysis pipeline for exploring biomarker-disease relationships using the **NHANES 2017–2020 Pre-Pandemic dataset** — built by a clinician transitioning into data analytics.
 
-> **Note:** This pipeline evolved from an initial exploratory analysis (see [exploratory/](../exploratory/)). Methodology was refined during pipeline development — the pipeline analyses should be considered the canonical version.
-
----
-
-## Background
-
-Built by a clinician transitioning into data analytics, this project combines domain expertise in laboratory medicine and chronic disease with scalable data engineering. The goal was to move beyond one-off analyses toward a system that can answer new epidemiological questions without rewriting code.
-
-NHANES is a CDC program assessing the health and nutritional status of Americans. The 2017-2020 pre-pandemic cycle is one of the most comprehensive population-level health surveys available.
+*Evolved from exploratory analysis of the datasets (see [exploratory](../exploratory) folder)*
 
 ---
 
-## Project Goals
+## The Problem with Most NHANES Analyses
 
-- Build a **reusable, scalable pipeline** for NHANES biomarker analysis
-- Enable analysis across **multiple disease states** without hardcoding column names or rewriting code
-- Apply **clinical domain knowledge** to cohort definitions, biomarker selection, and exclusion criteria
-- Demonstrate end-to-end data engineering: raw ingestion → database design → analysis → results
+Most NHANES analyses are written once, for one question, hardcoding column names like `LBXGH` and `BMXBMI` throughout. When the question changes, the code has to be rewritten.
 
----
-
-## Dataset
-
-- **Source:** [CDC NHANES 2017-March 2020 Pre-Pandemic](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?cycle=2017-2020)
-- **Tables loaded:** 46 laboratory tables (blood and urine), demographics, anthropometry, blood pressure
-- **Total biomarkers registered:** 345
-- **Format:** XPT files loaded into PostgreSQL
+This pipeline was built to solve that. One consistent architecture. Any biomarker. Any disease. Any medical history variable. No rewriting.
 
 ---
 
-## Pipeline Architecture
+## What I Built
+
+**39 laboratory tables** (347 biomarkers) and **11 medical history/questionnaire tables** (279 variables) loaded into PostgreSQL, structured around a long table design with a registry at its core for each data type.
 
 ```
 Raw XPT Files
       ↓
-raw_table_loading.py     ← automated batch ingestion
+PostgreSQL (raw schema)                    ← automated batch ingestion via ingest_folder()
       ↓
-PostgreSQL (raw schema)
+biomarker_registry  (347 biomarkers)       ← auto-scraped from CDC codebooks
+medhx_registry      (279 variables)        ← diet, medications, smoking, reproductive health, and more
       ↓
-biomarker_registry       ← maps NHANES codes → human-readable names + units
+participant_biomarkers   (2,093,413 rows)  ← long format: one row per participant per biomarker
+participant_medhx        (1,536,554 rows)  ← long format: one row per participant per med history item
+participant_demographics (15,560 rows)     ← outcomes + covariates
       ↓
-participant_biomarkers   ← long format: one row per participant per biomarker
-participant_demographics ← one row per participant: outcomes + covariates
-      ↓
-nhanes_analysis.py       ← reusable analysis functions
-      ↓
-Results
+nhanes_analysis.py                         ← reusable analysis functions
 ```
 
-### Why a Long Table Design?
+The registry pattern is the key architectural decision. Adding a new biomarker or medical history variable means inserting one row into the relevant registry — no schema changes, no rewriting analysis code. NHANES column codes (`LBXGH`, `URXUMA`, etc.) never appear outside the registry.
 
-Traditional NHANES analyses hardcode column names (e.g. `LBXGH` for HbA1c) — brittle and hard to reuse. This pipeline uses a long table design where:
-
-- Adding a new biomarker = inserting a row in `biomarker_registry`, no schema changes
-- Running a new analysis = calling the same functions with different inputs
-- All NHANES codes are abstracted away — analysis code only uses human-readable names
+Codebooks for all 39 lab tables and 11 medical history tables were automatically scraped from the CDC website at build time, extracting variable names, human-readable labels, and units — eliminating manual data dictionary lookup entirely.
 
 ---
 
-## Project Structure
+## Analyses
 
-```
-NHANES_analysis/
-├── data/
-│   ├── raw/
-│   └── processed/
-├── exploratory/
-│   └── notebooks/
-│       ├── 01_data_cleaning/
-│       └── 02_analysis/
-├── pipeline/
-│   ├── nhanes_utils.py                  ← data loading and cleaning utilities
-│   ├── nhanes_analysis.py               ← reusable analysis functions
-│   ├── diagnosis_config.py              ← disease state definitions
-│   ├── raw_table_loading.py             ← automated raw data ingestion
-│   ├── notebooks/
-│   │   ├── foundational_tables_config.ipynb
-│   │   ├── raw_data_upload_pipeline.ipynb
-│   │   └── analysis/
-│   │       ├── 1.urine_bmi_analysis.ipynb
-│   │       ├── 2.blood_carbohydrate_metabolism.ipynb
-│   │       └── 3.shbg_bmi_analysis.ipynb
-│   └── README.md
-└── README.md
-```
+Three analyses were conducted to validate the pipeline across different biomarker panels and disease contexts.
 
----
+### [1. Urine Biomarkers vs Obesity](./notebooks/analysis/1.urine_bmi_analysis.ipynb)
+**Cohort:** Adults ≥ 18 (n = 2,898) | **Biomarkers:** Albumin, creatinine, iodine
 
-## Database Schema
+Low predictive power (R² = 0.053). Only creatinine reached significance — likely reflecting its association with muscle mass rather than adiposity. These markers measure renal function, not fat.
 
-### `biomarker_registry`
-| Column | Description |
-|---|---|
-| `biomarker_id` | Primary key |
-| `biomarker_name` | Human-readable snake_case name (e.g. `glycohemoglobin`) |
-| `raw_col` | Original NHANES column code (e.g. `LBXGH`) |
-| `label` | Full description |
-| `unit` | Measurement unit (e.g. `%`, `mg/dL`) |
-| `source_table` | PostgreSQL raw table name |
+### [2. Carbohydrate Metabolism vs Obesity](./notebooks/analysis/2.blood_carbohydrate_metabolism.ipynb)
+**Cohort:** Adults ≥ 18, diabetics excluded (n = 3,478) | **Biomarkers:** Insulin, HbA1c, fasting glucose
 
-### `participant_biomarkers`
-| Column | Description |
-|---|---|
-| `participant_id` | NHANES SEQN identifier |
-| `biomarker_id` | Foreign key → `biomarker_registry` |
-| `value` | Measured value |
-| `cycle` | Survey cycle (2017-2020) |
+Strong associations (R² = 0.329). Insulin was the strongest correlate of BMI (r = 0.556). Each 1% increase in HbA1c was associated with 2.26× higher odds of obesity. Fasting glucose excluded from regression due to multicollinearity with HbA1c.
 
-### `participant_demographics`
-| Column | Description |
-|---|---|
-| `participant_id` | NHANES SEQN identifier |
-| `age` | Age in years |
-| `sex` | 1 = Male, 2 = Female |
-| `sex_label` | Male / Female |
-| `race_ethnicity` | Numeric code |
-| `race_ethnicity_label` | e.g. Non-Hispanic White |
-| `bmi` | Body mass index (kg/m²) |
-| `waist_cm` | Waist circumference (cm) |
-| `systolic_bp` | Systolic blood pressure (mmHg) |
-| `diastolic_bp` | Diastolic blood pressure (mmHg) |
-| `survey_weight` | NHANES sample weight |
+### [3. SHBG vs Obesity in Males 22–49](./notebooks/analysis/3.shbg_bmi_analysis.ipynb)
+**Cohort:** Males aged 22–49 (n = 1,387) | **Biomarker:** SHBG
+
+Strong inverse relationship (r = −0.352). Each 1 nmol/L increase in SHBG = 5.3% lower odds of obesity (OR = 0.947), consistent with known links between low SHBG, insulin resistance, and metabolic syndrome.
+
+![Alt text](./figures/shbg_distribution.png)
+![Alt text](./figures/shbg_quartile_forest.png)
+
+### [4. SHBG vs Obesity and Reproductive Hormones in Females 18–44](./notebooks/analysis/4.shbg_bmi_female.ipynb)
+
+**Cohort:** Females aged 18–44, negative pregnancy test (n = 1,308) | **Biomarkers:** SHBG, estrone, progesterone, LH, FSH
+
+Menstrual cycle phase was classified using a Gaussian Mixture Model on log-transformed progesterone, which showed a bimodal distribution consistent with two hormonally distinct populations (follicular/other: mean 0.09 ng/mL, luteal: mean 8.18 ng/mL).
+
+The SHBG–BMI relationship was consistent with the male cohort (r = −0.321), with females in the highest SHBG quartile showing **79% lower odds of obesity vs the lowest quartile (OR = 0.172)**. Linear regression confirmed a graded inverse association between SHBG and BMI (R² = 0.140), with progressively lower BMI across SHBG quartiles. Cycle phase independently contributed to BMI variation after SHBG adjustment (β = −1.39, p = 0.003; OR = 0.707, p = 0.005).
+
+The estrone–SHBG relationship differed by cycle phase, with a stronger positive association in the luteal phase compared to the follicular phase (r = 0.184 vs −0.102, p = 0.0009). This was supported in a multivariate interaction model (β = 0.255, p < 0.001), indicating effect modification by menstrual cycle phase.
+
+BMI was inversely associated with SHBG across both phases (β = −0.025, p < 0.001), consistent with adiposity-related suppression of SHBG independent of cycle phase classification.
 
 ---
 
-## Raw Data Ingestion (`raw_table_loading.py`)
+## Analysis Functions
 
-Automates batch ingestion of NHANES `.xpt` files into PostgreSQL. Eliminates manual file-by-file loading and ensures reproducible database construction.
-
-**Key features:**
-- Scans a directory for all `.xpt` files and loads them in one pass
-- Assigns semantic table names (e.g. `raw_demographics`, `raw_blood_glycohemoglobin`)
-- Preserves original NHANES structure in a raw schema layer
-- Modular — supports extension to additional NHANES cycles
-
-```bash
-python raw_table_loading.py
-```
-
----
-
-## Analysis Functions (`nhanes_analysis.py`)
-
-All functions share the same interface — pass biomarker names, a disease, and optional cohort filters:
+All functions share the same interface — pass biomarkers, a disease, and optional filters:
 
 ```python
+filters = {"age_range": (22, 49), "sex": 1, "exclude_diabetes": True}
+
 run_cohort_descriptives(biomarkers, disease, engine, filters)
 run_biomarker_descriptives(biomarkers, disease, engine, filters)
 run_distribution_plots(biomarkers, disease, engine, filters)
 run_correlation(biomarkers, disease, engine, method, log_transform, filters)
-run_scatter(biomarker, disease, engine, filters)
-run_linear_regression(biomarkers, disease, engine, log_transform, filters)
-run_logistic_regression(biomarkers, disease, engine, log_transform, filters)
-run_quartile_analysis(biomarker, disease, engine, log_transform, filters)
+run_linear_regression(biomarkers, disease, engine, log_transform, filters, covariates)
+run_logistic_regression(biomarkers, disease, engine, log_transform, filters, covariates)
+run_quartile_analysis(biomarker, disease, engine, log_transform, filters, covariates)
 ```
 
-### Cohort Filters
-
-```python
-filters = {
-    "min_age":           18,          # minimum age
-    "max_age":           65,          # maximum age
-    "age_range":         (22, 49),    # age range (alternative to min/max)
-    "sex":               1,           # 1 = Males only, 2 = Females only
-    "exclude_diabetes":  True,        # exclude diabetic participants
-    "diabetes_criteria": "hba1c_only" # exclusion criterion
-}
-```
-
-### Disease Configuration (`diagnosis_config.py`)
-
-| Disease | Outcome | Definition |
-|---|---|---|
-| Obesity | BMI | BMI ≥ 30 kg/m² (WHO) |
-| Hypertension | Systolic/Diastolic BP | SBP ≥ 130 OR DBP ≥ 80 mmHg (ACC/AHA 2017) |
-| Diabetes | HbA1c | HbA1c ≥ 6.5% (ADA) |
-
----
-
-## Analyses Conducted
-
-All analyses adjust for age, sex, and race/ethnicity. Biomarkers were log-transformed for correlation and linear regression. Untransformed values used for logistic regression to preserve clinical interpretability of odds ratios.
-
-### Results Summary
-
-| Analysis | Cohort | n | Strongest Biomarker | r | R² | Key OR |
-|---|---|---|---|---|---|---|
-| [Urine Biomarkers vs BMI](./notebooks/analysis/1.urine_bmi_analysis.ipynb) | Adults ≥ 18 | 2,898 | Creatinine (urine) | 0.163 | 0.063 | 1.004 (NS) |
-| [Carb Metabolism vs BMI](./notebooks/analysis/2.blood_carbohydrate_metabolism.ipynb) | Adults ≥ 18, no diabetes | 3,478 | Insulin | 0.556 | 0.329 | 1.118*** |
-| [SHBG vs BMI](./notebooks/analysis/3.shbg_bmi_analysis.ipynb) **(female cohort analysis in progress)**| Males 22–49 | 1,387 | SHBG | -0.352 | 0.155 | 0.947*** |
-
-*** p < 0.001 | NS = not significant
-
-### Key Findings Across Analyses
-
-- **Urine biomarkers** explained only 6.3% of BMI variance — no clinically meaningful association with obesity after adjustment. A valid null finding suggesting these markers reflect renal function, not adiposity.
-- **Carbohydrate metabolism markers** were strong predictors of obesity, explaining 32.9% of BMI variance. Insulin was the strongest correlate (r = 0.556). Each 1% increase in HbA1c was associated with 2.26x higher odds of obesity.
-- **SHBG** showed a strong inverse association with BMI in younger males (r = -0.352). Each 1 nmol/L increase in SHBG was associated with 5.3% lower odds of obesity, consistent with the known relationship between low SHBG and insulin resistance.
-
-*See individual notebooks for full cohort descriptions, biomarker distributions, and detailed regression outputs.*
-
----
-
-## Setup
-
-### Requirements
-```bash
-pip install pandas numpy sqlalchemy psycopg2 pyreadstat \
-            requests beautifulsoup4 scipy statsmodels \
-            matplotlib seaborn
-```
-
-### Database Connection
-```python
-from sqlalchemy import create_engine
-engine = create_engine("postgresql://user:password@localhost:5432/nhanes")
-```
-
-### Example Analysis
-```python
-from nhanes_analysis import (run_cohort_descriptives, run_biomarker_descriptives,
-                              run_distribution_plots, run_correlation,
-                              run_linear_regression, run_logistic_regression)
-from diagnosis_config import DISEASE_CONFIGS
-
-# SHBG vs BMI in males aged 22-49
-filters = {"age_range": (22, 49), "sex": 1}
-
-_ = run_cohort_descriptives(["shbg"], "obesity", engine, filters=filters)
-_ = run_biomarker_descriptives(["shbg"], "obesity", engine, filters=filters)
-run_distribution_plots(["shbg"], "obesity", engine, filters=filters)
-run_correlation(["shbg"], "obesity", engine, method="pearson", log_transform=True, filters=filters)
-run_linear_regression(["shbg"], "obesity", engine, log_transform=True, filters=filters)
-_ = run_logistic_regression(["shbg"], "obesity", engine, log_transform=False, filters=filters)
-```
+Covariates default to age, sex, and race/ethnicity but are fully configurable — medical history variables from `participant_medhx` can be passed in directly. Disease outcomes are defined once in `diagnosis_config.py` (WHO, ACC/AHA, ADA criteria) and reused across all analyses.
 
 ---
 
 ## Methodological Notes
 
-- **Log transformation:** Applied for correlation and linear regression to address right skewness. Not applied for logistic regression to preserve clinical interpretability of odds ratios
-- **Covariate adjustment:** All models adjust for age, sex, and race/ethnicity. Sex is automatically excluded when a single-sex cohort filter is applied
-- **Diabetes exclusion:** Participants excluded based on HbA1c ≥ 6.5% where clinically appropriate
-- **Missing data:** Complete case analysis — participants missing any key variable are excluded
+- **Log transformation** applied for correlation and linear regression to address right skewness. Not applied for logistic regression — preserves clinically interpretable odds ratios
+- **Covariate adjustment** for age, sex, and race/ethnicity across all models. Sex auto-excluded when a single-sex filter is applied
+- **Survey weights** collected and stored (`WTMECPRP`, PSU, strata) for future complex survey analysis
+- **Missing data** handled via complete case analysis
+- **Hormonal contraceptive exclusion** not applied due to incomplete medication capture in NHANES; noted as a limitation in hormone-related analyses
 
 ---
 
-## Skills Demonstrated
+## Stack
 
-- **Data Engineering** — automated batch ingestion, PostgreSQL schema design, long table architecture, codebook scraping
-- **Epidemiological Methods** — cohort definition, exclusion criteria, covariate adjustment, multicollinearity assessment
-- **Statistical Analysis** — Pearson correlation, linear and logistic regression, odds ratios with 95% CIs
-- **Clinical Domain Knowledge** — biomarker interpretation, disease definitions per ACC/AHA, WHO, and ADA guidelines
-- **Python** — reusable function design, SQLAlchemy, pandas, statsmodels, seaborn
-- **Reproducibility** — modular, version-controlled codebase separating data, config, and analysis layers
+Python · PostgreSQL · pandas · statsmodels · SQLAlchemy · seaborn · BeautifulSoup · scikit-learn
 
 ---
 
 ## Data Source
 
-Centers for Disease Control and Prevention. National Health and Nutrition Examination Survey 2017-March 2020 Pre-Pandemic Data. Available at: https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?cycle=2017-2020
+CDC NHANES 2017–March 2020 Pre-Pandemic: https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?cycle=2017-2020
+
+---
+*For database schema, setup instructions, and function reference → [TECHNICAL.md](TECHNICAL.md)*
