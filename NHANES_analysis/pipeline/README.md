@@ -61,7 +61,18 @@ Strong inverse relationship (r = −0.352). Each 1 nmol/L increase in SHBG = 5.3
 ![Alt text](./figures/shbg_distribution.png)
 ![Alt text](./figures/shbg_quartile_forest.png)
 
-*In progress: female cohort SHBG analysis*
+### [4. SHBG vs Obesity and Reproductive Hormones in Females 18–44](./notebooks/analysis/4.shbg_bmi_female.ipynb)
+
+**Cohort:** Females aged 18–44, negative pregnancy test (n = 1,308) | **Biomarkers:** SHBG, estrone, progesterone, LH, FSH
+
+Menstrual cycle phase was classified using a Gaussian Mixture Model on log-transformed progesterone, which showed a bimodal distribution consistent with two hormonally distinct populations (follicular/other: mean 0.09 ng/mL, luteal: mean 8.18 ng/mL).
+
+The SHBG–BMI relationship was consistent with the male cohort (r = −0.321), with females in the highest SHBG quartile showing **79% lower odds of obesity vs the lowest quartile (OR = 0.172)**. Linear regression confirmed a graded inverse association between SHBG and BMI (R² = 0.140), with progressively lower BMI across SHBG quartiles. Cycle phase independently contributed to BMI variation after SHBG adjustment (β = −1.39, p = 0.003; OR = 0.707, p = 0.005).
+
+The estrone–SHBG relationship differed by cycle phase, with a stronger positive association in the luteal phase compared to the follicular phase (r = 0.184 vs −0.102, p = 0.0009). This was supported in a multivariate interaction model (β = 0.255, p < 0.001), indicating effect modification by menstrual cycle phase.
+
+BMI was inversely associated with SHBG across both phases (β = −0.025, p < 0.001), consistent with adiposity-related suppression of SHBG independent of cycle phase classification.
+
 ---
 
 ## Analysis Functions
