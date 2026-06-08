@@ -48,7 +48,7 @@ Cohort descriptives · Correlation · Linear regression · Logistic regression �
 - Survey weights collected and stored for future population-level inference
 - Cross-sectional design — all associations observational, causality not inferred
 
-**→ [NHANES Pipeline](NHANES_analysis/pipeline/README.md)**
+**→ [NHANES Pipeline](NHANES_analysis/pipeline)**
 
 ---
 
