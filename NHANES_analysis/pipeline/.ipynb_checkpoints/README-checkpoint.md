@@ -58,7 +58,6 @@ Strong associations (R² = 0.329). Insulin was the strongest correlate of BMI (r
 
 Strong inverse relationship (r = −0.352). Each 1 nmol/L increase in SHBG = 5.3% lower odds of obesity (OR = 0.947), consistent with known links between low SHBG, insulin resistance, and metabolic syndrome.
 
-![Alt text](./figures/shbg_distribution.png)
 ![Alt text](./figures/shbg_quartile_forest.png)
 
 ### [4. SHBG vs Obesity and Reproductive Hormones in Females 18–44](./notebooks/analysis/4.shbg_bmi_female.ipynb)
