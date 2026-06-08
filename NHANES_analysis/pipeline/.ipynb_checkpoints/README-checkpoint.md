@@ -72,6 +72,7 @@ The SHBG–BMI relationship was consistent with the male cohort (r = −0.321), 
 The estrone–SHBG relationship differed by cycle phase, with a stronger positive association in the luteal phase compared to the follicular phase (r = 0.184 vs −0.102, p = 0.0009). This was supported in a multivariate interaction model (β = 0.255, p < 0.001), indicating effect modification by menstrual cycle phase.
 
 BMI was inversely associated with SHBG across both phases (β = −0.025, p < 0.001), consistent with adiposity-related suppression of SHBG independent of cycle phase classification.
+![Alt text](./figures/shbg_quartile_forest_female.png)
 
 ---
 
