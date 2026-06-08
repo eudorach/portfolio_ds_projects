@@ -82,13 +82,13 @@ All functions share the same interface — pass biomarkers, a disease, and optio
 ```python
 filters = {"age_range": (22, 49), "sex": 1, "exclude_diabetes": True}
 
-run_cohort_descriptives(biomarkers, disease, engine, filters)
-run_biomarker_descriptives(biomarkers, disease, engine, filters)
-run_distribution_plots(biomarkers, disease, engine, filters)
-run_correlation(biomarkers, disease, engine, method, log_transform, filters)
-run_linear_regression(biomarkers, disease, engine, log_transform, filters, covariates)
-run_logistic_regression(biomarkers, disease, engine, log_transform, filters, covariates)
-run_quartile_analysis(biomarker, disease, engine, log_transform, filters, covariates)
+run_cohort_descriptives(biomarkers, disease, engine, filters, df)
+run_biomarker_descriptives(biomarkers, disease, engine, filters, df)
+run_distribution_plots(biomarkers, disease, engine, filters, df, save_path)
+run_correlation(biomarkers, disease, engine, method, log_transform, filters, df)
+run_linear_regression(biomarkers, disease, engine, log_transform, filters, covariates, df)
+run_logistic_regression(biomarkers, disease, engine, log_transform, filters, covariates, df)
+run_quartile_analysis(biomarker, disease, engine, log_transform, filters, covariates, save_path, df)
 ```
 
 Covariates default to age, sex, and race/ethnicity but are fully configurable — medical history variables from `participant_medhx` can be passed in directly. Disease outcomes are defined once in `diagnosis_config.py` (WHO, ACC/AHA, ADA criteria) and reused across all analyses.
