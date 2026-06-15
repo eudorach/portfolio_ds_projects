@@ -1,4 +1,4 @@
-# Medical Appointment No-Show Analysis (Kaggle Dataset)--In Progress
+# Medical Appointment No-Show Analysis (Kaggle Dataset)
 ---
 
 ## Why This Project Exists
