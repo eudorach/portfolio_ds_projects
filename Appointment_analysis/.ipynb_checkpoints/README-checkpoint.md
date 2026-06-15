@@ -99,30 +99,30 @@ Analyses included:
 
 ```sql
 WITH base AS (
-    SELECT *,
-        CASE 
-            WHEN age < 18 THEN 'pediatric'
-            WHEN age BETWEEN 18 AND 25 THEN '18-25'
-            WHEN age BETWEEN 26 AND 35 THEN '26-35'
-            WHEN age BETWEEN 36 AND 45 THEN '36-45'
-            WHEN age BETWEEN 46 AND 55 THEN '46-55'
-            WHEN age BETWEEN 56 AND 65 THEN '56-65'
-            WHEN age BETWEEN 66 AND 75 THEN '66-75'
-            ELSE 'senior'
-        END AS age_group,
-
-        CASE WHEN Showed_up = FALSE THEN 1 ELSE 0 END AS no_show_flag
+    SELECT
+        SMS_received,
+        CAST(AppointmentDay AS DATE) - CAST(ScheduledDay AS DATE) AS wait_days,
+        CASE
+            WHEN CAST(AppointmentDay AS DATE) - CAST(ScheduledDay AS DATE) = 0 THEN 'Same Day'
+            WHEN CAST(AppointmentDay AS DATE) - CAST(ScheduledDay AS DATE) BETWEEN 1 AND 7 THEN '1-7 Days'
+            WHEN CAST(AppointmentDay AS DATE) - CAST(ScheduledDay AS DATE) BETWEEN 8 AND 14 THEN '8-14 Days'
+            WHEN CAST(AppointmentDay AS DATE) - CAST(ScheduledDay AS DATE) BETWEEN 15 AND 30 THEN '15-30 Days'
+            ELSE '30+ Days'
+        END AS wait_bucket,
+        Showed_up
     FROM appointments
+    WHERE (CAST(AppointmentDay AS DATE) - CAST(ScheduledDay AS DATE)) >= 0
 )
 
-SELECT 
-    age_group,
-    gender,
-    diabetes,
-    alcoholism,
-    AVG(no_show_flag) AS no_show_rate,
-    COUNT(*) AS total_appointments
+SELECT
+    SMS_received,
+    wait_bucket,
+    COUNT(*) AS total_appointments,
+    SUM(CASE WHEN Showed_up = FALSE THEN 1 ELSE 0 END) AS no_shows,
+    ROUND(AVG(CASE WHEN Showed_up = FALSE THEN 1 ELSE 0 END) * 100, 2) AS no_show_rate
 FROM base
+GROUP BY SMS_received, wait_bucket
+ORDER BY wait_bucket, SMS_received;
 ```
 ---
 
